@@ -5,17 +5,26 @@
 	display: inline-grid;
 	grid-template-rows: repeat(23, 30px);
 	grid-template-columns: repeat(22, 30px);
+    align-content: center;
+
 }
 .grid {
-  width: 150px;
+  width: 250px;
   line-height: 0;
   margin: auto;
   box-shadow: 0px 0px 20px white;
   margin-top: 20px;
 }
+
 .square {
-	background-color: lightyellow;
+	background-color: lightblue;
 	border: 1px solid black;
-	grid-row-end: span 1;
-	grid-column-end: span 1;
+	grid-row-end: span 2;
+	grid-column-end: span 2;
+}
+
+.room {
+	composes: centerText;
+	background-color: green;
+	border: 1px solid darkred;
 }

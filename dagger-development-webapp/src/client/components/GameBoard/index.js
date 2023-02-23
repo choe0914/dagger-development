@@ -1,4 +1,6 @@
 import React from 'react'
+import { BoardConfig, RoomName } from '../../model/room'
+
 class GameBoard extends React.Component {
     
 	render() {
@@ -23,9 +25,29 @@ class GameBoard extends React.Component {
 			);
 		}
 	}
+    const rooms = [];
+    for(const roomName of Object.values(BoardConfig.rooms)){
+		const [[minX, minY], [maxX, maxY]] = [roomName.coords][0];
+		const roomStyle = {
+			gridRowStart: minX + 1,
+			gridRowEnd: maxX + 1 + 1,
+			gridColumnStart: minY + 1,
+			gridColumnEnd: maxY + 1 + 1,
+		};
+		rooms.push(
+			<div
+                style={roomStyle}
+                class="room"
+				key={roomName}>
+				{roomName.name}
+			</div>
+		);
+    }
+
 		return (
             <>
             {squares}
+            {rooms}
             </>
 		);
 	}
