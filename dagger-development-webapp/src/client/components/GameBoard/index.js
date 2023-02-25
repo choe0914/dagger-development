@@ -1,8 +1,7 @@
 import React from 'react'
 import { BoardConfig, RoomName } from '../../model/room'
 
-class GameBoard extends React.Component {
-    
+class GameBoard extends React.Component {    
 	render() {
 	const squares = [];
     // Max row and column size of the grid
@@ -16,7 +15,6 @@ class GameBoard extends React.Component {
 			const squarePosition = `x${x}y${y}`;
 			squares.push(
 				<div
-					squarePosition={squarePosition}
                     className="square"
 					style={squareStyle}
 				>
@@ -26,20 +24,29 @@ class GameBoard extends React.Component {
 		}
 	}
     const rooms = [];
+    const url = "../../assets/rooms/";
     for(const roomName of Object.values(BoardConfig.rooms)){
 		const [[minX, minY], [maxX, maxY]] = [roomName.coords][0];
+
+        // Pull the image from the config and set the picture size within the room grid
 		const roomStyle = {
 			gridRowStart: minX + 1,
 			gridRowEnd: maxX + 1 + 1,
 			gridColumnStart: minY + 1,
 			gridColumnEnd: maxY + 1 + 1,
-		};
+            backgroundImage: `url(${roomName.path})`,
+            backgroundRepeat: 'no-repeat',
+            // backgroundSize: 'cover',
+            backgroumdPoistion: 'center',
+
+  };
+
 		rooms.push(
 			<div
-                style={roomStyle}
-                class="room"
-				key={roomName}>
-				{roomName.name}
+            
+            style={roomStyle}
+			key={roomName}>
+                {roomName.name}
 			</div>
 		);
     }
