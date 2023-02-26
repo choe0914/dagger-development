@@ -5,5 +5,5 @@ def init_data():
     # Create all the tables
     db.create_all()
 
-    # Add any inital data that is needed then commit
-    # using db.session.commit()
+    # Add any inital data that is needed (possibly none) then commit using the next line
+    # db.session.commit()

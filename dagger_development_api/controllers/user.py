@@ -5,6 +5,6 @@ from dagger_development_api.extensions import db
 # All routes for user data go here
 @cross_origin(supports_credentials=True)
 @user_blueprint.route('/user')
-def main_page():
+def example_user_route():
     return {"message": "test"}
     

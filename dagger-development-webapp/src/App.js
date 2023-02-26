@@ -4,8 +4,8 @@ import BoardTile from "./client/components/GameBoard/BoardTile"
 function App() {
   return (
     <div className="App">
-          <BoardTile />
-      </div>
+      Hello World
+    </div>
   );
 }
 
