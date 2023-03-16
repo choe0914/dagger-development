@@ -8,6 +8,3 @@ https://www.henningludvigsen.com/index.php/project/clue-liars-edition/
 
 Clue-Less web application is INTERNAL and ACADEMIC.   
 NOT FOR RELEASE, PUBLICATION OR DISTRIBUTION IN WHOLE OR IN PART, DIRECTLY OR INDIRECTLY.  
-
-
-
