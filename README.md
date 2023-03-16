@@ -28,13 +28,13 @@ All digital artwork herein is copyrighted property of Henning Ludvigsen and Hasb
 
 # CONTENT CITATIONS
 
-Ludgvigsen, Henning. 2022, Hasbro. Clue Classic.
+Ludgvigsen, Henning. 2022, Hasbro. Clue Classic.  
 https://www.henningludvigsen.com/index.php/project/2023-clue-classic/  
 
-Ludgvigsen, Henning. 2022, Hasbro. Clue Liars Edition. 
+Ludgvigsen, Henning. 2022, Hasbro. Clue Liars Edition.  
 https://www.henningludvigsen.com/index.php/project/clue-liars-edition  
 
 # RELEASE NOTES
 
-Clue-Less web application is INTERNAL and ACADEMIC.
+Clue-Less web application is INTERNAL and ACADEMIC.  
 NOT FOR RELEASE OR DISTRIBUTION, IN WHOLE OR IN PART, DIRECTLY OR INDIRECTLY, TO ANY PUBLIC MEDIUM.
