@@ -10,8 +10,8 @@ the faculty of Johns Hopkins University Foundations of Software Engineering cour
 - Karl Svitak
 - David Whalen
 
-Johns Hopkins Whiting School of Engineering
-EN.605.601.86 Foundations of Software Engineering
+- Johns Hopkins Whiting School of Engineering
+- EN.605.601.86 Foundations of Software Engineering
 
 # Clue-Less
 
@@ -26,9 +26,9 @@ All digital artwork herein is copyrighted property of Henning Ludvigsen and Hasb
 # CONTENT CITATIONS
 
 Ludgvigsen, Henning. 2022, Hasbro. Clue Classic. 
-https://www.henningludvigsen.com/index.php/project/2023-clue-classic/
+- https://www.henningludvigsen.com/index.php/project/2023-clue-classic/
 Ludgvigsen, Henning. 2022, Hasbro. Clue Liars Edition. 
-https://www.henningludvigsen.com/index.php/project/clue-liars-edition/
+- https://www.henningludvigsen.com/index.php/project/clue-liars-edition/
 
 # RELEASE NOTES
 
