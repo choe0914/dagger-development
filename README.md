@@ -1,4 +1,4 @@
-This repositiory serves as the collaborative development environment for 
+This repository serves as the collaborative development environment for 
 the Dagger Development team in execution of the Clue-Less project requirements as set forth by 
 the faculty of Johns Hopkins University Foundations of Software Engineering course.
 
