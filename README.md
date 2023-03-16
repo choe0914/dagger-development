@@ -24,7 +24,7 @@ Players can further customize their experience through the selection of one of s
 
 # CONTENT COPYRIGHT INFORMATION
 
-All digital artwork herein is copyrighted property of Henning Ludvigsen and Hasbro.
+All digital artwork herein except team logo and standard iconography is copyrighted property of Henning Ludvigsen and Hasbro.  
 
 # CONTENT CITATIONS
 
