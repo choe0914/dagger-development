@@ -23,7 +23,7 @@ Clue-Less is slimmed down and fully digital, simple to setup – requiring only 
 
 All digital artwork herein is copyrighted property of Henning Ludvigsen and Hasbro.
 
- #CONTENT CITATIONS
+# CONTENT CITATIONS
 
 Ludgvigsen, Henning. 2022, Hasbro. Clue Classic. 
 https://www.henningludvigsen.com/index.php/project/2023-clue-classic/
