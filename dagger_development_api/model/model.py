@@ -1,10 +1,9 @@
 from dagger_development_api.extensions import db
 from dagger_development_api.model.user import User
-from dagger_development_api.model.hand import Hand
 from dagger_development_api.model.game import Game
-from dagger_development_api.model.game_state import GameState
+from dagger_development_api.model.game_card import GameCard
 from dagger_development_api.model.player_state import PlayerState
-from dagger_development_api.model.card import Card
+from dagger_development_api.model.card_info import CardInfo
 
 def init_data():
     # Create all the tables
