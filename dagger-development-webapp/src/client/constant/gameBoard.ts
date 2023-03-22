@@ -1,4 +1,4 @@
-export enum RoomName {
+export enum RoomNames {
     ballroom = "Ballroom",
     billiard = "Billiard",
     conservatory = "Conservatory",
@@ -7,6 +7,6 @@ export enum RoomName {
     kitchen = "Kitchen",
     library = "Library",
     lounge = "Lounge",
-    study = "Study",
-    empty = "",
-  }
+    study = "Study"
+  } 
+
