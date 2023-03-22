@@ -21,6 +21,10 @@ class PlayerState(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('user.userId'))
     user = relationship("User", back_populates="playerStates")
 
+    # A player's notepad
+    notepadId = db.Column(db.Integer, db.ForeignKey('notepad.notepadId'))
+    notepad = relationship("Notepad", backref="player", uselist=False)
+
     #  CONSTRAINTS  #
     # Unique Constraint to prevent multiple playerstates representing the same user in one game
     __table_args__ = (db.UniqueConstraint('userId', 'gameId', name='_user_game_uc'),)

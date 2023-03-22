@@ -10,6 +10,8 @@ class Game(db.Model):
     curent_player_turn = db.Column(db.Integer, db.ForeignKey('player_state.playerStateId'))
     # Which cards are in the winning hand
     winningHand = relationship('GameCard', foreign_keys='GameCard.game_hand_id', back_populates=('gameHand'))
+    # The deck for the game
+    deck = relationship('GameCard', foreign_keys='GameCard.gameId', backref=('game'))
     # Which players (player states) are in the current game
     players = relationship('PlayerState', foreign_keys='PlayerState.gameId', backref=('game'))
     # Name of this game

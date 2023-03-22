@@ -8,6 +8,7 @@ class GameCard(db.Model):
     gameCardId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     # The card info this represents 
     cardInfoId = db.Column(db.Integer, db.ForeignKey('card_info.cardInfoId'))
+    cardInfo = relationship('CardInfo', foreign_keys='GameCard.cardInfoId', backref=('gameCard'))
     # The game this card belongs to
     gameId = db.Column(db.Integer, db.ForeignKey('game.gameId'))
     
