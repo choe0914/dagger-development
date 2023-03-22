@@ -1,3 +1,52 @@
-.App {
-  text-align: center;
+
+.conatiner {
+    height: 200px;
+    width: 200px;
+    display: grid;
+}
+
+.board-container {
+  background-size: 779px 637px;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-board {
+    display: grid;
+    width: 670px;
+    height: 520px;
+
+    margin-bottom: 25px;
+    grid-template-columns: repeat(12,50px); 
+    grid-auto-rows: 50px;
+  }
+  
+.on {
+  background-color: green;
+}
+.start-tile {
+  width: 200px;
+  height: 200px;
+}
+  .start-tile-glow {
+  background: blue;
+  opacity: 0.7;
+  box-shadow: 0px 0px 10px blue;
+}
+
+.selectable-tile {
+  background: greenyellow;
+  opacity: 0.7;
+  box-shadow: 0px 0px 10px greenyellow;
+}
+
+.dot {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: inline-block;
 }
