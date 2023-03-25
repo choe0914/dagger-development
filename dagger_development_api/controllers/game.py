@@ -8,12 +8,12 @@ from dagger_development_api.extensions import db
 
 @game_blueprint('/calc_mvmnt')
 def valid_invalid():
-    return {"message": "test"}
+    return "test"
 
 @game_blueprint('/suggestion')
 def ask_users_suggestion():
-    return {"message": "test"}
+    return "test"
 
 @game_blueprint('/accusation')
 def check_win():
-    return {"message": "test"}
+    return "test"
