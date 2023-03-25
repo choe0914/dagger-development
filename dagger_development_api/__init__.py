@@ -20,7 +20,5 @@ def create_app(config_class=Config):
     
     # Register blueprints
     from dagger_development_api.controllers import user_blueprint
-    from dagger_development_api.controllers import game_blueprint
     app.register_blueprint(user_blueprint)
-    app.register_blueprint(game_blueprint)
     return app
