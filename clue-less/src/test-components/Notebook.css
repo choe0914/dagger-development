@@ -1,0 +1,47 @@
+td {
+}
+table {
+    /* margin-top: 4vh; */
+    height: 10vh;
+    /* background-color: blanchedalmond; */
+    position: absolute;
+    border-collapse: collapse;
+    font-size: 0.8em;
+}
+input[type=checkbox] {
+    padding: 0;
+    margin: 0.3vh;
+}
+
+.table-section {
+    font-weight: bold;
+    border-bottom: 1pt solid black;
+}
+.notebook-div {
+    /* margin-top: 3vh; */
+    /* padding-top: 2vh; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #6a3794;
+    max-width: 100%;
+}
+#notebook {
+    max-height: 70vh;
+    width: auto;
+}
+
+
+/* .notebook-div:hover #notebook {
+    transform: scale(120%);
+} */
+
+@media screen and (max-width: 900px) {
+    .notebook-div {
+        margin-top: 0;
+    }
+    #notebook {
+        max-height: 80vh;
+        width: auto;
+    }
+}
