@@ -1,0 +1,10 @@
+export const kitchen = require("./assets/room-img/kitchen.jpg");
+export const ballroom = require("./assets/room-img/ballroom.jpg");
+export const billiards = require("./assets/room-img/billiards.jpg");
+export const conservatory = require("./assets/room-img/conservatory.jpg");
+export const dining = require("./assets/room-img/dining.jpg");
+export const hall = require("./assets/room-img/hall.jpg");
+export const library = require("./assets/room-img/library.jpg");
+export const lounge = require("./assets/room-img/lounge.jpg");
+export const study = require("./assets/room-img/study.jpg");
+export const center = require("./assets/room-img/center.jpg");

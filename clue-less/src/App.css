@@ -1,0 +1,37 @@
+:root {
+
+  --full-width: 100vw;
+  --full-height: 100vh;
+  --header-height: 8vh;
+  --region-height: 92vh;
+  --panel-left-width: 25vw;
+  --panel-center-width: 50vw;
+  --panel-right-width: 25vw;
+  --basis: 4vh;
+  --kitchen-height: 32vh;
+  --dining-height: 28vh;
+  --lounge-height: 24vh;
+  --LR-room-width: 24vh;
+  --ball-height: 20vh;
+  --interogation-height: 48vh;
+  --hall-room-height: 16vh;
+  --center-rooms-width: 36vh;
+  --conservatory-height: 24vh;
+  --billiards-height: 20vh;
+  --library-height: 20vh;
+  --study-height: 20vh;
+  
+
+  --game-board-height: 90vh;
+  --deep-blue: #152A61;
+  --light-blue: #284F86;
+  --gold: #F2D857;
+  --brown: #442A16;
+  --tan: #9E7A5A;
+
+  --scarlett: #790905;
+  --green: #1C5125;
+  --peacock: #0B1535;
+  --mustard: #F9B416;
+  --plum: #542D59;
+}

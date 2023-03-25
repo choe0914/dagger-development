@@ -1,0 +1,38 @@
+header {
+    display: flex;
+    align-items: center;
+    min-width: var(--full-width);
+    /* width: var(--full-width); */
+    height: var(--header-height);
+    background-color: rgb(0, 0, 0);
+}
+
+#header-logo {
+    height: var(--logo-height);
+    margin-left: 4vw;
+    width: auto;
+}
+
+#menu-icon {
+    height: 4vh;
+    width: auto;
+    position: absolute;
+    right: 5vw;
+    background-color: transparent;
+    border: none;
+    /* z-index: 102; */
+    /* background-image: url("../assets/img/icons/menu.png");
+    background-size: cover;
+    background-repeat: no-repeat; */
+}
+
+nav {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 92vh;
+    width: 20vw;
+    z-index: 101;
+    background-color: aquamarine;
+
+}

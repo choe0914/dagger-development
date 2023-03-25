@@ -1,0 +1,41 @@
+:root {
+
+  --full-width: 100vw;
+  --full-height: 100vh;
+  --header-height: 8vh;
+  --region-height: 87vh;
+  --panel-left-width: 40vw;
+  --panel-right-width: 60vw;
+  --char-splash-height: 80vh;
+  --logo-height: 6vh;
+  --footer-height: 5vh;
+
+  --deep-blue: #152A61;
+  --light-blue: #284F86;
+  --gold: #F2D857;
+  --brown: #442A16;
+  --tan: #9E7A5A;
+
+  --scarlett: #790905;
+  --bright-scarlett: #ac0d07;
+  --green: #1C5125;
+  --peacock: #0B1535;
+  --mustard: #F9B416;
+  --plum: #542D59;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    height: var(--footer-height);
+    width: var(--full-width);
+    background-color: #000000;
+    z-index: 1;
+  }
+  #footer-copyright {
+    font-size: 0.9em;
+    color: #ffffff;
+    margin-left: 4vw;
+  }
