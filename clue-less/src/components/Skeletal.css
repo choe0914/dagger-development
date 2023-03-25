@@ -13,17 +13,18 @@
     justify-content: center;
     align-items: center;
     width: 35vw;
-    height: 87vh;
+    height: 85vh;
     color: white;
     z-index: 99;
 }
 
 #username-wrapper {
     height: 100%;
-    width: 80%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: linear-gradient(rgba(255, 0, 0, 0.288), rgb(0, 0, 0));
 }
 
 .username-entry {
@@ -31,31 +32,38 @@
     padding: 5vw;
     max-width: 70%;
     flex-direction: column;
-    background-color: #ffffff1A;
+    /* background-color: #ffffff1A; */
 }
 
 #username-header {
     font-style: bold;
-    font-size: 1.7em;
+    font-size: 1.5vw;
     margin-bottom: 2vh;
     font-weight: 700;
     max-width: 100%;
+    /* background-color: #ca120c; */
 }
 
 #game-description {
-    max-width: 90%;
+    max-width: 100%;
     font-style: italic;
     margin-bottom: 4vh;
     font-weight: 100;
+    font-size: 1.5vw;
+
+    /* background-color: #790905; */
 }
 
 #username-info {
     margin-bottom: 2vh;
+    font-size: 1.5vh;
+    
+    
 }
 
 #uname {
     margin-bottom: 2vh;
-    max-width: 85%;
+    max-width: 100%;
     border: none;
     border-style: none;
     height: 4vh;
@@ -65,7 +73,7 @@
 }
 
 #launch {
-    max-width: 85%;
+    max-width: 100%;
     border: none;
     border-style: none;
     border-radius: 16px;
@@ -91,7 +99,7 @@
     /* background-image: url("../assets/img/theme/blank.png"); */
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: #ca120c;
+    /* background-color: #ca120c; */
 }
 
 h1 {
@@ -118,11 +126,11 @@ h2 {
 }
 
 #tag-a {
-    bottom: 10vh;
+    bottom: 5vh;
 }
 
 #tag-b {
-    bottom: 5vh;
+    bottom: 0vh;
     font-weight: bold;
 }
 
@@ -137,28 +145,29 @@ h2 {
     .username-body {
         justify-content: center;
     }
-
+    #username-wrapper {
+        background-image: none;
+        height: 100%;
+        width: 98%;
+    }
     .username-panel {
         width: 90vw;
         position: absolute;
         height: 80vh;
         align-items: center;
         justify-content: center;
+        
     }
 
     .username-entry {
         justify-content: center;
-        width: 90vw;
-        height: 60vh;
         margin: 0;
-        padding-left: 12vw;
-        padding-right: 12vw;
         background-color: #000000ef;
         z-index: 99;
     }
 
     #username-header {
-        font-size: 1.4em;
+        font-size: 6vw;
     }
 
     .splash-panel {
@@ -181,8 +190,7 @@ h2 {
         max-width: 90%;
     }
 
-    #username-wrapper {
-        height: 100%;
-        width: 98%;
+    #game-description {
+        font-size: 2vh;
     }
 }
