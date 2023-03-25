@@ -7,13 +7,13 @@ from dagger_development_api.extensions import db
 @game_blueprint.route('/game')
 
 @game_blueprint('/calc_mvmnt')
-def valid_invalid():
+def calc_mvmnt():
     return {"message": "test"}
 
-@game_blueprint('/suggestion')
+@game_blueprint('/ask_users_suggestion')
 def ask_users_suggestion():
     return {"message": "test"}
 
-@game_blueprint('/accusation')
+@game_blueprint('/check_win')
 def check_win():
     return {"message": "test"}
