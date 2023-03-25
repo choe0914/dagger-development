@@ -9,6 +9,8 @@ from flask import jsonify
 # All routes for user data go here
 @cross_origin(supports_credentials=True)
 @user_blueprint.route('/user')
+
+@user_blueprint.route('/example')
 def example_user_route():
     # Create Example user
     user = User("abc")
