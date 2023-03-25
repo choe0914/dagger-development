@@ -31,18 +31,14 @@ def example_user_route():
     resp.status_code = 200
     return resp
 
-@user_blueprint('/save_user_todb')
 def save_user_todb():
     return {"message": "test"}
 
-@user_blueprint('/load_user_fromdb')
 def load_user_fromdb():
     return {"message": "test"}
 
-@user_blueprint('/send_msg_user')
 def send_msg_user():
     return {"message": "test"}
 
-@user_blueprint('/set_msg_everyone')
 def send_msq_everyone():
     return {"message": "test"}  
