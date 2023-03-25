@@ -12,6 +12,7 @@ from flask import jsonify
 def example_user_route(username):
     # Create Example user
     user = User(username)
+    print("Username: " + username)
     db.session.add(user)
 
     # Create example Game
