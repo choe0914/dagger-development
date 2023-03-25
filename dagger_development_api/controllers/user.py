@@ -30,6 +30,7 @@ def example_user_route():
     resp = jsonify(players=players, playerStates=playerStates, success=True)
     resp.status_code = 200
     return resp
+
 @user_blueprint('/save_user')
 def save_user_todb():
     return {"message": "test"}
