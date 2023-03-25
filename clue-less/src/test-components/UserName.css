@@ -1,0 +1,24 @@
+.username-body {
+    display: grid;
+    height: 85vh;
+    width: 100vw;
+    background-color: burlywood;
+    /* overflow: hidden; */
+}
+.username-panel {
+    
+    width: 40vw;
+    height: 100%;
+    background-color: aquamarine;
+}
+.splash-panel {
+
+    justify-content: right;
+
+    text-align: right;
+}
+.char-group {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}

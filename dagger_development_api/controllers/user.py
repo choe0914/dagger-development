@@ -8,10 +8,11 @@ from flask import jsonify
 
 # All routes for user data go here
 @cross_origin(supports_credentials=True)
-@user_blueprint.route('/user')
-def example_user_route():
+@user_blueprint.route('/user/<username>')
+def example_user_route(username):
     # Create Example user
-    user = User("abc")
+    user = User(username)
+    print("Username: " + username)
     db.session.add(user)
 
     # Create example Game
