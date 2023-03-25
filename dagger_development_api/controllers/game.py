@@ -6,11 +6,14 @@ from dagger_development_api.extensions import db
 @cross_origin(supports_credentials=True)
 @game_blueprint.route('/game')
 
+@game_blueprint.route('/game/cal_mvmnt')
 def calc_mvmnt():
     return {"message": "test"}
 
+@game_blueprint.route('/user/suggestion')
 def ask_users_suggestion():
     return {"message": "test"}
 
+@game_blueprint.route('/user/accusation')
 def check_win():
     return {"message": "test"}
