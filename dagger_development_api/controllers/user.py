@@ -6,26 +6,9 @@ from dagger_development_api.model.game import Game
 from dagger_development_api.model.player_state import PlayerState
 from flask import jsonify
 
-# All routes for user data (if needed)
+# All routes for user data go here
 @cross_origin(supports_credentials=True)
 @user_blueprint.route('/user')
-
-@user_blueprint('/save_user')
-def save_user_todb():
-    return {"message": "test"}
-
-@user_blueprint('/load_user')
-def load_user_fromdb():
-    return {"message": "test"}
-
-@user_blueprint('/get_hand')
-def send_msg_user():
-    return {"message": "test"}
-
-@user_blueprint('/set_character')
-def send_msq_everyone():
-    return {"message": "test"}
-  
 def example_user_route():
     # Create Example user
     user = User("abc")
@@ -47,6 +30,18 @@ def example_user_route():
     resp = jsonify(players=players, playerStates=playerStates, success=True)
     resp.status_code = 200
     return resp
+@user_blueprint('/save_user')
+def save_user_todb():
+    return {"message": "test"}
 
-    
-    
+@user_blueprint('/load_user')
+def load_user_fromdb():
+    return {"message": "test"}
+
+@user_blueprint('/get_hand')
+def send_msg_user():
+    return {"message": "test"}
+
+@user_blueprint('/set_character')
+def send_msq_everyone():
+    return {"message": "test"}  
