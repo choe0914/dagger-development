@@ -1,4 +1,4 @@
-.username-body {
+.game-launch-body {
     display: flex;
     align-items: center;
     height: 87vh;
@@ -8,7 +8,7 @@
     background-color: #000000;
 }
 
-.username-panel {
+.game-launch-panel {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +18,7 @@
     z-index: 99;
 }
 
-#username-wrapper {
+#game-launch-wrapper {
     height: 100%;
     width: 100%;
     display: flex;
@@ -27,7 +27,7 @@
     background-image: linear-gradient(rgba(255, 0, 0, 0.288), rgb(0, 0, 0));
 }
 
-.username-entry {
+.game-launch-entry {
     display: flex;
     padding: 5vw;
     max-width: 70%;
@@ -35,44 +35,35 @@
     /* background-color: #ffffff1A; */
 }
 
-#username-header {
+#game-launch-header {
     font-style: bold;
     font-size: 2vw;
-    margin-bottom: 1vh;
+    margin-bottom: 4vh;
     font-weight: 700;
     max-width: 100%;
     /* background-color: #ca120c; */
 }
 
-#game-description {
-    max-width: 100%;
-    font-style: italic;
-    margin-bottom: 4vh;
-    font-weight: 100;
-    font-size: 1.5vw;
-
-    /* background-color: #790905; */
-}
-
-#username-info {
-    margin-bottom: 2vh;
-    font-size: 2vh;
-    
+#game-launch-join, #game-launch-new {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    position: relative;
+    font-size: 2vw;
+    height: 8vh;
     
 }
 
-#uname {
-    margin-bottom: 2vh;
-    max-width: 100%;
-    border: none;
-    border-style: none;
-    height: 4vh;
-    font-size: larger;
-    background-color: #ffffff1a;
-    color: #ffffff
+.game-choice {
+    position: absolute;
+    transform: scale(2);
+    right: 0;
+    margin: 0;
+    padding: 0;
 }
 
 #launch {
+    margin-top: 4vh;
     max-width: 100%;
     border: none;
     border-style: none;
@@ -91,6 +82,9 @@
 
 #next-info {
     margin-top: 3vh;
+    opacity: 50%;
+    max-width: 100%;
+    text-align: center;
 }
 
 .splash-panel {

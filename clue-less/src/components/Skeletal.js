@@ -33,6 +33,7 @@ function UserName () {
                         <span id="username-info">Please enter a unique username to begin</span>
                         <input type="text" id="uname" name="uname" placeholder='Username' onBlur={k => {username = k.target.value;}}></input>
                         <button id="launch" ref={launchButton} onClick={handleSignInClick}>Continue</button>
+                        <span id="next-info">Next - Join or Start New Game</span>
                     </section>
                 </section>
             </section>
