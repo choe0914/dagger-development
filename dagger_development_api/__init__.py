@@ -5,6 +5,7 @@ from dagger_development_api.config import Config
 from dagger_development_api.model import model
 import os 
 
+os.system("python")
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 def create_app(config_class=Config):
