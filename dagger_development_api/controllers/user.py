@@ -31,3 +31,19 @@ def example_user_route(username):
     resp = jsonify(players=players, playerStates=playerStates, success=True)
     resp.status_code = 200
     return resp
+
+@user_blueprint.route('/user/save_user')
+def save_user_todb():
+    return {"message": "test"}
+
+@user_blueprint.route('/user/load_user')
+def load_user_fromdb():
+    return {"message": "test"}
+
+@user_blueprint.route('/user/send_user')
+def send_msg_user():
+    return {"message": "test"}
+
+@user_blueprint.route('/user/send_all')
+def send_msq_everyone():
+    return {"message": "test"}  
