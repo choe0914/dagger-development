@@ -10,10 +10,10 @@ from dagger_development_api.extensions import db
 def calc_mvmnt():
     return {"message": "test"}
 
-@game_blueprint.route('/user/suggestion')
+@game_blueprint.route('/game/suggestion')
 def ask_users_suggestion():
     return {"message": "test"}
 
-@game_blueprint.route('/user/accusation')
+@game_blueprint.route('/game/accusation')
 def check_win():
     return {"message": "test"}
