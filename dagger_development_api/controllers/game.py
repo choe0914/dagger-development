@@ -30,14 +30,16 @@ def start_game(currentGame):
         winningHand, playerHands, weaponLayout = utils.start_game(len(playerList))
 
         updateStmt = update(Game).where(Game.gameId == currentGame).values(hand=winningHand)
-        db.session.commit(updateStmt)
+        db.session.update(updateStmt)
+        db.session.commit()
         
 
     #For each player give them one of the hands (current would be in order they joined)
     for user_obj in playerResult.scalars():
         if playerHands[handRotation] != None:
             updateStmt = update(PlayerState).where(PlayerState.gameId == currentGame).values(hand=playerHands[handRotation])
-            db.session.commit(updateStmt)
+            db.session.update(updateStmt)
+            db.session.commit()
             handRotation += 1
 
     resp = jsonify(weaponLayout=weaponLayout, success=True)

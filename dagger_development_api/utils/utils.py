@@ -47,7 +47,7 @@ def start_game(totalPlayers):
     cardIndex = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]         #index the cards in an array to sort
 
     weaponRooms = []
-    playerHands = [[]  for i in range(totalPlayers)]        #Create the empty player hands
+    playerHands = [[]  for x in range(totalPlayers)]        #Create the empty player hands
 
     for x in range(6):                                      #randomize the rooms
         holdRoom = random.randint(0,8)
