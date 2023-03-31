@@ -51,8 +51,8 @@ function GameType () {
                         <span id="game-launch-header">Welcome USER-NAME</span>
                         <span className="game-option-txt" id="game-launch-join" onClick={handleGameChoiceA}>Join Game<input id="join-game" className="game-choice" type="radio" name="choice"></input></span>
                         <div id="game-search-wrapper">
-                            <input type="text" id="game-id-field" onKeyUp={checkField} name="game-id-field" placeholder='Game ID'></input>
-                            <button id="search">Search</button>
+                            <input type="text" id="game-id-field" maxLength={6} onKeyUp={checkField} name="game-id-field" placeholder='Game ID'></input>
+                            <button id="search">List</button>
                         </div>
                         <span className="game-option-txt" id="game-launch-new" onClick={handleGameChoiceB}>Host New Game<input id="start-game" className="game-choice" type="radio" name="choice"></input></span>
                         <button id="launch" ref={launchButton} onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB} onClick={handleGameChoiceClick}>Continue</button>

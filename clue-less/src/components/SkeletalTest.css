@@ -76,6 +76,7 @@
     width: 30%;
     border: none;
     border-style: none;
+    cursor: pointer;
 }
 .game-choice {
     position: absolute;
