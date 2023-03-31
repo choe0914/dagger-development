@@ -38,7 +38,7 @@
 #game-launch-header {
     font-style: bold;
     font-size: 2vw;
-    margin-bottom: 4vh;
+    margin-bottom: 1vh;
     font-weight: 700;
     max-width: 100%;
     /* background-color: #ca120c; */
@@ -51,7 +51,6 @@
     position: relative;
     font-size: 2vw;
     height: 8vh;
-    
 }
 #game-search-wrapper {
     display: flex;
@@ -84,6 +83,26 @@
     right: 0;
     margin: 0;
     padding: 0;
+}
+.game-vis {
+    
+    transform: scale(1.5);
+    margin: 0;
+    padding: 0; 
+    margin-left: 2vw;
+}
+#game-vis-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: none;
+}
+.game-vis-txt {
+    margin-right: 4vw;
+    font-size: 1.5vw;
+    display: flex;
 }
 
 #launch {
@@ -170,14 +189,15 @@
     .game-launch-panel {
         width: 100%;
         position: absolute;
-        height: 80vh;
+        height: 80%;
         align-items: center;
         justify-content: center;
-        
     }
 
     .game-launch-entry {
         justify-content: center;
+        height: 70%;
+        width: 96%;
         margin: 0;
         background-color: #000000;
         z-index: 99;
@@ -187,7 +207,7 @@
         font-size: 4vw;
     }
     .game-option-txt {
-        font-size: 4vw;
+        font-size: 5vw;
     }
     .splash-panel {
         width: 100vw;

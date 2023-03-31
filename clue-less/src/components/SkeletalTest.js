@@ -25,18 +25,33 @@ function GameType () {
     function handleGameChoiceA(event) {
         launchButton.current.style.display = "none";
         var gameChoice = document.getElementById("game-search-wrapper");
+        var gameVis = document.getElementById("game-vis-wrapper");
         gameChoice.style.display = "unset";
         gameChoice.style.display = "flex";
+        gameVis.style.display = "none";
     }
     function handleGameChoiceB(event) {
         var gameChoice = document.getElementById("game-search-wrapper");
+        var gameVis = document.getElementById("game-vis-wrapper");
         document.getElementById("game-id-field").value = "";
         gameChoice.style.display = "none";
+        gameVis.style.display = "unset";
+        gameVis.style.display = "flex";
+        
+    }
+    function handleGameVisChoiceA(event) {
+        // TODO: handle the option to post the game ID so others may see it in their global lists
+        console.log("Public");
+        launchButton.current.style.display = "unset";
+    }
+    function handleGameVisChoiceB(event) {
+        // TODO: handle the option to keep game ID private
+        console.log("Private");
         launchButton.current.style.display = "unset";
     }
     function checkField(event) {
         var fieldText = document.getElementById("game-id-field");
-        console.log(fieldText.value)
+        // handling valid length joinable game ID 
         if (fieldText.value !== "" && fieldText.value.length > 5) {
             launchButton.current.style.display = "unset";
         } else {
@@ -50,12 +65,17 @@ function GameType () {
                     <section className="game-launch-entry">
                     
                         <span id="game-launch-header">Welcome USER-NAME</span>
+                        <p>Begin by selecting "Join Game" or "Host New Game". If starting a new game, an ID will be provided after character selection that you can share to invite friends or make public so others may join.</p>
                         <span className="game-option-txt" id="game-launch-join" onClick={handleGameChoiceA}>Join Game<input id="join-game" className="game-choice" type="radio" name="choice"></input></span>
                         <div id="game-search-wrapper">
                             <input type="text" id="game-id-field" maxLength={6} onKeyUp={checkField} name="game-id-field" placeholder='Game ID'></input>
                             <button id="search">List</button>
                         </div>
                         <span className="game-option-txt" id="game-launch-new" onClick={handleGameChoiceB}>Host New Game<input id="start-game" className="game-choice" type="radio" name="choice"></input></span>
+                        <div id="game-vis-wrapper">
+                            <span className="game-vis-txt" id="game-vis-public" onClick={handleGameVisChoiceA}>Public<input id="game-public" className="game-vis" type="radio" name="vis-choice"></input></span>
+                            <span className="game-vis-txt" id="game-vis-private" onClick={handleGameVisChoiceB}>Private<input id="game-private" className="game-vis" type="radio" name="vis-choice"></input></span>
+                        </div>
                         <button id="launch" ref={launchButton} onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB} onClick={handleGameChoiceClick}>Continue</button>
                         <span id="next-info">Next - Character Selection</span>
                     </section>

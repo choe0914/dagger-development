@@ -75,7 +75,7 @@
     color: #ffffff;
 }
 
-#launch {
+#launch-user {
     max-width: 100%;
     border: none;
     border-style: none;
@@ -86,9 +86,11 @@
     font-size: larger;
     cursor: pointer;
     box-shadow: 0px 5px 5px black;
+    margin-top: 4vh;
+    display: none;
 }
 
-#launch:hover {
+#launch-user:hover {
     transform: brightness(80%)
 }
 
@@ -192,7 +194,7 @@
         max-width: 90%;
     }
     
-    #launch {
+    #launch-user {
         max-width: 90%;
     }
 
