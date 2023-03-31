@@ -44,7 +44,7 @@
     /* background-color: #ca120c; */
 }
 
-#game-launch-join, #game-launch-new {
+.game-option-txt {
     display: flex;
     align-items: center;
     align-content: center;
@@ -53,7 +53,31 @@
     height: 8vh;
     
 }
+#game-search-wrapper {
+    display: flex;
+    align-items: center;
+    height: 4vh;
+    max-width: 100%;
+    display: none;
+}
+#game-id-field {
+    border: none;
+    border-style: none;
+    height: 4vh;
+    width: 70%;
+    font-size: larger;
+    background-color: #ffffff1a;
+    color: #ffffff;
+    
+}
 
+#search {
+    height: 100%;
+    width: 30%;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+}
 .game-choice {
     position: absolute;
     transform: scale(2);
@@ -74,10 +98,7 @@
     font-size: larger;
     cursor: pointer;
     box-shadow: 0px 5px 5px black;
-}
-
-#launch:hover {
-    transform: brightness(80%)
+    display: none;
 }
 
 #next-info {
@@ -87,69 +108,67 @@
     text-align: center;
 }
 
-.splash-panel {
+.splash-panel-A {
     height: 85vh;
     width: 65vw;
     display: flex;
     position: relative;
     justify-content: right;
-    /* background-image: url("../assets/img/theme/char-group.jpg"); */
-    background-image: url("../assets/img/theme/blank.png");
+    /* background-image: url("../assets/img/theme/backdrop.jpg"); */
+    /* background-image: url("../assets/img/theme/blank.png"); */
     background-repeat: no-repeat;
     background-size: cover;
+    /* opacity: 20%; */
     /* background-color: #ca120c; */
 }
-
-h1 {
-    color: white;
-    position: absolute;
-    width: 100%;
-    margin: 0;
-    font-family: "poster-gothic-round-atf", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 5em;
-}
-
-h2 {
-    position: absolute;
-    font-family: "franklin-gothic-atf", sans-serif;
-    font-weight: 100;
-    font-style: normal;
-    font-size: 2em;
-    color: white;
-    width: 100%;
-    text-align: right;
-    padding-right: 1vw;
-}
-
-#tag-a {
-    bottom: 5vh;
-}
-
-#tag-b {
-    bottom: 0vh;
-    font-weight: bold;
-}
-
-.blank {
+#back-drop {
     height: 100%;
+    width: 100%;
+    opacity: 20%;
+}
+#crime {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    opacity: unset;
+    
+
+}
+#boddy-black {
+    height: 40%;
     width: auto;
-    object-fit: contain;
-    opacity: 10%;
+    margin-right: 5vw;
+    
+}
+#boden {
+    font-family: "inglesa-caps-variable", sans-serif;
+    font-variation-settings: "wght" 600;
+    font-size: 2.5vw;
+    margin: 1.5vh;
+}
+#boddy-intro {
+    margin-left: 3vw;
+    margin-right: 3vw;
+    color: white;
+    font-size: 1.2vw;
+    text-align: center;
 }
 
 @media screen and (max-width: 1200px) {
-    .username-body {
-        justify-content: center;
+    .game-launch-body {
+        justify-content: right;
     }
-    #username-wrapper {
+    #game-launch-wrapper {
         background-image: none;
         height: 100%;
-        width: 98%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
     }
-    .username-panel {
-        width: 90vw;
+    .game-launch-panel {
+        width: 100%;
         position: absolute;
         height: 80vh;
         align-items: center;
@@ -157,27 +176,24 @@ h2 {
         
     }
 
-    .username-entry {
+    .game-launch-entry {
         justify-content: center;
         margin: 0;
-        background-color: #000000ef;
+        background-color: #000000;
         z-index: 99;
     }
 
-    #username-header {
-        font-size: 6vw;
+    #game-launch-header {
+        font-size: 4vw;
     }
-
+    .game-option-txt {
+        font-size: 4vw;
+    }
     .splash-panel {
         width: 100vw;
     }
-
-    h1 {
-        text-align: center;
-    }
-
-    h2 {
-        font-size: 1.2em;
+    #crime {
+        display: none;
     }
 
     #uname {
@@ -187,8 +203,9 @@ h2 {
     #launch {
         max-width: 90%;
     }
-
-    #game-description {
-        font-size: 2vh;
+    #back-drop {
+        height: 100%;
+        width: auto;
     }
+
 }

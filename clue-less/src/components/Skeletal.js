@@ -53,10 +53,10 @@ function UserName() {
                     </section>
                 </section>
             </section>
-            <section className="splash-panel">
-                <h1>&nbsp;CLUE-LESS</h1>
-                <h2 id="tag-a">One is guilty, none are innocent.</h2>
-                <h2 id="tag-b">A modern take on the classic mystery game.</h2>
+            <section className="splash-panel-welcome">
+                <h1 id="game-title">&nbsp;CLUE-LESS</h1>
+                <h2 className="sub-heading" id="tag-a">One is guilty, none are innocent.</h2>
+                <h2 className="sub-heading" id="tag-b">A modern take on the classic mystery game.</h2>
             </section>
 
 

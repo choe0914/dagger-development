@@ -17,9 +17,8 @@ class App extends Component {
 
           </Route>
         </Routes>
-
-
       </BrowserRouter>
+
     );
   }
 }
