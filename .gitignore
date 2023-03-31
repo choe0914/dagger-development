@@ -1,2 +1,4 @@
 # dependencies
 /instance
+/clue-less/node_modules/
+/dagger_development_api/__pycache__/

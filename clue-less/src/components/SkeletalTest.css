@@ -1,4 +1,4 @@
-.username-body {
+.game-launch-body {
     display: flex;
     align-items: center;
     height: 87vh;
@@ -8,7 +8,7 @@
     background-color: #000000;
 }
 
-.username-panel {
+.game-launch-panel {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +18,7 @@
     z-index: 99;
 }
 
-#username-wrapper {
+#game-launch-wrapper {
     height: 100%;
     width: 100%;
     display: flex;
@@ -27,7 +27,7 @@
     background-image: linear-gradient(rgba(255, 0, 0, 0.288), rgb(0, 0, 0));
 }
 
-.username-entry {
+.game-launch-entry {
     display: flex;
     padding: 5vw;
     max-width: 70%;
@@ -35,41 +35,58 @@
     /* background-color: #ffffff1A; */
 }
 
-#username-header {
+#game-launch-header {
     font-style: bold;
-    font-size: 1.8vw;
-    margin-bottom: 1vh;
+    font-size: 2vw;
+    margin-bottom: 4vh;
     font-weight: 700;
     max-width: 100%;
     /* background-color: #ca120c; */
 }
 
-#game-description {
-    max-width: 100%;
-    font-style: italic;
-    margin-bottom: 4vh;
-    font-weight: 100;
-    font-size: 1.5vw;
-
-    /* background-color: #790905; */
+.game-option-txt {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    position: relative;
+    font-size: 2vw;
+    height: 8vh;
+    
 }
-
-#username-info {
-    margin-bottom: 2vh;
-    font-size: 1vw;   
-}
-
-#uname {
+#game-search-wrapper {
+    display: flex;
+    align-items: center;
+    height: 4vh;
     max-width: 100%;
+    display: none;
+}
+#game-id-field {
     border: none;
     border-style: none;
     height: 4vh;
+    width: 70%;
     font-size: larger;
     background-color: #ffffff1a;
     color: #ffffff;
+    
+}
+
+#search {
+    height: 100%;
+    width: 30%;
+    border: none;
+    border-style: none;
+}
+.game-choice {
+    position: absolute;
+    transform: scale(2);
+    right: 0;
+    margin: 0;
+    padding: 0;
 }
 
 #launch {
+    margin-top: 4vh;
     max-width: 100%;
     border: none;
     border-style: none;
@@ -80,60 +97,31 @@
     font-size: larger;
     cursor: pointer;
     box-shadow: 0px 5px 5px black;
-}
-
-#launch:hover {
-    transform: brightness(80%)
+    display: none;
 }
 
 #next-info {
     margin-top: 3vh;
+    opacity: 50%;
+    max-width: 100%;
+    text-align: center;
 }
 
-.splash-panel-welcome {
+.splash-panel {
     height: 85vh;
     width: 65vw;
     display: flex;
     position: relative;
     justify-content: right;
-    background-image: url("../assets/img/theme/char-group.jpg");
+    background-image: url("../assets/img/theme/backdrop.jpg");
     /* background-image: url("../assets/img/theme/blank.png"); */
     background-repeat: no-repeat;
     background-size: cover;
+    opacity: 20%;
     /* background-color: #ca120c; */
 }
 
-h1 {
-    color: white;
-    position: absolute;
-    width: 100%;
-    margin: 0;
-    font-family: "poster-gothic-round-atf", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 5em;
-}
 
-h2 {
-    position: absolute;
-    font-family: "franklin-gothic-atf", sans-serif;
-    font-weight: 100;
-    font-style: normal;
-    font-size: 2em;
-    color: white;
-    width: 100%;
-    text-align: right;
-    padding-right: 1vw;
-}
-
-#tag-a {
-    bottom: 5vh;
-}
-
-#tag-b {
-    bottom: 0vh;
-    font-weight: bold;
-}
 
 .blank {
     height: 100%;
@@ -143,15 +131,15 @@ h2 {
 }
 
 @media screen and (max-width: 1200px) {
-    .username-body {
+    .game-launch-body {
         justify-content: center;
     }
-    #username-wrapper {
+    #game-launch-wrapper {
         background-image: none;
         height: 100%;
         width: 98%;
     }
-    .username-panel {
+    .game-launch-panel {
         width: 90vw;
         position: absolute;
         height: 80vh;
@@ -160,30 +148,21 @@ h2 {
         
     }
 
-    .username-entry {
+    .game-launch-entry {
         justify-content: center;
         margin: 0;
         background-color: #000000;
         z-index: 99;
     }
 
-    #username-header {
-        font-size: 6vw;
+    #game-launch-header {
+        font-size: 4vw;
     }
-    #username-info {
-        margin-bottom: 2vh;
-        font-size: 2.5vw;   
+    .game-option-txt {
+        font-size: 4vw;
     }
     .splash-panel {
         width: 100vw;
-    }
-
-    h1 {
-        text-align: center;
-    }
-
-    h2 {
-        font-size: 1.2em;
     }
 
     #uname {
@@ -194,7 +173,4 @@ h2 {
         max-width: 90%;
     }
 
-    #game-description {
-        font-size: 2vh;
-    }
 }
