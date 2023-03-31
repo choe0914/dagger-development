@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
-import Header from './components/Header';
-// import Board from './components/Board';
-import Skeletal from './components/Skeletal';
-import SkeletalTest from './components/SkeletalTest';
-import Footer from './components/Footer';
+import Skeletal, { SharedLayout } from './components/Skeletal';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import JoinGame from './test-components/JoinGame';
+import Board from './test-components/Board';
 
- 
+
 class App extends Component {
   render() {
     return (
-      <div>
-        
-        <Header />
-        {/* <Board /> */}
-        <Skeletal />
-        <Footer />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<SharedLayout />}>
+            <Route path='/welcome' element={<Skeletal />} />
+            <Route path='/joinGame' element={<JoinGame />} />
+            <Route path='/gameStart' element={<Board />} />
+
+          </Route>
+        </Routes>
+
+
+      </BrowserRouter>
     );
   }
 }
- 
+
 export default App;
 
 
