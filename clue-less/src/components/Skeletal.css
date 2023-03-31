@@ -48,7 +48,13 @@
     max-width: 100%;
     font-style: italic;
     margin-bottom: 4vh;
+    font-size: 1.5vw;
+
+    /* background-color: #790905; */
     font-weight: 100;
+    font-size: 1.5vw;
+
+    /* background-color: #790905; */
     font-size: 1.5vw;
 
     /* background-color: #790905; */
@@ -86,18 +92,14 @@
     transform: brightness(80%)
 }
 
-#next-info {
-    margin-top: 3vh;
-}
-
-.splash-panel-welcome {
+.splash-panel {
     height: 85vh;
     width: 65vw;
     display: flex;
     position: relative;
     justify-content: right;
-    background-image: url("../assets/img/theme/char-group.jpg");
-    /* background-image: url("../assets/img/theme/blank.png"); */
+    /* background-image: url("../assets/img/theme/char-group.jpg"); */
+    background-image: url("../assets/img/theme/blank.png");
     background-repeat: no-repeat;
     background-size: cover;
     /* background-color: #ca120c; */
@@ -128,10 +130,12 @@ h2 {
 
 #tag-a {
     bottom: 5vh;
+    bottom: 5vh;
 }
 
 #tag-b {
     bottom: 0vh;
+    bottom: 5vh;
     font-weight: bold;
 }
 
