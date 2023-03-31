@@ -108,40 +108,67 @@
     text-align: center;
 }
 
-.splash-panel {
+.splash-panel-A {
     height: 85vh;
     width: 65vw;
     display: flex;
     position: relative;
     justify-content: right;
-    background-image: url("../assets/img/theme/backdrop.jpg");
+    /* background-image: url("../assets/img/theme/backdrop.jpg"); */
     /* background-image: url("../assets/img/theme/blank.png"); */
     background-repeat: no-repeat;
     background-size: cover;
-    opacity: 20%;
+    /* opacity: 20%; */
     /* background-color: #ca120c; */
 }
-
-
-
-.blank {
+#back-drop {
     height: 100%;
+    width: 100%;
+    opacity: 20%;
+}
+#crime {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    opacity: unset;
+    
+
+}
+#boddy-black {
+    height: 40%;
     width: auto;
-    object-fit: contain;
-    opacity: 10%;
+    margin-right: 5vw;
+    
+}
+#boden {
+    font-family: "inglesa-caps-variable", sans-serif;
+    font-variation-settings: "wght" 600;
+    font-size: 2.5vw;
+    margin: 1.5vh;
+}
+#boddy-intro {
+    margin-left: 3vw;
+    margin-right: 3vw;
+    color: white;
+    font-size: 1.2vw;
+    text-align: center;
 }
 
 @media screen and (max-width: 1200px) {
     .game-launch-body {
-        justify-content: center;
+        justify-content: right;
     }
     #game-launch-wrapper {
         background-image: none;
         height: 100%;
-        width: 98%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
     }
     .game-launch-panel {
-        width: 90vw;
+        width: 100%;
         position: absolute;
         height: 80vh;
         align-items: center;
@@ -165,6 +192,9 @@
     .splash-panel {
         width: 100vw;
     }
+    #crime {
+        display: none;
+    }
 
     #uname {
         max-width: 90%;
@@ -172,6 +202,10 @@
     
     #launch {
         max-width: 90%;
+    }
+    #back-drop {
+        height: 100%;
+        width: auto;
     }
 
 }

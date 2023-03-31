@@ -1,6 +1,7 @@
 import './SkeletalTest.css';
 import React, { useRef } from 'react';
-
+import boddy from      "../assets/img/theme/boddy-black.jpg";
+import backdrop from      "../assets/img/theme/backdrop.jpg";
 // const [game-launch, setgame-launch] = useState('');
 
 function GameType () {
@@ -60,8 +61,17 @@ function GameType () {
                     </section>
                 </section>
             </section>
-            <section className="splash-panel">
+            <section className="splash-panel-A">
+                <img className="backdrop" id="back-drop" src={backdrop} alt="Pre-game miscellaneous hints"></img>
+                <div id="crime">
                 
+                    <p id="boddy-intro"><h1 id="boden">Boden "Boddy" Black</h1>Boden "Boddy" Black Jr. isn't rich. He is filthy rich. He made it the old-fashioned way, by inheritance. 
+                        Jumping from one passion project to another, mostly due to utter boredom, his newest venture is the obnoxiously 
+                        opulent Boden Black Hotel. Fitting. Despite public opposition, the hotel seems to have been fast tracked by government 
+                        officials and he's partnering with some of Hue County's elite. Hopefully this project won't bore him to death.
+                    </p>
+                    <img className="boddy" id="boddy-black" src={boddy} alt="Boden 'Boddy' Black"></img>
+                </div>
             </section>
             
             

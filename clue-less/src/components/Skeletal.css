@@ -92,20 +92,20 @@
     transform: brightness(80%)
 }
 
-.splash-panel {
+.splash-panel-welcome {
     height: 85vh;
     width: 65vw;
     display: flex;
     position: relative;
     justify-content: right;
-    /* background-image: url("../assets/img/theme/char-group.jpg"); */
-    background-image: url("../assets/img/theme/blank.png");
+    background-image: url("../assets/img/theme/char-group.jpg");
+    /* background-image: url("../assets/img/theme/blank.png"); */
     background-repeat: no-repeat;
     background-size: cover;
     /* background-color: #ca120c; */
 }
 
-h1 {
+#game-title {
     color: white;
     position: absolute;
     width: 100%;
@@ -116,7 +116,7 @@ h1 {
     font-size: 5em;
 }
 
-h2 {
+.sub-heading {
     position: absolute;
     font-family: "franklin-gothic-atf", sans-serif;
     font-weight: 100;
@@ -130,12 +130,10 @@ h2 {
 
 #tag-a {
     bottom: 5vh;
-    bottom: 5vh;
 }
 
 #tag-b {
     bottom: 0vh;
-    bottom: 5vh;
     font-weight: bold;
 }
 
@@ -156,9 +154,9 @@ h2 {
         width: 98%;
     }
     .username-panel {
-        width: 90vw;
+        width: 98vw;
         position: absolute;
-        height: 80vh;
+        height: 90vh;
         align-items: center;
         justify-content: center;
         
@@ -178,16 +176,16 @@ h2 {
         margin-bottom: 2vh;
         font-size: 2.5vw;   
     }
-    .splash-panel {
+    .splash-panel-welcome {
         width: 100vw;
     }
 
-    h1 {
-        text-align: center;
+    #game-title {
+        display: none;
     }
 
-    h2 {
-        font-size: 1.2em;
+    .sub-heading {
+        display: none;
     }
 
     #uname {
