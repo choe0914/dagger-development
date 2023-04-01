@@ -24,7 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(rgba(255, 0, 0, 0.288), rgb(0, 0, 0));
+    /* background-image: linear-gradient(rgba(5, 5, 5, 0.288), rgb(0, 0, 0)); */
 }
 
 .username-entry {
@@ -75,7 +75,7 @@
     color: #ffffff;
 }
 
-#launch-user {
+#launch-game-select {
     max-width: 100%;
     border: none;
     border-style: none;
@@ -90,7 +90,7 @@
     display: none;
 }
 
-#launch-user:hover {
+#launch-game-select:hover {
     transform: brightness(80%)
 }
 
@@ -194,7 +194,7 @@
         max-width: 90%;
     }
     
-    #launch-user {
+    #launch-game-select {
         max-width: 90%;
     }
 

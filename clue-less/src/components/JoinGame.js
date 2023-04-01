@@ -1,30 +1,35 @@
 import './JoinGame.css';
 // import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React, { useRef } from 'react';
+// import React, { useRef } from 'react';
 import boddy from "../assets/img/theme/boddy-black.jpg";
 import backdrop from "../assets/img/theme/backdrop.jpg";
 // const [game-launch, setgame-launch] = useState('');
 
 function GameType() {
     const navigate = useNavigate();
-    const launchButton = useRef();
+    // var launchButton = useRef();
+    
     // const gameChoice = useRef();
     function handleGameChoiceClick(event) {
-        launchButton.current.style.transform = "translateY(2px)";
+        var launchButton = document.getElementById("launch-char-select");
+        launchButton.style.transform = "translateY(2px)";
         setTimeout(() => {
-            launchButton.current.style.transform = "translateY(-1px)";
+            launchButton.style.transform = "translateY(-1px)";
         }, 100);
         navigate('/characterSelect');
     }
     function buttonHoverA(event) {
-        launchButton.current.style.filter = "brightness(80%)";
+        var launchButton = document.getElementById("launch-char-select");
+        launchButton.style.filter = "brightness(80%)";
     }
     function buttonHoverB(event) {
-        launchButton.current.style.filter = "brightness(100%)";
+        var launchButton = document.getElementById("launch-char-select");
+        launchButton.style.filter = "brightness(100%)";
     }
     function handleGameChoiceA(event) {
-        launchButton.current.style.visibility = "hidden";
+        var launchButton = document.getElementById("launch-char-select");
+        launchButton.style.visibility = "hidden";
         var fieldText = document.getElementById("game-id-field");
         fieldText.style.border = "1px solid rgba(255, 0, 0, 0.5)";
         var gameChoice = document.getElementById("game-search-wrapper");
@@ -34,35 +39,39 @@ function GameType() {
         gameVis.style.display = "none";
     }
     function handleGameChoiceB(event) {
+        var launchButton = document.getElementById("launch-char-select");
         var gameChoice = document.getElementById("game-search-wrapper");
         var gameVis = document.getElementById("game-vis-wrapper");
         document.getElementById("game-id-field").value = "";
         gameChoice.style.display = "none";
         gameVis.style.display = "unset";
         gameVis.style.display = "flex";
-        launchButton.current.style.visibility = "hidden";
+        launchButton.style.visibility = "hidden";
 
     }
     // 121212
     function handleGameVisChoiceA(event) {
+        var launchButton = document.getElementById("launch-char-select");
         // TODO: handle the option to post the game ID so others may see it in their global lists
         console.log("Public");
-        launchButton.current.style.visibility = "visible";
+        launchButton.style.visibility = "visible";
     }
     function handleGameVisChoiceB(event) {
+        var launchButton = document.getElementById("launch-char-select");
         // TODO: handle the option to keep game ID private
         console.log("Private");
-        launchButton.current.style.visibility = "visible";
+        launchButton.style.visibility = "visible";
     }
     function checkField(event) {
+        var launchButton = document.getElementById("launch-char-select");
         var fieldText = document.getElementById("game-id-field");
         // handling valid length joinable game ID
         if (Number.isInteger(Number(fieldText.value))) {
             if (fieldText.value !== "" && fieldText.value.length > 5) {
-                launchButton.current.style.visibility = "visible";
+                launchButton.style.visibility = "visible";
                 fieldText.style.border = "1px solid green";
             } else {
-                launchButton.current.style.visibility = "hidden";
+                launchButton.style.visibility = "hidden";
                 fieldText.style.border = "1px solid rgba(255, 0, 0, 0.5)";
             }
         } else {
@@ -88,7 +97,7 @@ function GameType() {
                             <span className="game-vis-txt" id="game-vis-public" onClick={handleGameVisChoiceA}>Public<input id="game-public" className="game-vis" type="radio" name="vis-choice"></input></span>
                             <span className="game-vis-txt" id="game-vis-private" onClick={handleGameVisChoiceB}>Private<input id="game-private" className="game-vis" type="radio" name="vis-choice"></input></span>
                         </div>
-                        <button id="launch" ref={launchButton} onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB} onClick={handleGameChoiceClick}>Continue</button>
+                        <button id="launch-char-select" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB} onClick={handleGameChoiceClick}>Continue</button>
                         <span id="next-info">Next - Character Selection</span>
                     </section>
                 </section>

@@ -21,13 +21,14 @@ export function SharedLayout() {
 }
 
 function UserName() {
-    const launchButton = useRef();
+    
     let navigate = useNavigate();
     function handleSignInClick(event) {
-        // launchButton.current.style.transform = "translateY(2px)";
-        // setTimeout(() => {
-        //     launchButton.current.style.transform = "translateY(-1px)";
-        // }, 100);
+        var launchButton = document.getElementById("launch-game-select");
+        launchButton.style.transform = "translateY(2px)";
+        setTimeout(() => {
+            launchButton.style.transform = "translateY(-1px)";
+        }, 100);
         var fieldText = document.getElementById("uname");
         window.userName = fieldText.value;
         userAction();
@@ -42,14 +43,15 @@ function UserName() {
         
     
       function checkNameField(event) {
+        var launchButton = document.getElementById("launch-game-select");
         var fieldText = document.getElementById("uname");
         // handling valid length joinable game ID 
         if (fieldText.value !== "" && fieldText.value.length > 5) {
-            launchButton.current.style.display = "unset";
+            launchButton.style.display = "unset";
             window.userName = fieldText.value;
             
         } else {
-            launchButton.current.style.display = "none";
+            launchButton.style.display = "none";
         }
     }
     return (
@@ -63,7 +65,7 @@ function UserName() {
                             Join or invite friends to solve the mystery of who killed Boden "Boddy" Black.</p>
                         <span id="username-info">Please enter a unique username to begin</span>
                         <input type="text" id="uname" name="uname" placeholder='Username' onKeyUp={checkNameField} onBlur={k => {username = k.target.value;}}></input>
-                        <button id="launch-user" ref={launchButton} onClick={handleSignInClick}>Continue</button>
+                        <button id="launch-game-select" onClick={handleSignInClick}>Continue</button>
                         <span id="next-info">Next - Join or Start New Game</span>
                     </section>
                 </section>
