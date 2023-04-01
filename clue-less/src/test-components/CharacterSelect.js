@@ -13,7 +13,53 @@ import scarlett from "../assets/img/char-img/scarlett.png";
 import white from "../assets/img/char-img/white.png";
 function CharacterSelect() {
     const navigate = useNavigate();
+    function handleGameLaunchClick(event) {
+        var launchButton = document.getElementById("launch-game");
+        launchButton.style.transform = "translateY(2px)";
+        setTimeout(() => {
+            launchButton.style.transform = "translateY(-1px)";
+        }, 100);
+        navigate('/gameStart');
+    }
+    function buttonHoverA(event) {
+        var launchButton = document.getElementById("launch-game");
+        launchButton.style.filter = "brightness(80%)";
+    }
+    function buttonHoverB(event) {
+        var launchButton = document.getElementById("launch-game");
+        launchButton.style.filter = "brightness(100%)";
+    }
 
+    function charHoverA(char) {
+        
+        char.currentTarget.style.filter = "brightness(60%)";
+        switch (char.currentTarget.id) {
+            case "green":
+                char.currentTarget.style.border = "3px solid green";
+                break;
+            case "mustard":
+                char.currentTarget.style.border = "3px solid yellow";
+                break;
+            case "peacock":
+                char.currentTarget.style.border = "3px solid blue";
+                break;
+            case "plum":
+                char.currentTarget.style.border = "3px solid purple";
+                break;
+            case "scarlett":
+                char.currentTarget.style.border = "3px solid red";
+                break;
+            case "white":
+                char.currentTarget.style.border = "3px solid white";
+                break;
+            default:
+                char.currentTarget.style.border = "3px solid rgba(0, 0, 0, 0)";
+        }
+    }
+    function charHoverB(char) {
+        char.currentTarget.style.filter = "brightness(100%)";
+        char.currentTarget.style.border = "3px solid rgba(0, 0, 0, 0)";
+    }
     return (
 
         <main className="char-select-body">
@@ -23,14 +69,14 @@ function CharacterSelect() {
 
                         <span id="char-select-header">Character Selection</span>
                         <div id="character-div">
-                            <img className="char" id="green" src={green} alt="Mayor Green"></img>
-                            <img className="char" id="mustard" src={mustard} alt="Colonel Mustard"></img>
-                            <img className="char" id="peacock" src={peacock} alt="Solicitor Peacock"></img>
-                            <img className="char" id="plum" src={plum} alt="Professor Plum"></img>
-                            <img className="char" id="scarlett" src={scarlett} alt="Miss Scarlett"></img>
-                            <img className="char" id="white" src={white} alt="Chef White"></img>
+                            <img className="char" onMouseEnter={charHoverA} onMouseLeave={charHoverB} id="green" src={green} alt="Mayor Green"></img>
+                            <img className="char" onMouseEnter={charHoverA} onMouseLeave={charHoverB} id="mustard" src={mustard} alt="Colonel Mustard"></img>
+                            <img className="char" onMouseEnter={charHoverA} onMouseLeave={charHoverB} id="peacock" src={peacock} alt="Solicitor Peacock"></img>
+                            <img className="char" onMouseEnter={charHoverA} onMouseLeave={charHoverB} id="plum" src={plum} alt="Professor Plum"></img>
+                            <img className="char" onMouseEnter={charHoverA} onMouseLeave={charHoverB} id="scarlett" src={scarlett} alt="Miss Scarlett"></img>
+                            <img className="char" onMouseEnter={charHoverA} onMouseLeave={charHoverB} id="white" src={white} alt="Chef White"></img>
                         </div>
-                        <button id="launch-game" onClick={event => { navigate('/gameStart') }}>Start Game</button>
+                        <button id="launch-game" onClick={handleGameLaunchClick} onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Start Game</button>
                     </section>
                 </section>
             </section>

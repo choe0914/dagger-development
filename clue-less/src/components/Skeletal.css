@@ -90,10 +90,6 @@
     display: none;
 }
 
-#launch-game-select:hover {
-    transform: brightness(80%)
-}
-
 .splash-panel-welcome {
     height: 85vh;
     width: 65vw;

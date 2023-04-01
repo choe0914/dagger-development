@@ -33,6 +33,14 @@ function UserName() {
         window.userName = fieldText.value;
         userAction();
     }
+    function buttonHoverA(event) {
+        var launchButton = document.getElementById("launch-game-select");
+        launchButton.style.filter = "brightness(80%)";
+    }
+    function buttonHoverB(event) {
+        var launchButton = document.getElementById("launch-game-select");
+        launchButton.style.filter = "brightness(100%)";
+    }
 
     const userAction = async () => {
         //  const response = await fetch('http://127.0.0.1:5000/user/' + username);
@@ -41,7 +49,6 @@ function UserName() {
     }
 
         
-    
       function checkNameField(event) {
         var launchButton = document.getElementById("launch-game-select");
         var fieldText = document.getElementById("uname");
@@ -65,7 +72,7 @@ function UserName() {
                             Join or invite friends to solve the mystery of who killed Boden "Boddy" Black.</p>
                         <span id="username-info">Please enter a unique username to begin</span>
                         <input type="text" id="uname" name="uname" placeholder='Username' onKeyUp={checkNameField} onBlur={k => {username = k.target.value;}}></input>
-                        <button id="launch-game-select" onClick={handleSignInClick}>Continue</button>
+                        <button id="launch-game-select" onClick={handleSignInClick} onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Continue</button>
                         <span id="next-info">Next - Join or Start New Game</span>
                     </section>
                 </section>
