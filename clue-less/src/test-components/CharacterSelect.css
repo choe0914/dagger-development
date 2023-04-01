@@ -1,4 +1,4 @@
-.game-launch-body {
+.char-select-body {
     display: flex;
     align-items: center;
     height: 87vh;
@@ -8,7 +8,7 @@
     background-color: #000000;
 }
 
-.game-launch-panel {
+.char-select-panel {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,101 +18,41 @@
     z-index: 99;
 }
 
-#game-launch-wrapper {
+#char-select-wrapper {
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(rgba(255, 0, 0, 0.288), rgb(0, 0, 0));
+    /* background-image: linear-gradient(rgba(255, 0, 0, 0.288), rgb(0, 0, 0)); */
 }
 
-.game-launch-entry {
+.char-select-entry {
     display: flex;
     padding: 5vw;
     max-width: 70%;
     flex-direction: column;
-    /* background-color: #ffffff1A; */
+    background-color: #ffffff1A;
 }
 
-#game-launch-header {
+#char-select-header {
     font-style: bold;
     font-size: 2vw;
-    margin-bottom: 1vh;
+    margin-bottom: 2vh;
     font-weight: 700;
     max-width: 100%;
     /* background-color: #ca120c; */
 }
+#character-div {
 
-.game-option-txt {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    position: relative;
-    font-size: 1.7vw;
-    height: 8vh;
 }
-#game-search-wrapper {
-    display: flex;
-    align-items: center;
-    height: 4vh;
-    max-width: 100%;
-    display: none;
-}
-#game-id-field {
-    border: none;
-    border-style: none;
-    outline: none;
-    height: 4vh;
-    width: 70%;
-    font-size: larger;
-    background-color: #ffffff1a;
-    color: #ffffff;
-    
-}
-
-#game-id-field:focus {
-    border: 1px solid rgba(255, 0, 0, 0.5);
-    /* outline-color: #ca120c; */
-    /* background-color: aqua; */
-}
-
-#search {
-    height: 100%;
-    width: 30%;
-    border: none;
-    border-style: none;
+.char {
+    height: 7vw;
+    width: auto;
+    margin: 0.5vw;
     cursor: pointer;
 }
-.game-choice {
-    position: absolute;
-    transform: scale(2);
-    right: 0;
-    margin: 0;
-    padding: 0;
-}
-.game-vis {
-    
-    transform: scale(1.5);
-    margin: 0;
-    padding: 0; 
-    margin-left: 2vw;
-}
-#game-vis-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    display: none;
-}
-.game-vis-txt {
-    margin-right: 4vw;
-    font-size: 1.2vw;
-    display: flex;
-}
-
-#launch {
+#launch-game {
     margin-top: 4vh;
     max-width: 100%;
     border: none;
@@ -124,7 +64,7 @@
     font-size: larger;
     cursor: pointer;
     box-shadow: 0px 5px 5px black;
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 #next-info {
@@ -134,7 +74,7 @@
     text-align: center;
 }
 
-.splash-panel-A {
+.splash-panel-B {
     height: 85vh;
     width: 65vw;
     display: flex;
@@ -152,48 +92,58 @@
     width: 100%;
     opacity: 20%;
 }
-#crime {
+#murder {
     width: 100%;
     height: 100%;
     position: absolute;
     display: flex;
+    flex-direction: column;
     align-items: center;
     opacity: unset;
     
 
 }
-#boddy-black {
+
+#invite-img {
     height: 40%;
     width: auto;
     margin-right: 5vw;
+    transform: rotate(-5deg);
+    margin-top: 5vh;
+    margin-bottom: 5vh;
     
 }
-#boden {
+#murder-heading {
     font-family: "inglesa-caps-variable", sans-serif;
     font-variation-settings: "wght" 600;
     font-size: 2.5vw;
     margin: 1.5vh;
+    color: white;
 }
-#boddy-intro {
+#murder-intro {
     margin-left: 3vw;
     margin-right: 3vw;
     color: white;
     font-size: 1.2vw;
     text-align: center;
+    width: 70%;
+}
+#murdered {
+    color: red;
 }
 
 @media screen and (max-width: 1200px) {
-    .game-launch-body {
+    .char-select-body {
         justify-content: right;
     }
-    #game-launch-wrapper {
+    #char-select-wrapper {
         background-image: none;
         height: 100%;
         width: 100%;
         margin: 0;
         padding: 0;
     }
-    .game-launch-panel {
+    .char-select-panel {
         width: 100%;
         position: absolute;
         height: 80%;
@@ -201,38 +151,31 @@
         justify-content: center;
     }
 
-    .game-launch-entry {
+    .char-select-entry {
+        display: flex;
         justify-content: center;
+        /* align-items: center; */
         height: 70%;
         width: 96%;
         margin: 0;
         background-color: #000000;
         z-index: 99;
     }
-
-    #game-launch-header {
-        font-size: 4vw;
+    .char {
+        height: 16vw;
+        width: auto;
+        margin: 1.8vw;
     }
-    .game-option-txt {
-        font-size: 5vw;
+    #char-select-header {
+        font-size: 6vw;
     }
-    .game-vis-txt {
-        font-size: 4vw;
+    #launch-game {
+        width: 100%;
     }
-    .splash-panel {
-        width: 100vw;
-    }
-    #crime {
+    #murder {
         display: none;
     }
 
-    #uname {
-        max-width: 90%;
-    }
-    
-    #launch {
-        max-width: 90%;
-    }
     #back-drop {
         height: 100%;
         width: auto;
