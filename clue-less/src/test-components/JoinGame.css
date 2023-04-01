@@ -1,0 +1,241 @@
+.game-launch-body {
+    display: flex;
+    align-items: center;
+    height: 87vh;
+    width: 100vw;
+    overflow: hidden;
+    grid-template-columns: repeat(2, 50vw);
+    background-color: #000000;
+}
+
+.game-launch-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35vw;
+    height: 85vh;
+    color: white;
+    z-index: 99;
+}
+
+#game-launch-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(rgba(255, 0, 0, 0.288), rgb(0, 0, 0));
+}
+
+.game-launch-entry {
+    display: flex;
+    padding: 5vw;
+    max-width: 70%;
+    flex-direction: column;
+    /* background-color: #ffffff1A; */
+}
+
+#game-launch-header {
+    font-style: bold;
+    font-size: 2vw;
+    margin-bottom: 1vh;
+    font-weight: 700;
+    max-width: 100%;
+    /* background-color: #ca120c; */
+}
+
+.game-option-txt {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    position: relative;
+    font-size: 1.7vw;
+    height: 8vh;
+}
+#game-search-wrapper {
+    display: flex;
+    align-items: center;
+    height: 4vh;
+    max-width: 100%;
+    display: none;
+}
+#game-id-field {
+    border: none;
+    border-style: none;
+    outline: none;
+    height: 4vh;
+    width: 70%;
+    font-size: larger;
+    background-color: #ffffff1a;
+    color: #ffffff;
+    
+}
+
+#game-id-field:focus {
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    /* outline-color: #ca120c; */
+    /* background-color: aqua; */
+}
+
+#search {
+    height: 100%;
+    width: 30%;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+}
+.game-choice {
+    position: absolute;
+    transform: scale(2);
+    right: 0;
+    margin: 0;
+    padding: 0;
+}
+.game-vis {
+    
+    transform: scale(1.5);
+    margin: 0;
+    padding: 0; 
+    margin-left: 2vw;
+}
+#game-vis-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: none;
+}
+.game-vis-txt {
+    margin-right: 4vw;
+    font-size: 1.2vw;
+    display: flex;
+}
+
+#launch {
+    margin-top: 4vh;
+    max-width: 100%;
+    border: none;
+    border-style: none;
+    border-radius: 16px;
+    height: 4vh;
+    background-image: linear-gradient(to right, #790905, #ca120c);
+    color: white;
+    font-size: larger;
+    cursor: pointer;
+    box-shadow: 0px 5px 5px black;
+    visibility: hidden;
+}
+
+#next-info {
+    margin-top: 3vh;
+    opacity: 50%;
+    max-width: 100%;
+    text-align: center;
+}
+
+.splash-panel-A {
+    height: 85vh;
+    width: 65vw;
+    display: flex;
+    position: relative;
+    justify-content: right;
+    /* background-image: url("../assets/img/theme/backdrop.jpg"); */
+    /* background-image: url("../assets/img/theme/blank.png"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* opacity: 20%; */
+    /* background-color: #ca120c; */
+}
+#back-drop {
+    height: 100%;
+    width: 100%;
+    opacity: 20%;
+}
+#crime {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    opacity: unset;
+    
+
+}
+#boddy-black {
+    height: 40%;
+    width: auto;
+    margin-right: 5vw;
+    
+}
+#boden {
+    font-family: "inglesa-caps-variable", sans-serif;
+    font-variation-settings: "wght" 600;
+    font-size: 2.5vw;
+    margin: 1.5vh;
+}
+#boddy-intro {
+    margin-left: 3vw;
+    margin-right: 3vw;
+    color: white;
+    font-size: 1.2vw;
+    text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+    .game-launch-body {
+        justify-content: right;
+    }
+    #game-launch-wrapper {
+        background-image: none;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .game-launch-panel {
+        width: 100%;
+        position: absolute;
+        height: 80%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .game-launch-entry {
+        justify-content: center;
+        height: 70%;
+        width: 96%;
+        margin: 0;
+        background-color: #000000;
+        z-index: 99;
+    }
+
+    #game-launch-header {
+        font-size: 4vw;
+    }
+    .game-option-txt {
+        font-size: 5vw;
+    }
+    .game-vis-txt {
+        font-size: 4vw;
+    }
+    .splash-panel {
+        width: 100vw;
+    }
+    #crime {
+        display: none;
+    }
+
+    #uname {
+        max-width: 90%;
+    }
+    
+    #launch {
+        max-width: 90%;
+    }
+    #back-drop {
+        height: 100%;
+        width: auto;
+    }
+
+}
