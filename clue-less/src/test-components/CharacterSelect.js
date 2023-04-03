@@ -1,7 +1,7 @@
 import './CharacterSelect.css';
 // import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React, { useRef } from 'react';
+// import React, { useRef } from 'react';
 import invite from "../assets/img/theme/clue-less-invite.jpg";
 import backdrop from "../assets/img/theme/backdrop.jpg";
 // const [char-select, setchar-select] = useState('');

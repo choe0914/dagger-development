@@ -23,7 +23,6 @@ input[type=checkbox] {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #6a3794;
     max-width: 100%;
 }
 #notebook {
@@ -39,9 +38,16 @@ input[type=checkbox] {
 @media screen and (max-width: 900px) {
     .notebook-div {
         margin-top: 0;
+        min-width: 60vw;
+        
     }
     #notebook {
-        max-height: 80vh;
+        max-height: 75vh;
         width: auto;
+    }
+    table {
+        margin-top: 4vh;
+        font-size: 0.7em;
+        
     }
 }
