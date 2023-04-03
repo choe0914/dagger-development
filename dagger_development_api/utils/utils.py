@@ -50,65 +50,65 @@ def load_game(ex):
 def start_game(currentGame):
     #Total cards is 21 - the winning 3 = 18
     totalCards = 18
-    handRotation = 0                        
+    handRotation = 0
 
     #index the cards in an array to sort
-    roomIndex = [1,3,5,9,11,13,17,19,21]
+    roomIndex = [1,2,3,4,5,6,7,8,9]
     cardIndex = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
 
     weaponRooms = []
 
     #Databse queries for the game we are working with and the player states in them
-    gameStmt = select(Game).where(Game.gameId == currentGame)       
-    gameResult = db.session.execute(gameStmt)
-    playerStmt = select(PlayerState).where(PlayerState.gameId == currentGame)
-    playerResult = db.session.execute(playerStmt)
+    #gameStmt = select(Game).where(Game.gameId == currentGame)
+    #gameResult = db.session.execute(gameStmt)
+    user_obj = db.session.query(Game).where(Game.gameId == currentGame).first()
 
     #For the game that we find then send the player list and calculate the hands
-    for user_obj in gameResult.scalars():
-        playerList = user_obj.players
+    #db.session.query(Game).where(Playerid).first()
+    #user_obj.players
 
-        #playerHands = [[]  for x in range(len(playerList))]
+    playerList = user_obj.players
 
-        #Randomize the weapon starting rooms
-        for x in range(6):                                      
-            holdRoom = random.randint(0,8)
-            weaponRooms.append(roomIndex[holdRoom])
+    #playerHands = [[]  for x in range(len(playerList))]
 
-        #randomize the winner first
-        winningHand = [random.randint(0,5), random.randint(6,11), random.randint(12,20)]
+    #Randomize the weapon starting rooms
+    for x in range(6):
+        holdRoom = random.randint(0,8)
+        weaponRooms.append(roomIndex[holdRoom])
 
-        #remove selected cards
-        cardIndex.pop(winningHand[2])
-        cardIndex.pop(winningHand[1])
-        cardIndex.pop(winningHand[0])
+    #randomize the winner first
+    winningHand = [random.randint(0,5), random.randint(6,11), random.randint(12,20)]
 
-        #loop through all the cards
-        while(totalCards > 0):
-            for x in range(len(playerList)):
-                #stop when there are none left
-                if(totalCards == 0):
+    #remove selected cards
+    cardIndex.pop(winningHand[2])
+    cardIndex.pop(winningHand[1])
+    cardIndex.pop(winningHand[0])
 
-                    break
+    #loop through all the cards
+    while(totalCards > 0):
+        for x in range(len(playerList)):
+            #stop when there are none left
+            if(totalCards == 0):
 
-                #get a random card, add it to a hand, and remove it from the deck
-                indexValue = random.randint(0,totalCards-1)
-                cardPicked = cardIndex[indexValue]
-                playerList[x].hand.append(cardPicked)
-                cardIndex.pop(indexValue)
-                totalCards -= 1
+                break
 
-        updateStmt = update(Game).where(Game.gameId == currentGame).values(hand=winningHand)
-        db.session.update(updateStmt)
-        db.session.commit()
+            #get a random card, add it to a hand, and remove it from the deck
+            indexValue = random.randint(0,totalCards-1)
+            cardPicked = cardIndex[indexValue]
+            playerList[x].hand.append(cardPicked)
+            cardIndex.pop(indexValue)
+            totalCards -= 1
+
 
     #For each player give them one of the hands (current would be in order they joined)
-    for user_obj in playerResult.scalars():
-        if playerList[handRotation] != None:
-            updateStmt = update(PlayerState).where(and_(PlayerState.gameId == currentGame, PlayerState.userId == playerList[handRotation].userId)).values(hand=playerList[handRotation])
-            db.session.update(updateStmt)
-            db.session.commit()
-            handRotation += 1
+    # for x in range(len(playerList)):
+    #     if playerList[handRotation] != None:
+    #         updateStmt = update(PlayerState).where(and_(PlayerState.gameId == currentGame, PlayerState.userId == playerList[handRotation].userId)).values(hand=playerList[handRotation])
+    #         db.session.update(updateStmt)
+    #         db.session.commit()
+    #         handRotation += 1
 
-    #return the room orientation    
+    db.session.commit()
+
+    #return the room orientation
     return(weaponRooms)
