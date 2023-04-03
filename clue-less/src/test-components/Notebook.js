@@ -22,430 +22,432 @@ class Notebook extends Component {
               
         
             <table className="notebook-table" id="nb-table">
-                <tr className="table-section">WHO?</tr>
-                <tr className="nb-char-row" id={chars[0]}>{chars[0]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-char-row" id={chars[1]}>{chars[1]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-char-row" id={chars[2]}>{chars[2]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-char-row" id={chars[3]}>{chars[3]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-char-row" id={chars[4]}>{chars[4]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-char-row" id={chars[5]}>{chars[5]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="table-section">WHAT?</tr>
-                <tr className="nb-weapon-row" id={weaponsTag[0]}>{weapons[0]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-weapon-row" id={weaponsTag[1]}>{weapons[1]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                
-                <tr className="nb-weapon-row" id={weaponsTag[2]}>{weapons[2]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-weapon-row" id={weaponsTag[3]}>{weapons[3]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-weapon-row" id={weaponsTag[4]}>{weapons[4]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-weapon-row" id={weaponsTag[5]}>{weapons[5]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="table-section">WHERE?</tr>
-                <tr className="nb-room-row" id={roomsTag[0]}>{rooms[0]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-room-row" id={roomsTag[1]}>{rooms[1]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-room-row" id={roomsTag[2]}>{rooms[2]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-room-row" id={roomsTag[3]}>{rooms[3]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-room-row" id={roomsTag[4]}>{rooms[4]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-room-row" id={roomsTag[5]}>{rooms[5]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-room-row" id={roomsTag[6]}>{rooms[6]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-room-row" id={roomsTag[7]}>{rooms[7]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
-                <tr className="nb-room-row" id={roomsTag[8]}>{rooms[8]}
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr className="table-section"><td>WHO?</td></tr>
+                    <tr className="nb-char-row" id={chars[0]}><td>{chars[0]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-char-row" id={chars[1]}><td>{chars[1]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-char-row" id={chars[2]}><td>{chars[2]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-char-row" id={chars[3]}><td>{chars[3]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-char-row" id={chars[4]}><td>{chars[4]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-char-row" id={chars[5]}><td>{chars[5]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="table-section"><td>WHAT?</td></tr>
+                    <tr className="nb-weapon-row" id={weaponsTag[0]}><td>{weapons[0]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-weapon-row" id={weaponsTag[1]}><td>{weapons[1]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    
+                    <tr className="nb-weapon-row" id={weaponsTag[2]}><td>{weapons[2]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-weapon-row" id={weaponsTag[3]}><td>{weapons[3]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-weapon-row" id={weaponsTag[4]}><td>{weapons[4]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-weapon-row" id={weaponsTag[5]}><td>{weapons[5]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="table-section"><td>WHERE?</td></tr>
+                    <tr className="nb-room-row" id={roomsTag[0]}><td>{rooms[0]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-room-row" id={roomsTag[1]}><td>{rooms[1]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-room-row" id={roomsTag[2]}><td>{rooms[2]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-room-row" id={roomsTag[3]}><td>{rooms[3]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-room-row" id={roomsTag[4]}><td>{rooms[4]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-room-row" id={roomsTag[5]}><td>{rooms[5]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-room-row" id={roomsTag[6]}><td>{rooms[6]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-room-row" id={roomsTag[7]}><td>{rooms[7]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr className="nb-room-row" id={roomsTag[8]}><td>{rooms[8]}</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
       );

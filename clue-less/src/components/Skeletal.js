@@ -1,5 +1,5 @@
 import './Skeletal.css';
-import React, { useRef } from 'react';
+// import React, { useRef } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import { Outlet, useNavigate } from 'react-router-dom';
