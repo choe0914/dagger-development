@@ -12,7 +12,7 @@ class PlayerState(db.Model):
     # The players current board position in this game
     currentPosition = db.Column(db.Integer)
     # A list representing the cards a player has
-    hand = relationship('GameCard', back_populates=('playerHand'))
+    hand = relationship('GameCard', back_populates=('playerHand'), uselist=True)
     
     #  RELATIONSHIPS  #
     # Foreign key and relationship represented in the game object as the players in said game
@@ -36,4 +36,10 @@ class PlayerState(db.Model):
         self.currentPosition = current_position
     
     def as_dict(self):
-       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        output = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        if not self.notepad:
+            output["notepad"] = {}
+        else:
+            output["notepad"] = self.notepad.as_dict()
+        output["hand"] = list(map(lambda player: player.as_dict(), self.hand))
+        return output

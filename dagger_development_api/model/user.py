@@ -15,3 +15,8 @@ class User(db.Model):
 
     def __init__(self, name):
         self.name = name
+    
+    def as_dict(self):
+       output = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+       output["playerStates"] = list(map(lambda player: player.as_dict(), self.playerStates))
+       return output
