@@ -50,7 +50,7 @@ def load_game(ex):
 def start_game(currentGame):
     #Total cards is 21 - the winning 3 = 18
     totalCards = 18
-    handRotation = 0
+    #handRotation = 0
 
     #index the cards in an array to sort
     roomIndex = [1,2,3,4,5,6,7,8,9]
