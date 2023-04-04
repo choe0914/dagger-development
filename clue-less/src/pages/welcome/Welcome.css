@@ -96,7 +96,7 @@
     display: flex;
     position: relative;
     justify-content: right;
-    background-image: url("../assets/img/theme/char-group.jpg");
+    background-image: url("../../assets/img/theme/char-group.jpg");
     /* background-image: url("../assets/img/theme/blank.png"); */
     background-repeat: no-repeat;
     background-size: cover;

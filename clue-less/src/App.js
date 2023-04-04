@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Skeletal, { SharedLayout } from './components/Skeletal';
+import Skeletal from './pages/welcome/Welcome';
+import { SharedLayout } from './components/layout/Layout';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import JoinGame from './components/JoinGame';
-import Board from './test-components/Board';
-import CharacterSelect from './test-components/CharacterSelect';
+import Board from './pages/startGame/Board';
+import CharacterSelect from './pages/characterSelect/CharacterSelect';
 
 class App extends Component {
   render() {

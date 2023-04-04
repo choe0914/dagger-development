@@ -137,7 +137,7 @@
 }
 
 #room-1 {
-    background-image: url("../assets/img/room-img/kitchen.jpg");
+    background-image: url("../../assets/img/room-img/kitchen.jpg");
     background-size: 100% 100%;
     height: var(--kitchen-height);
     width: var(--LR-room-width);
@@ -155,7 +155,7 @@
 }
 
 #room-2 {
-    background-image: url("../assets/img/room-img/ballroom.jpg");
+    background-image: url("../../assets/img/room-img/ballroom.jpg");
     background-size: 100% 100%;
     height: var(--ball-height);
     width: var(--center-rooms-width);
@@ -171,7 +171,7 @@
 } 
 
 #room-3 {
-    background-image: url("../assets/img/room-img/conservatory.jpg");
+    background-image: url("../../assets/img/room-img/conservatory.jpg");
     background-size: 100% 100%;
     height: var(--conservatory-height);
     width: var(--LR-room-width);
@@ -188,7 +188,7 @@
 }
 
 #room-4 {
-    background-image: url("../assets/img/room-img/billiards.jpg");
+    background-image: url("../../assets/img/room-img/billiards.jpg");
     background-size: 100% 100%;
     height: var(--billiards-height);
     width: var(--LR-room-width);
@@ -204,7 +204,7 @@
 }
 
 #room-5 {
-    background-image: url("../assets/img/room-img/library.jpg");
+    background-image: url("../../assets/img/room-img/library.jpg");
     background-size: 100% 100%;
     height: var(--library-height);
     width: var(--LR-room-width);
@@ -220,7 +220,7 @@
 }
 
 #room-6 {
-    background-image: url("../assets/img/room-img/study.jpg");
+    background-image: url("../../assets/img/room-img/study.jpg");
     background-size: 100% 100%;
     height: var(--library-height);
     width: var(--LR-room-width);
@@ -236,7 +236,7 @@
 }
 
 #room-7 {
-    background-image: url("../assets/img/room-img/hall.jpg");
+    background-image: url("../../assets/img/room-img/hall.jpg");
     background-size: 100% 100%;
     height: var(--hall-room-height);
     width: var(--center-rooms-width);
@@ -252,7 +252,7 @@
 }
 
 #room-8 {
-    background-image: url("../assets/img/room-img/lounge.jpg");
+    background-image: url("../../assets/img/room-img/lounge.jpg");
     background-size: 100% 100%;
     height: var(--lounge-height);
     width: var(--LR-room-width);
@@ -268,7 +268,7 @@
 }
 
 #room-9 {
-    background-image: url("../assets/img/room-img/dining.jpg");
+    background-image: url("../../assets/img/room-img/dining.jpg");
     background-size: 100% 100%;
     height: var(--dining-height);
     width: var(--LR-room-width);
@@ -284,7 +284,7 @@
 }
 
 #room-0 {
-    background-image: url("../assets/img/room-img/center.jpg");
+    background-image: url("../../assets/img/room-img/center.jpg");
     background-size: 100% 100%;
     height: var(--interogation-height);
     width: var(--center-rooms-width);
