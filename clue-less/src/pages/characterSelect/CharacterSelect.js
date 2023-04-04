@@ -2,15 +2,15 @@ import './CharacterSelect.css';
 // import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import React, { useRef } from 'react';
-import invite from "../assets/img/theme/clue-less-invite.jpg";
-import backdrop from "../assets/img/theme/backdrop.jpg";
+import invite from "../../assets/img/theme/clue-less-invite.jpg";
+import backdrop from "../../assets/img/theme/backdrop.jpg";
 // const [char-select, setchar-select] = useState('');
-import green from "../assets/img/char-img/green.png";
-import mustard from "../assets/img/char-img/mustard.png";
-import peacock from "../assets/img/char-img/peacock.png";
-import plum from "../assets/img/char-img/plum.png";
-import scarlett from "../assets/img/char-img/scarlett.png";
-import white from "../assets/img/char-img/white.png";
+import green from "../../assets/img/char-img/green.png";
+import mustard from "../../assets/img/char-img/mustard.png";
+import peacock from "../../assets/img/char-img/peacock.png";
+import plum from "../../assets/img/char-img/plum.png";
+import scarlett from "../../assets/img/char-img/scarlett.png";
+import white from "../../assets/img/char-img/white.png";
 function CharacterSelect() {
     const navigate = useNavigate();
     function handleGameLaunchClick(event) {
@@ -31,7 +31,7 @@ function CharacterSelect() {
     }
 
     function charHoverA(char) {
-        
+
         char.currentTarget.style.filter = "brightness(60%)";
         switch (char.currentTarget.id) {
             case "green":
