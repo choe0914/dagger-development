@@ -81,3 +81,35 @@ def move_player(moveRequest):
     # Update other players via websockets?
     send(game.players, to=game.gameId)
     #return {"playerId": player.playerStateId, "position": player.currentPosition}
+
+@socketio.on('accusation')
+def check_win(accusation):
+    #accusation in format of gameId, person, weapon, room
+    success = "Win"
+    fail = "Lose"
+
+    #Get the room list so we can update the tokens
+    room_list = list(ROOMS.values())
+
+    #Query the database to update player position, where a weapon token is, and where a character is.
+    player = db.session.query(PlayerState).where(PlayerState.characterId == accusation["characterId"]).first()
+    card = db.session.query(GameCard).where(GameCard.gameCardId == accusation["weaponId"]).first()
+    game = db.session.query(Game).where(Game.gameId == accusation["characterId"]).first()
+    player.current_position = accusation["roomId"]
+    card.currentRoom = room_list[accusation["roomId"]]
+    db.session.commit()
+
+    #Remove the first entry for easier hand checking
+    accusation.pop(0)
+
+    # Update other players via websockets the playersates and where the weapon token is
+    send(game.players + card.currentRoom, to=game.gameId)
+
+    #Check if the character, weapon, and room ar correct
+    if accusation == game.winningHand:
+        #If it was a success, 
+        send(success, to=game.gameId)
+        #return {"result": success}
+    else:
+        send(fail, to=game.gameId)
+        #return {"result": fail}
