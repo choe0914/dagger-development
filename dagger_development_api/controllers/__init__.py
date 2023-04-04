@@ -8,3 +8,4 @@ player_blueprint = Blueprint('player_blueprint', __name__)
 from dagger_development_api.controllers import user
 from dagger_development_api.controllers import game
 from dagger_development_api.controllers import player
+from dagger_development_api.controllers import events

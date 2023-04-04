@@ -1,5 +1,5 @@
-from dagger_development_api.controllers import game_blueprint
-from flask_cors import cross_origin
+from flask_socketio import send, join_room, leave_room
+import socketio
 from dagger_development_api.extensions import db
 from flask import request
 import random
@@ -9,43 +9,24 @@ from dagger_development_api.model.player_state import PlayerState
 from dagger_development_api.model.card_info import CardInfo
 from dagger_development_api.model.game_card import GameCard
 from dagger_development_api.utils.constants import CARD_TYPES, ROOMS
-from flask_socketio import send, join_room, leave_room
 
-# All routes for game data and calculations (if needed)
-@cross_origin(supports_credentials=True)
-@game_blueprint.route('/game')
-# Create a new game
-@game_blueprint.route('/game/create')
-def create_game():
-    game = Game("")
-    db.session.add(game)
-    db.session.commit()
-    return {"gameId": game.gameId}
-
-# Get all gameIds
-@game_blueprint.route('/game/get_all')
-def get_all():
-    games = list(map(lambda game: game.as_dict(), db.session.query(Game).all()))
-    # Return a list of all the games
-    return {"games": games}
-
-# Given a userId, gameId, characterId, and positionId, make a new player for the user in the given game
-@game_blueprint.route('/game/join', methods=['POST'])
-def join_game():
-    user = db.session.query(User).where(User.userId == request.json["userId"]).first()
-    game = db.session.query(Game).where(Game.gameId == request.json["gameId"]).first()
+#Socket representation of the join api route
+#Stored in dictionary of userId, gameId, characterId, and positionId
+@socketio.on("joined")
+def joined(gameRoom):
+    user = db.session.query(User).where(User.userId == gameRoom["userId"]).first()
+    game = db.session.query(Game).where(Game.gameId == gameRoom["gameId"]).first()
     # Create new playerState and add it to db
-    db.session.add(PlayerState(request.json["userId"], request.json["gameId"], request.json["characterId"], \
-        request.json["positionId"]))
+    db.session.add(PlayerState(gameRoom["userId"], gameRoom["gameId"], gameRoom["characterId"], \
+        gameRoom["positionId"]))
     db.session.commit()
-    #Have the player join a room
-    join_room(game.gameId)
-    send(game.players, to=game.gameId)
     # Return the gameId and the current list of players
-    return {"gameId": game.gameId, "players": list(map(lambda player: player.as_dict(), game.players))}
+    #return {"gameId": game.gameId, "players": list(map(lambda player: player.as_dict(), game.players))}
+    join_room(gameRoom)
+    send(game, to=game.gameId)
 
-# Start the given game.  Create a deck and deal cards
-@game_blueprint.route('/game/start/<gameId>')
+#Socket representation of the start game api route
+@socketio.on.route("start")
 def start_game(gameId):
     game = db.session.query(Game).where(Game.gameId == gameId).first()
     # Create game deck
@@ -88,12 +69,15 @@ def start_game(gameId):
     send(game, to=game.gameId)
 
     # Return game info
-    return {"gameInfo": game.as_dict()}
+    #return {"gameInfo": game.as_dict()}
 
-@game_blueprint.route('/game/suggestion')
-def ask_users_suggestion():
-    return {"message": "test"}
-
-@game_blueprint.route('/game/accusation')
-def check_win():
-    return {"message": "test"}
+#Socket representation of the move api route
+@socketio.on('move')
+def move_player(moveRequest):
+    player = db.session.query(User).where(User.userId == moveRequest["userId"]).first()
+    game = db.session.query(Game).where(Game.gameId == moveRequest["gameId"]).first()
+    player.current_position = moveRequest["positionId"]
+    db.session.commit()
+    # Update other players via websockets?
+    send(game.players, to=game.gameId)
+    #return {"playerId": player.playerStateId, "position": player.currentPosition}

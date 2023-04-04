@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+from flask_socketio import SocketIO
 from dagger_development_api.config import Config
 from dagger_development_api.model import model
 import os 
