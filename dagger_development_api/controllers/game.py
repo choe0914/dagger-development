@@ -111,6 +111,7 @@ def check_win(accusation):
     card.currentRoom = room_list[accusation["roomId"]]
     db.session.commit()
 
+    #Remove the first entry for easier hand checking
     accusation.pop(0)
 
     # Update other players via websockets the playersates and where the weapon token is
