@@ -20,12 +20,17 @@ class GameCard(db.Model):
     game_hand_id = db.Column(db.Integer, db.ForeignKey('game.gameId'), nullable=True)
     player_hand_id = db.Column(db.Integer, db.ForeignKey('player_state.playerStateId'), nullable=True)
 
+    # The current room for tokens, empty string represents no room
+    currentRoom = db.Column(db.String(20))
+
     # Constraint that ensures that there are not duplicated cards in the game deck
     __table_args__ = (db.UniqueConstraint('cardInfoId', 'gameId', name='_user_game_uc'),)
 
     def __init__(self, card_id, game_id):
-        self.cardId = card_id
+        self.cardInfoId = card_id
         self.gameId = game_id
     
     def as_dict(self):
-       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+       output = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+       output["cardInfo"] = self.cardInfo.as_dict()
+       return output

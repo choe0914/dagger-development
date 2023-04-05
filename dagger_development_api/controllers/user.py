@@ -9,25 +9,15 @@ from flask import jsonify
 # All routes for user data go here
 @cross_origin(supports_credentials=True)
 @user_blueprint.route('/user/<username>')
-def example_user_route(username):
+def add_user(username):
     # Create Example user
     user = User(username)
-    print("Username: " + username)
     db.session.add(user)
-
-    # Create example Game
-    game = Game("123")
-    db.session.add(game)
     db.session.commit()
+    return {"User": user.as_dict()}
 
-    # Create player state for user and game
-    ps = PlayerState(user.userId, game.gameId, 0, 0)
-    db.session.add(ps)
-    db.session.commit()
-
-    # Create Response
-    players = list(map(lambda player: player.as_dict(), game.players))
-    playerStates = list(map(lambda player: player.as_dict(), user.playerStates))
-    resp = jsonify(players=players, playerStates=playerStates, success=True)
-    resp.status_code = 200
-    return resp
+@user_blueprint.route('/user/get_all')
+def get_all_users():
+    # Create Example user
+    users = list(map(lambda game: game.as_dict(), db.session.query(User).all()))
+    return {"users": users}
