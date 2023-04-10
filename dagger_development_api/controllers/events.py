@@ -10,6 +10,9 @@ from dagger_development_api.model.card_info import CardInfo
 from dagger_development_api.model.game_card import GameCard
 from dagger_development_api.utils.constants import CARD_TYPES, ROOMS
 
+#Global variable for responding to a suggestion
+suggestionId = None
+
 #Socket representation of the join api route
 #Stored in dictionary of userId, gameId, characterId, and positionId
 @socketio.on("joined")
@@ -23,7 +26,7 @@ def joined(gameRoom):
     # Return the gameId and the current list of players
     #return {"gameId": game.gameId, "players": list(map(lambda player: player.as_dict(), game.players))}
     join_room(gameRoom)
-    send(game, to=game.gameId)
+    send("Response", game, to=game.gameId)
 
 #Socket representation of the start game api route
 @socketio.on.route("start")
@@ -66,7 +69,7 @@ def start_game(gameId):
     db.session.commit()
 
     #Update all the players in the room
-    send(game, to=game.gameId)
+    send("Response", game, to=game.gameId)
 
     # Return game info
     #return {"gameInfo": game.as_dict()}
@@ -79,7 +82,7 @@ def move_player(moveRequest):
     player.current_position = moveRequest["positionId"]
     db.session.commit()
     # Update other players via websockets?
-    send(game.players, to=game.gameId)
+    send("Response", game.players, to=game.gameId)
     #return {"playerId": player.playerStateId, "position": player.currentPosition}
 
 @socketio.on('accusation')
@@ -103,7 +106,7 @@ def check_win(accusation):
     accusation.pop(0)
 
     # Update other players via websockets the playersates and where the weapon token is
-    send(game.players + card.currentRoom, to=game.gameId)
+    send("Response", (game.players, card.currentRoom), to=game.gameId)
 
     #Check if the character, weapon, and room ar correct
     if accusation == game.winningHand:
@@ -113,3 +116,35 @@ def check_win(accusation):
     else:
         send(fail, to=game.gameId)
         #return {"result": fail}
+
+@socketio.on('suggestion')
+def check_sugg(suggestion):
+    #suggestion in format of gameId, person, weapon, room
+    #Get the room list so we can update the tokens
+    room_list = list(ROOMS.values())
+
+    #Query the database to update player position, where a weapon token is, and where a character is.
+    player = db.session.query(PlayerState).where(PlayerState.characterId == suggestion["characterId"]).first()
+    card = db.session.query(GameCard).where(GameCard.gameCardId == suggestion["weaponId"]).first()
+    game = db.session.query(Game).where(Game.gameId == suggestion["gameId"]).first()
+    player.current_position = suggestion["roomId"]
+    card.currentRoom = room_list[suggestion["roomId"]]
+    db.session.commit()
+
+    # Update other players via websockets the playersates and where the weapon token is
+    #Additionally, send them all the guess items
+    send("Response", (game.players, card.currentRoom, suggestion["characterId"], suggestion["weaponId"], suggestion["roomId"]), to=game.gameId)
+
+    #Set the global variable for users to respond to a player who made a suggestion
+    suggestionId = request.sid
+    #return {"result": "success"}
+
+@socketio.on('suggestion-response')
+def check_sugg(usrResponse):
+    #Send responses to the suggestion creator for the various cards.
+    if usrResponse["weaponId"] is not None:
+        send("Response", usrResponse["weaponId"], to=suggestionId)
+    elif usrResponse["characterId"] is not None:
+        send("Response", usrResponse["characterId"], to=suggestionId)
+    elif usrResponse["roomId"] is not None:
+        send("Response", usrResponse["characterId"], to=suggestionId)

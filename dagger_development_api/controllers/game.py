@@ -40,7 +40,7 @@ def join_game():
     db.session.commit()
     #Have the player join a room
     join_room(game.gameId)
-    send(game.players, to=game.gameId)
+    send("Response", game.players, to=game.gameId)
     # Return the gameId and the current list of players
     return {"gameId": game.gameId, "players": list(map(lambda player: player.as_dict(), game.players))}
 
@@ -85,14 +85,10 @@ def start_game(gameId):
     db.session.commit()
 
     #Update all the players in the room
-    send(game, to=game.gameId)
+    send("Response", game, to=game.gameId)
 
     # Return game info
     return {"gameInfo": game.as_dict()}
-
-@game_blueprint.route('/game/suggestion')
-def ask_users_suggestion():
-    return {"message": "test"}
 
 @game_blueprint.route('/game/accusation')
 def check_win(accusation):
@@ -106,7 +102,7 @@ def check_win(accusation):
     #Query the database to update player position, where a weapon token is, and where a character is.
     player = db.session.query(PlayerState).where(PlayerState.characterId == accusation["characterId"]).first()
     card = db.session.query(GameCard).where(GameCard.gameCardId == accusation["weaponId"]).first()
-    game = db.session.query(Game).where(Game.gameId == accusation["characterId"]).first()
+    game = db.session.query(Game).where(Game.gameId == accusation["gameId"]).first()
     player.current_position = accusation["roomId"]
     card.currentRoom = room_list[accusation["roomId"]]
     db.session.commit()
@@ -115,13 +111,13 @@ def check_win(accusation):
     accusation.pop(0)
 
     # Update other players via websockets the playersates and where the weapon token is
-    send(game.players + card.currentRoom, to=game.gameId)
+    send("Response", (game.players, card.currentRoom), to=game.gameId)
 
     #Check if the character, weapon, and room ar correct
     if accusation == game.winningHand:
         #If it was a success, 
-        send(success, to=game.gameId)
+        send("Response", success, to=game.gameId)
         return {"result": success}
     else:
-        send(fail, to=game.gameId)
+        send("Response", fail, to=game.gameId)
         return {"result": fail}
