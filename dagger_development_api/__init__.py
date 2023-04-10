@@ -9,6 +9,8 @@ import os
 os.system("python")
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
+socketio = SocketIO()
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -27,4 +29,6 @@ def create_app(config_class=Config):
     app.register_blueprint(user_blueprint)
     app.register_blueprint(game_blueprint)
     app.register_blueprint(player_blueprint)
+
+    socketio.init_app(app)
     return app

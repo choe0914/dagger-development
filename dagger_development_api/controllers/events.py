@@ -1,5 +1,5 @@
 from flask_socketio import send, join_room, leave_room
-import socketio
+from .. import socketio
 from dagger_development_api.extensions import db
 from flask import request
 import random
@@ -29,7 +29,7 @@ def joined(gameRoom):
     send("Response", game, to=game.gameId)
 
 #Socket representation of the start game api route
-@socketio.on.route("start")
+@socketio.on("start")
 def start_game(gameId):
     game = db.session.query(Game).where(Game.gameId == gameId).first()
     # Create game deck
