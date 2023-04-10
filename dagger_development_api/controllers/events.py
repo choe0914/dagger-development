@@ -82,7 +82,7 @@ def move_player(moveRequest):
     player.current_position = moveRequest["positionId"]
     db.session.commit()
     # Update other players via websockets?
-    send("Response", game.players, to=game.gameId)
+    send("Response", game, to=game.gameId)
     #return {"playerId": player.playerStateId, "position": player.currentPosition}
 
 @socketio.on('accusation')
@@ -106,7 +106,7 @@ def check_win(accusation):
     accusation.pop(0)
 
     # Update other players via websockets the playersates and where the weapon token is
-    send("Response", (game.players, card.currentRoom), to=game.gameId)
+    send("Response", (game, card.currentRoom), to=game.gameId)
 
     #Check if the character, weapon, and room ar correct
     if accusation == game.winningHand:
@@ -133,7 +133,7 @@ def check_sugg(suggestion):
 
     # Update other players via websockets the playersates and where the weapon token is
     #Additionally, send them all the guess items
-    send("Response", (game.players, card.currentRoom, suggestion["characterId"], suggestion["weaponId"], suggestion["roomId"]), to=game.gameId)
+    send("Response", (game, card.currentRoom, suggestion["characterId"], suggestion["weaponId"], suggestion["roomId"]), to=game.gameId)
 
     #Set the global variable for users to respond to a player who made a suggestion
     suggestionId = request.sid
