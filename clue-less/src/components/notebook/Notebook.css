@@ -29,6 +29,14 @@ input[type=checkbox] {
     max-height: 70vh;
     width: auto;
 }
+.nb-header-token {
+    height: 2vh;
+    width: 2vh;
+    border: 1px solid black;
+}
+
+
+
 
 
 /* .notebook-div:hover #notebook {

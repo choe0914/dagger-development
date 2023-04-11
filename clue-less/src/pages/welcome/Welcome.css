@@ -1,7 +1,7 @@
 .username-body {
     display: flex;
     align-items: center;
-    height: 87vh;
+    height: var(--full-height);
     width: 100vw;
     overflow: hidden;
     grid-template-columns: repeat(2, 50vw);

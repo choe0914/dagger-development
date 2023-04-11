@@ -1,7 +1,7 @@
 .char-select-body {
     display: flex;
     align-items: center;
-    height: 87vh;
+    height: var(--full-height);
     width: 100vw;
     overflow: hidden;
     grid-template-columns: repeat(2, 50vw);
@@ -44,12 +44,24 @@
     /* background-color: #ca120c; */
 }
 #character-div {
-
+    display: grid;
+    grid-template-columns: repeat(3, 16vh);
+    grid-template-rows: repeat(2, 16vh);
+}
+.char-opt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.check-mark {
+    position: absolute;
+    font-size: 2.5em;
+    visibility: hidden;
 }
 .char {
-    height: 6vw;
-    width: auto;
-    margin: 0.5vw;
+    max-height: 6vw;
+    max-width: 6vw;
+    /* margin: 0.5vw; */
     cursor: pointer;
     border-radius: 100%;
     border: 3px solid rgba(0, 0, 0, 0);
@@ -66,7 +78,7 @@
     font-size: larger;
     cursor: pointer;
     box-shadow: 0px 5px 5px black;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 #next-info {
@@ -130,9 +142,6 @@
     text-align: center;
     width: 70%;
 }
-#murdered {
-    color: red;
-}
 
 @media screen and (max-width: 1200px) {
     .char-select-body {
@@ -164,12 +173,13 @@
         z-index: 99;
     }
     .char {
-        height: 16vw;
-        width: auto;
-        margin: 1.8vw;
+        height: 18vw;
+        width: 18vw;
+        /* margin: 1.8vw; */
     }
     #char-select-header {
         font-size: 6vw;
+        text-align: center;
     }
     #launch-game {
         width: 100%;
