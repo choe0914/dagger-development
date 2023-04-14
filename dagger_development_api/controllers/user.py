@@ -19,11 +19,14 @@ def add_user(username):
 
 # Given a userId, gameId, characterId, and positionId, make a new player for the user in the given game
 @user_blueprint.route('/user/create', methods=['POST'])
-def join_game():
+def create_user():
 
     # Create new user
     user = User(request.json["username"])
     db.session.add(user)
+    db.session.commit()
+
+    userId = db.session.query(User).where(User.name == request.json["username"]).first().userId
 
     # Create new player state
     player_state = PlayerState(
@@ -33,6 +36,20 @@ def join_game():
         request.json["currentPosition"]
     )
     db.session.add(player_state)
+
+    db.session.commit()
+    return {"User": user.as_dict()}
+
+# Given a userId, gameId, characterId, and positionId, make a new player for the user in the given game
+@user_blueprint.route('/user/edit', methods=['PUT'])
+def edit_user():
+    
+    # Get the user
+    user = db.session.query(User).where(User.name == request.json["username"]).first()
+    user.name = request.json["username"]
+    player_state = db.session.query(PlayerState).where(PlayerState.userId == user.userId).first()
+    player_state.characterId = request.json["characterId"]
+    player_state.currentPosition = request.json["currentPosition"]
 
     db.session.commit()
     return {"User": user.as_dict()}
