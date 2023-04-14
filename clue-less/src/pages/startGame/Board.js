@@ -1,6 +1,7 @@
 // import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Board.css';
+import Room from './room'
 import Notebook from '../../components/notebook/Notebook';
 // import kitchen from "../assets/img/room-img/kitchen.jpg";
 // import ball from "../assets/img/room-img/ballroom.jpg";
@@ -120,199 +121,6 @@ function Board() {
   function dragCard(e) {
     e.dataTransfer.setData("text", e.target.id);
   }
-  function drag(e) {
-    e.dataTransfer.setData("text", e.target.id);
-  }
-  function dropKitchen(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall1(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropBall(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall2(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropConservatory(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall3(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropBilliards(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall4(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropLibrary(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall5(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropStudy(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall6(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall7(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropLounge(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall8(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropDining(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall9(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall10A(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall10B(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall11(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall12A(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall12B(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall12C(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall13(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-
-  // checks current player character, allows movement of token by them only
-  function checkPC(e) {
-    if (e.currentTarget.id.slice(-1) === window.playerCharacter) {
-      e.currentTarget.setAttribute("draggable", "true");
-      e.currentTarget.style.cursor = "pointer";
-    }
-    //// testing event
-    // e.currentTarget.setAttribute("draggable", "true");
-    // e.currentTarget.style.cursor = "pointer";
-  }
-  function secretPassageKitchen(e) {
-    var char = document.getElementById(`char-${window.playerCharacter}`);
-    if (e.currentTarget.parentElement === char.parentElement) {
-      document.getElementById("room-6").appendChild(char);
-    }  
-  }
-  function secretPassageConservatory(e) {
-    var char = document.getElementById(`char-${window.playerCharacter}`);
-    if (e.currentTarget.parentElement === char.parentElement) {
-      document.getElementById("room-8").appendChild(char);
-    } 
-  }
-  function secretPassageStudy(e) {
-    var char = document.getElementById(`char-${window.playerCharacter}`);
-    if (e.currentTarget.parentElement === char.parentElement) {
-      document.getElementById("room-1").appendChild(char);
-    } 
-  }
-  function secretPassageLounge(e) {
-    var char = document.getElementById(`char-${window.playerCharacter}`);
-    if (e.currentTarget.parentElement === char.parentElement) {
-      document.getElementById("room-3").appendChild(char);
-    } 
-  }
-  function fixColors(e) {
-    window.charTokenColors.splice(Number(window.playerCharacter)-1, 1);
-    document.getElementById("nb-token-b").style.backgroundColor = window.charTokenColors[0];
-  }
-
   function dropPrevent(e) {
     document.getElementById("drop-preventer").style.display = "unset";
   }
@@ -348,91 +156,65 @@ function Board() {
             <img className="player-card" id="card-3" src={cards[Math.floor(Math.random() * cards.length)]} onMouseDown={dropPrevent} onMouseUp={dropEnable} draggable="true" onDragStart={dragCard} onDragOver={noAllowDrop} alt="Card 3"></img>
           </div>
         </div>
-
+ 
 
 
         <div className="player-interact-div">
           {/* <button className="player-sugg-acc" id="suggestion-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Suggest</button> */}
           <Notebook />
-          {/* <button className="player-sugg-acc" id="accusation-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Accuse</button> */}
+          {/* <button className="player-sugg-acc" i d="accusation-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Accuse</button> */}
         </div>
       </section>
       <section className="board-div">
         <div className="game-board">
           <div id="drop-preventer"></div>
-          <div className="room-div" id="room-1" onDrop={dropKitchen} onDragOver={allowRoomDrop}>
-            <button className="secret-passage" id="secret-pass-1" onClick={secretPassageKitchen}>To Study</button>
-          </div>
-          <div className="hallway" id="hall-1" onDrop={dropHall1} onDragOver={allowHallwayDrop}><span className="hall-num">1</span>
-            <div className="starting-loc" id="loc-1" onDragOver={noAllowDrop}>
-              <div className="char-token" id="char-1" onMouseDown={checkPC} onMouseUp={brighten} draggable="false" onDragStart={drag} onDragOver={noAllowDrop}></div>
-            </div>
-          </div>
-          <div className="room-div" id="room-2" onDrop={dropBall} onDragOver={allowRoomDrop}>
-          </div>
-          <div className="hallway" id="hall-2" onDrop={dropHall2} onDragOver={allowHallwayDrop}><span className="hall-num">2</span>
-            <div className="starting-loc" id="loc-2" onDragOver={noAllowDrop}>
-              <div className="char-token" id="char-2" onMouseDown={checkPC} draggable="false" onDragStart={drag} onDragOver={noAllowDrop}></div>
-            </div>
-          </div>
-          <div className="room-div" id="room-3" onDrop={dropConservatory} onDragOver={allowRoomDrop}>
-            <button className="secret-passage" id="secret-pass-3" onClick={secretPassageConservatory}>To Lounge</button>
-          </div>
-          <div className="hallway" id="hall-3" onDrop={dropHall3} onDragOver={allowHallwayDrop}><span className="hall-num">3</span>
-            <div className="starting-loc" id="loc-3" onDragOver={noAllowDrop}>
-              <div className="char-token" id="char-3" onMouseDown={checkPC} draggable="false" onDragStart={drag} onDragOver={noAllowDrop}></div>
-            </div>
-          </div>
+          <Room classId="room-div" styleId="room-1" roomId="Kitchen" handleDragOver={allowRoomDrop}
+            secretPassage={{styleId:"secret-pass-1", text:"To Study", toId:"Study"}} />
 
-          <div className="room-div" id="room-4" onDrop={dropBilliards} onDragOver={allowRoomDrop}>
-          </div>
-          <div className="hallway" id="hall-4" onDrop={dropHall4} onDragOver={allowHallwayDrop}><span className="hall-num">4</span>
-            <div className="starting-loc" id="loc-4" onDragOver={noAllowDrop}>
-              <div className="char-token" id="char-4" onMouseDown={checkPC} draggable="false" onDragStart={drag} onDragOver={noAllowDrop}></div>
-            </div>
-          </div>
+          <Room classId="hallway" hallwayId="1" styleId="hall-1" roomId="Hallway1" handleDragOver={allowHallwayDrop}
+            startingLocation={{classId: "loc-1", handleDragOver:noAllowDrop}}/>
+          
+          <Room classId="room-div" styleId="room-2" roomId="Ballroom" handleDragOver={allowRoomDrop}/>
 
-          <div className="room-div" id="room-5" onDrop={dropLibrary} onDragOver={allowRoomDrop}>
-          </div>
-          <div className="hallway" id="hall-5" onDrop={dropHall5} onDragOver={allowHallwayDrop}><span className="hall-num">5</span>
-            <div className="starting-loc" id="loc-5" onDragOver={noAllowDrop}>
-              <div className="char-token" id="char-5" onMouseDown={checkPC} draggable="false" onDragStart={drag} onDragOver={noAllowDrop}></div>
-            </div>
-          </div>
+          <Room classId="hallway" hallwayId="2" styleId="hall-2" roomId="Hallway2" handleDragOver={allowHallwayDrop}
+            startingLocation={{classId: "loc-2", handleDragOver:noAllowDrop}}/>
 
-          <div className="room-div" id="room-6" onDrop={dropStudy} onDragOver={allowRoomDrop}>
-            <button className="secret-passage" id="secret-pass-6" onClick={secretPassageStudy}>To Kitchen</button>
-          </div>
-          <div className="hallway" id="hall-6" onDrop={dropHall6} onDragOver={allowHallwayDrop}><span className="hall-num">6</span>
-            <div className="starting-loc" id="loc-6" onDragOver={noAllowDrop}>
-              <div className="char-token" id="char-6" onMouseDown={checkPC} draggable="false" onDragStart={drag} onDragOver={noAllowDrop}></div>
-            </div>
-          </div>
+          <Room classId="room-div" styleId="room-3" roomId="Conservatory" handleDragOver={allowRoomDrop}/>
 
-          <div className="room-div" id="room-7" onDrop={dropHall} onDragOver={allowRoomDrop}>
-          </div>
-          <div className="hallway" id="hall-7" onDrop={dropHall7} onDragOver={allowHallwayDrop}><span className="hall-num">7</span>
-            <div className="starting-loc" id="loc-7" onDragOver={noAllowDrop}>
-              <div className="char-token" id="char-7"></div>
-            </div>
-          </div>
+          <Room classId="hallway" hallwayId="3" styleId="hall-3" roomId="Hallway3" handleDragOver={allowHallwayDrop}
+            startingLocation={{classId: "loc-3", handleDragOver:noAllowDrop}}/>
 
-          <div className="room-div" id="room-8" onDrop={dropLounge} onDragOver={allowRoomDrop}>
-            <button className="secret-passage" id="secret-pass-8" onClick={secretPassageLounge}>To Conservatory</button>
-          </div>
-          <div className="hallway" id="hall-8" onDrop={dropHall8} onDragOver={allowHallwayDrop}><span className="hall-num">8</span>
-            <div className="starting-loc" id="loc-8" onDragOver={noAllowDrop}>
-              <div className="char-token" id="char-8"></div>
-            </div>
-          </div>
+          <Room classId="room-div" styleId="room-4" roomId="Billiards" handleDragOver={allowRoomDrop}/>
 
-          <div className="hallway" id="hall-9" onDrop={dropHall9} onDragOver={allowHallwayDrop}><span className="hall-num">9</span>
-            <div className="starting-loc" id="loc-9" onDragOver={noAllowDrop}>
-              <div className="char-token" id="char-9"></div>
-            </div>
-          </div>
-          <div className="room-div" id="room-9" onDrop={dropDining} onDragOver={allowRoomDrop}>
-          </div>
+          <Room classId="hallway" hallwayId="4" styleId="hall-4" roomId="Hallway4" handleDragOver={allowHallwayDrop}
+            startingLocation={{classId: "loc-4", handleDragOver:noAllowDrop}}/>
+
+          <Room classId="room-div" styleId="room-5" roomId="Library" handleDragOver={allowRoomDrop}/>
+
+          <Room classId="hallway" hallwayId="5" styleId="hall-5" roomId="Hallway5" handleDragOver={allowHallwayDrop}
+            startingLocation={{classId: "loc-5", handleDragOver:noAllowDrop}}/>
+
+          <Room classId="room-div" styleId="room-6" roomId="Study" handleDragOver={allowRoomDrop}
+            secretPassage={{styleId:"secret-pass-6", text:"To Kitchen", toId:"Kitchen"}} />
+
+          <Room classId="hallway" hallwayId="6" styleId="hall-6" roomId="Hallway6" handleDragOver={allowHallwayDrop}
+            startingLocation={{classId: "loc-6", handleDragOver:noAllowDrop}}/>
+
+          <Room classId="room-div" styleId="room-7" roomId="Hall" handleDragOver={allowRoomDrop}/>
+
+          <Room classId="hallway" hallwayId="7" styleId="hall-7" roomId="Hallway7" handleDragOver={allowHallwayDrop}
+            startingLocation={{classId: "loc-7", handleDragOver:noAllowDrop}}/>
+
+          <Room classId="room-div" styleId="room-8" roomId="Lounge" handleDragOver={allowRoomDrop}/>
+
+          <Room classId="hallway" hallwayId="8" styleId="hall-8" roomId="Hallway8" handleDragOver={allowHallwayDrop}
+            startingLocation={{classId: "loc-8", handleDragOver:noAllowDrop}}/>
+
+          <Room classId="hallway" hallwayId="9" styleId="hall-9" roomId="Hallway9" handleDragOver={allowHallwayDrop}
+            startingLocation={{classId: "loc-9", handleDragOver:noAllowDrop}}/>
+
+          <Room classId="room-div" styleId="room-9" roomId="Dining Room" handleDragOver={allowRoomDrop}/>
+
 
           <div className="room-div" id="room-0">
             <div id="solve-deck">
@@ -442,13 +224,13 @@ function Board() {
             </div>
           </div>
 
-          <div className="hallway" id="hall-10A" onDrop={dropHall10A} onDragOver={allowHallwayDrop}><span className="hall-num">10A</span></div>
-          <div className="hallway" id="hall-10B" onDrop={dropHall10B} onDragOver={allowHallwayDrop}><span className="hall-num">10B</span></div>
-          <div className="hallway" id="hall-11" onDrop={dropHall11} onDragOver={allowHallwayDrop}><span className="hall-num">11</span></div>
-          <div className="hallway" id="hall-12A" onDrop={dropHall12A} onDragOver={allowHallwayDrop}><span className="hall-num">12A</span></div>
-          <div className="hallway" id="hall-12B" onDrop={dropHall12B} onDragOver={allowHallwayDrop}><span className="hall-num">12B</span></div>
-          <div className="hallway" id="hall-12C" onDrop={dropHall12C} onDragOver={allowHallwayDrop}><span className="hall-num">12C</span></div>
-          <div className="hallway" id="hall-13" onDrop={dropHall13} onDragOver={allowHallwayDrop}><span className="hall-num">13</span></div>
+          <Room classId="hallway" hallwayId="10A" styleId="hall-10A" roomId="Hallway10A" handleDragOver={allowHallwayDrop}/>
+          <Room classId="hallway" hallwayId="10B" styleId="hall-10B" roomId="Hallway10B" handleDragOver={allowHallwayDrop}/>
+          <Room classId="hallway" hallwayId="11" styleId="hall-11" roomId="Hallway11" handleDragOver={allowHallwayDrop}/>
+          <Room classId="hallway" hallwayId="12A" styleId="hall-12A" roomId="Hallway12A" handleDragOver={allowHallwayDrop}/>
+          <Room classId="hallway" hallwayId="12B" styleId="hall-12B" roomId="Hallway12B" handleDragOver={allowHallwayDrop}/>
+          <Room classId="hallway" hallwayId="12C" styleId="hall-12C" roomId="Hallway12C" handleDragOver={allowHallwayDrop}/>
+          <Room classId="hallway" hallwayId="13" styleId="hall-13" roomId="Hallway13" handleDragOver={allowHallwayDrop}/>
         </div>
       </section>
       <section className="right-panel">
