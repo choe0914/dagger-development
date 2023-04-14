@@ -1,7 +1,7 @@
 import './JoinGame.css';
 // import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import boddy from "../assets/img/theme/boddy-black.jpg";
 import backdrop from "../assets/img/theme/backdrop.jpg";
 // const [game-launch, setgame-launch] = useState('');
@@ -9,9 +9,30 @@ import backdrop from "../assets/img/theme/backdrop.jpg";
 function GameType() {
     const navigate = useNavigate();
     // var launchButton = useRef();
-    
+
+    const [newGame, setNewGame] = useState(0)
+  
     // const gameChoice = useRef();
     function handleGameChoiceClick(event) {
+        if (newGame) {
+            fetch("http://localhost:5000/game/create", {
+                method: "GET", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                headers: {
+                  "Content-Type": "application/json",
+                },// body data type must match "Content-Type" header
+              }).then((response) => { return response.json(); }).then((data) => {
+                window.gameId = data.gameId
+                handleProceeding()
+              })
+        } else {
+            window.gameId = document.getElementById("game-id-field").value
+            handleProceeding()
+        }
+    }
+
+    function handleProceeding() {
         var launchButton = document.getElementById("launch-char-select");
         launchButton.style.transform = "translateY(2px)";
         setTimeout(() => {
@@ -28,6 +49,7 @@ function GameType() {
         launchButton.style.filter = "brightness(100%)";
     }
     function handleGameChoiceA(event) {
+        setNewGame(0)
         var launchButton = document.getElementById("launch-char-select");
         launchButton.style.visibility = "hidden";
         var fieldText = document.getElementById("game-id-field");
@@ -39,6 +61,7 @@ function GameType() {
         gameVis.style.display = "none";
     }
     function handleGameChoiceB(event) {
+        setNewGame(1)
         var launchButton = document.getElementById("launch-char-select");
         var gameChoice = document.getElementById("game-search-wrapper");
         var gameVis = document.getElementById("game-vis-wrapper");
@@ -67,7 +90,7 @@ function GameType() {
         var fieldText = document.getElementById("game-id-field");
         // handling valid length joinable game ID
         if (Number.isInteger(Number(fieldText.value))) {
-            if (fieldText.value !== "" && fieldText.value.length > 5) {
+            if (fieldText.value !== "" && fieldText.value.length > 0) {
                 launchButton.style.visibility = "visible";
                 fieldText.style.border = "1px solid green";
             } else {
