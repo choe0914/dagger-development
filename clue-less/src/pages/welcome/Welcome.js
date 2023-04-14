@@ -7,15 +7,19 @@ let username = '';
 
 function UserName() {
     const [dbUserList, setUsers] = useState([]);
+    const [currentUsername, setCurrentUsername] = useState("");
+    const [isUniqueUsername, setIsUniqueUsername] = useState(true);
+
     const { register, getValues, formState: { errors } } = useForm({ mode: "onChange" });
     let navigate = useNavigate();
+
 
     useEffect(() => {
         // Retrieve all user name from DB - user table 
         fetch('http://127.0.0.1:5000/user/get_all')
             .then((response) => response.json())
             .then((data) => {
-                setUsers(data);
+                setUsers(data.users);
             });
     }, []);
 
@@ -28,7 +32,11 @@ function UserName() {
         }, 100);
         var fieldText = document.getElementById("uname");
         window.userName = fieldText.value;
-        userAction();
+        let validate = dbUserList.filter(elem => elem.name === currentUsername).length < 1;
+        setIsUniqueUsername(validate);
+        if (validate) {
+            userAction();
+        }
     }
     function buttonHoverA(event) {
         var launchButton = document.getElementById("launch-game-select");
@@ -40,8 +48,8 @@ function UserName() {
     }
 
     const userAction = async () => {
-        //  const response = await fetch('http://127.0.0.1:5000/user/' + username);
-        //  const myJson = await response.json(); //extract JSON from the http response
+        const response = await fetch('http://127.0.0.1:5000/user/' + username);
+        const myJson = await response.json(); //extract JSON from the http response
         navigate('/joinGame');
     }
 
@@ -68,14 +76,11 @@ function UserName() {
                             Join or invite friends to solve the mystery of who killed Boden "Boddy" Black.</p>
                         <span id="username-info">Please enter a unique username to begin</span>
                         <input type="text" id="uname" name="uname" placeholder='Username'
-                            onKeyUp={checkNameField} onBlur={k => { username = k.target.value; }}
-                            {...register("uname", {
-                                required: true, minLength: 6, validate: value => !dbUserList.includes(value)
-                            })}></input>
-                        {errors.uname && errors.uname.type === "required" && (<p id="murdered" className="font-bold" >User name is required</p>)}
-                        {errors.uname && errors.uname.type === "minLength" && (<p id="murdered" className="font-bold" >Username minimum length is 6 characters</p>)}
-                        {errors.uname && errors.uname.type === "validate" && (<p id="murdered" className="font-bold" >Username not unique enough</p>)}
+                            onKeyUp={checkNameField} onBlur={k => { username = k.target.value; }} onChange={(e) => setCurrentUsername(e.target.value)}
+                            required minLength={6}
+                        />
                         <button id="launch-game-select" onClick={handleSignInClick} onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Continue</button>
+                        {!isUniqueUsername && <p id="murdered" className="font-bold" >Username not unique enough</p>}
                         <span id="next-info">Next - Join or Start New Game</span>
                     </section>
                 </section>
