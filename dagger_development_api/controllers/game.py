@@ -9,11 +9,11 @@ from dagger_development_api.model.player_state import PlayerState
 from dagger_development_api.model.card_info import CardInfo
 from dagger_development_api.model.game_card import GameCard
 from dagger_development_api.utils.constants import CARD_TYPES, ROOMS
+from flask_socketio import send, join_room, leave_room
 
 # All routes for game data and calculations (if needed)
 @cross_origin(supports_credentials=True)
 @game_blueprint.route('/game')
-
 # Create a new game
 @game_blueprint.route('/game/create')
 def create_game():
@@ -38,6 +38,9 @@ def join_game():
     db.session.add(PlayerState(request.json["userId"], request.json["gameId"], request.json["characterId"], \
         request.json["positionId"]))
     db.session.commit()
+    #Have the player join a room
+    join_room(game.gameId)
+    send("Response", game.players, to=game.gameId)
     # Return the gameId and the current list of players
     return {"gameId": game.gameId, "players": list(map(lambda player: player.as_dict(), game.players))}
 
@@ -81,13 +84,40 @@ def start_game(gameId):
 
     db.session.commit()
 
+    #Update all the players in the room
+    send("Response", game, to=game.gameId)
+
     # Return game info
     return {"gameInfo": game.as_dict()}
 
-@game_blueprint.route('/game/suggestion')
-def ask_users_suggestion():
-    return {"message": "test"}
-
 @game_blueprint.route('/game/accusation')
-def check_win():
-    return {"message": "test"}
+def check_win(accusation):
+    #accusation in format of gameId, person, weapon, room
+    success = "Win"
+    fail = "Lose"
+
+    #Get the room list so we can update the tokens
+    room_list = list(ROOMS.values())
+
+    #Query the database to update player position, where a weapon token is, and where a character is.
+    player = db.session.query(PlayerState).where(PlayerState.characterId == accusation["characterId"]).first()
+    card = db.session.query(GameCard).where(GameCard.gameCardId == accusation["weaponId"]).first()
+    game = db.session.query(Game).where(Game.gameId == accusation["gameId"]).first()
+    player.current_position = accusation["roomId"]
+    card.currentRoom = room_list[accusation["roomId"]]
+    db.session.commit()
+
+    #Remove the first entry for easier hand checking
+    accusation.pop(0)
+
+    # Update other players via websockets the playersates and where the weapon token is
+    send("Response", (game.players, card.currentRoom), to=game.gameId)
+
+    #Check if the character, weapon, and room ar correct
+    if accusation == game.winningHand:
+        #If it was a success, 
+        send("Response", success, to=game.gameId)
+        return {"result": success}
+    else:
+        send("Response", fail, to=game.gameId)
+        return {"result": fail}
