@@ -9,7 +9,7 @@ import os
 os.system("python")
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-socketio = SocketIO()
+socketio = SocketIO(cors_allowed_origins="*")
 
 def create_app(config_class=Config):
     app = Flask(__name__)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {init_socket} from './socket'
 import Skeletal from './pages/welcome/Welcome';
 import { SharedLayout } from './components/layout/Layout';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -7,6 +8,12 @@ import Board from './pages/startGame/Board';
 import CharacterSelect from './pages/characterSelect/CharacterSelect';
 
 class App extends Component {
+
+  constructor() {
+    super()
+    init_socket()
+  }
+  
   render() {
     return (
       <BrowserRouter>
@@ -15,7 +22,7 @@ class App extends Component {
             <Route path='/welcome' element={<Skeletal />} />
             <Route path='/joinGame' element={<JoinGame />} />
             <Route path='/characterSelect' element={<CharacterSelect />} />
-            <Route path='/gameStart' element={<Board />} />
+            <Route path='/gameStart' element={<Board key="1234" />} />
 
           </Route>
         </Routes>

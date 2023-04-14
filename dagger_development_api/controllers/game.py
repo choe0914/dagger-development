@@ -1,6 +1,7 @@
 from dagger_development_api.controllers import game_blueprint
 from flask_cors import cross_origin
 from dagger_development_api.extensions import db
+from .. import socketio
 from flask import request
 import random
 from dagger_development_api.model.game import Game
@@ -10,6 +11,7 @@ from dagger_development_api.model.card_info import CardInfo
 from dagger_development_api.model.game_card import GameCard
 from dagger_development_api.utils.constants import CARD_TYPES, ROOMS
 from flask_socketio import send, join_room, leave_room
+
 
 # All routes for game data and calculations (if needed)
 @cross_origin(supports_credentials=True)
@@ -42,6 +44,17 @@ def get_room_contents():
     
     return {"player_tokens": player_tokens, "weapon_tokens": weapon_tokens}
 
+@game_blueprint.route('/game/get_all_board_pieces', methods=['POST'])
+def get_all_board_pieces():
+     # Get all the weapon tokens
+    weapon_tokens = list(map(lambda card: card.as_dict(), db.session.query(GameCard)\
+        .where(GameCard.gameId == request.json["gameId"]).all()))
+    # Get all the player tokens
+    player_tokens = list(map(lambda player: player.as_dict(), db.session.query(PlayerState)\
+        .where(PlayerState.gameId == request.json["gameId"]).all()))
+    
+    return {"player_tokens": player_tokens, "weapon_tokens": weapon_tokens}
+
 # Given a userId, gameId, characterId, and positionId, make a new player for the user in the given game
 @game_blueprint.route('/game/join', methods=['POST'])
 def join_game():
@@ -53,8 +66,7 @@ def join_game():
     db.session.add(player)
     db.session.commit()
     #Have the player join a room
-    join_room(game.gameId)
-    send("Response", game.players, to=game.gameId)
+    socketio.emit("update_players", {"players": list(map(lambda player: player.as_dict(), game.players))}, room=game.gameId)
     # Return the gameId and the current list of players
     return {"gameId": game.gameId, "yourPlayer": player.as_dict(), "players": list(map(lambda player: player.as_dict(), game.players))}
 
@@ -99,7 +111,7 @@ def start_game(gameId):
     db.session.commit()
 
     #Update all the players in the room
-    send("Response", game, to=game.gameId)
+    send(game, json=True, to=game.gameId)
 
     # Return game info
     return {"gameInfo": game.as_dict()}
@@ -125,13 +137,13 @@ def check_win(accusation):
     accusation.pop(0)
 
     # Update other players via websockets the playersates and where the weapon token is
-    send("Response", (game.players, card.currentRoom), to=game.gameId)
+    send({"players": game.players, "currentRoom": card.currentRoom}, json=True, to=game.gameId)
 
     #Check if the character, weapon, and room ar correct
     if accusation == game.winningHand:
         #If it was a success, 
-        send("Response", success, to=game.gameId)
+        send("Success", to=game.gameId)
         return {"result": success}
     else:
-        send("Response", fail, to=game.gameId)
+        send("Fail", to=game.gameId)
         return {"result": fail}
