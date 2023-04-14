@@ -5,6 +5,7 @@ from dagger_development_api.model.user import User
 from dagger_development_api.model.game import Game
 from dagger_development_api.model.player_state import PlayerState
 from flask import jsonify
+from flask import request
 
 # All routes for user data go here
 @cross_origin(supports_credentials=True)
@@ -15,6 +16,27 @@ def add_user(username):
     db.session.add(user)
     db.session.commit()
     return {"User": user.as_dict()}
+
+# Given a userId, gameId, characterId, and positionId, make a new player for the user in the given game
+@user_blueprint.route('/user/create', methods=['POST'])
+def join_game():
+
+    # Create new user
+    user = User(request.json["username"])
+    db.session.add(user)
+
+    # Create new player state
+    player_state = PlayerState(
+        user.userId,
+        request.json["gameId"],
+        request.json["characterId"],
+        request.json["currentPosition"]
+    )
+    db.session.add(player_state)
+
+    db.session.commit()
+    return {"User": user.as_dict()}
+
 
 @user_blueprint.route('/user/get_all')
 def get_all_users():
