@@ -10,6 +10,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 def create_app(config_class=Config):
     app = Flask(__name__)
+    CORS(app, origins=["*"], supports_credentials=True)
     app.config.from_object(config_class)
 
     # Init the Database and fill with data if necessary
@@ -23,7 +24,9 @@ def create_app(config_class=Config):
     from dagger_development_api.controllers import user_blueprint
     from dagger_development_api.controllers import game_blueprint
     from dagger_development_api.controllers import player_blueprint
+
     app.register_blueprint(user_blueprint)
     app.register_blueprint(game_blueprint)
     app.register_blueprint(player_blueprint)
+    
     return app

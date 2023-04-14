@@ -11,10 +11,11 @@ from dagger_development_api.model.player_state import PlayerState
 @player_blueprint.route('/player')
 
 # Given a playerId, and new position, move the player
-@player_blueprint.route('/player/move_player')
+@player_blueprint.route('/player/move_player', methods=['POST', 'OPTIONS'], strict_slashes=False)
+@cross_origin(supports_credentials=True)
 def move_player():
-    player = db.session.query(PlayerState).where(PlayerState.playerStateId == request.json.playerId)
-    player.current_position = request.json.positionId
+    player = db.session.query(PlayerState).where(PlayerState.playerStateId == request.json["playerId"]).first()
+    player.currentPosition = request.json["positionId"]
     db.session.commit()
     # Update other players via websockets?
     return {"playerId": player.playerStateId, "position": player.currentPosition}

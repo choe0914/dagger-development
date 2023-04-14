@@ -29,17 +29,31 @@ def get_all():
     # Return a list of all the games
     return {"games": games}
 
+@game_blueprint.route('/game/get_room_contents', methods=['POST'])
+def get_room_contents():
+    # Get all the weapon tokens
+    weapon_tokens = list(map(lambda card: card.as_dict(), db.session.query(GameCard)\
+        .where(GameCard.gameId == request.json["gameId"])\
+        .where(GameCard.currentRoom == request.json["roomId"]).all()))
+    # Get all the player tokens
+    player_tokens = list(map(lambda player: player.as_dict(), db.session.query(PlayerState)\
+        .where(PlayerState.gameId == request.json["gameId"])\
+        .where(PlayerState.currentPosition == request.json["roomId"]).all()))
+    
+    return {"player_tokens": player_tokens, "weapon_tokens": weapon_tokens}
+
 # Given a userId, gameId, characterId, and positionId, make a new player for the user in the given game
 @game_blueprint.route('/game/join', methods=['POST'])
 def join_game():
-    user = db.session.query(User).where(User.userId == request.json["userId"]).first()
+    user = db.session.query(User).where(User.name == request.json["userName"]).first()
     game = db.session.query(Game).where(Game.gameId == request.json["gameId"]).first()
+    player = PlayerState(user.userId, request.json["gameId"], request.json["characterId"], \
+        request.json["positionId"])
     # Create new playerState and add it to db
-    db.session.add(PlayerState(request.json["userId"], request.json["gameId"], request.json["characterId"], \
-        request.json["positionId"]))
+    db.session.add(player)
     db.session.commit()
     # Return the gameId and the current list of players
-    return {"gameId": game.gameId, "players": list(map(lambda player: player.as_dict(), game.players))}
+    return {"gameId": game.gameId, "yourPlayer": player.as_dict(), "players": list(map(lambda player: player.as_dict(), game.players))}
 
 # Start the given game.  Create a deck and deal cards
 @game_blueprint.route('/game/start/<gameId>')
