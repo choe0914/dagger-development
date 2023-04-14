@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 
 let username = '';
-
+// window.USERNAME = username;
 function UserName() {
     const [dbUserList, setUsers] = useState([]);
     const { register, getValues, formState: { errors } } = useForm({ mode: "onChange" });
@@ -51,7 +51,6 @@ function UserName() {
         // handling valid length joinable game ID 
         if (fieldText.value !== "" && fieldText.value.length > 5) {
             launchButton.style.display = "unset";
-            window.userName = fieldText.value;
 
         } else {
             launchButton.style.display = "none";

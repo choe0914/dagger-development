@@ -13,46 +13,16 @@ const rooms = ["BALLROOM", "BILLIARD ROOM", "CONSERVATORY", "DINING ROOM", "HALL
 const roomsTag = ["BALLROOM", "BILLIARD-ROOM", "CONSERVATORY", "DINING-ROOM", "HALL", "KITCHEN",
     "LIBRARY", "LOUNGE", "STUDY"];
 
-window.greenHex    = "#1C5125";
-window.mustardHex  = "#F9B416";
-window.peacockHex  = "#0B1535";
-window.plumHex     = "#542D59";
-window.scarlettHex = "#790905";
-window.whiteHex    = "#ffffff";
 const hexCharColors = ["#1C5125","#F9B416","#0B1535","#542D59","#790905","#ffffff"]
+const charTokenColors = ["#3db350", "#F9B416", "#3863f1", "#b95cc5", "#e2140c", "#f5f5f5"];
 console.log(hexCharColors[Number(window.playerCharacter)])
-
+// window.onload = (event) => {
+//   charTokenColors.splice(Number(window.playerCharacter), 1);
+//   console.log("here");
+// };
 class Notebook extends Component {
     
     render() {
-        function checkPCColor(e) {
-            console.log(e.currentTarget.className)
-            for (let i=0; i<document.getElementsByClassName(e.currentTarget.className).length; i++) {
-                console.log(i); 
-            }
-            // console.log(e.currentTarget.id.slice(-1))
-            
-            // switch (e.currentTarget.id.slice(-1)) {
-            //     case "a":
-            //         e.currentTarget.style.backgroundColor = hexCharColors[Number(window.playerCharacter)-1];
-            //     break;
-            //     case "b":
-            //         e.currentTarget.style.backgroundColor = hexCharColors[Number(window.playerCharacter)-1];
-            //     break;
-            //     case "c":
-            //         e.currentTarget.style.backgroundColor = hexCharColors[Number(window.playerCharacter)-1];
-            //     break; 
-            //     case "d":
-            //         e.currentTarget.style.backgroundColor = hexCharColors[Number(window.playerCharacter)-1];
-            //     break; 
-            //     case "e":
-            //         e.currentTarget.style.backgroundColor = hexCharColors[Number(window.playerCharacter)-1];
-            //     break; 
-            //     case "f":
-            //         e.currentTarget.style.backgroundColor = hexCharColors[Number(window.playerCharacter)-1];
-            //     break;                     
-            // }
-        }
         return (
             <div className="notebook-div">
                 <img className="notebook-img" id="notebook" src={notebook} alt="Detective Notebook"></img>
@@ -61,12 +31,12 @@ class Notebook extends Component {
                 <table className="notebook-table" id="nb-table">
                     <tbody>
                         <tr className="table-section" id="table-header-row"><td>WHO?</td>
-                            <td><div className='nb-header-token' id='nb-token-a' onClick={checkPCColor}></div></td>
-                            <td><div className='nb-header-token' id='nb-token-b' onClick={checkPCColor}></div></td>
-                            <td><div className='nb-header-token' id='nb-token-c' onClick={checkPCColor}></div></td>
-                            <td><div className='nb-header-token' id='nb-token-d' onClick={checkPCColor}></div></td>
-                            <td><div className='nb-header-token' id='nb-token-e' onClick={checkPCColor}></div></td>
-                            <td><div className='nb-header-token' id='nb-token-f' onClick={checkPCColor}></div></td>
+                            <td><div className='nb-header-token' id='nb-token-a' style={{backgroundColor: window.charColor}}></div></td>
+                            <td><div className='nb-header-token' id='nb-token-b' style={{backgroundColor: window.charTokenColors[0]}}></div></td>
+                            <td><div className='nb-header-token' id='nb-token-c' style={{backgroundColor: window.charTokenColors[1]}}></div></td>
+                            <td><div className='nb-header-token' id='nb-token-d' style={{backgroundColor: window.charTokenColors[2]}}></div></td>
+                            <td><div className='nb-header-token' id='nb-token-e' style={{backgroundColor: window.charTokenColors[3]}}></div></td>
+                            <td><div className='nb-header-token' id='nb-token-f' style={{backgroundColor: window.charTokenColors[4]}}></div></td>
                         </tr>
                         <tr className="nb-char-row" id={chars[0]}><td>{chars[0]}</td>
                             <td>

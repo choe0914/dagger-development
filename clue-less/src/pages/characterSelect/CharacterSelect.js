@@ -53,7 +53,7 @@ const whiteBio = "An up-and-coming chef full of youthful ambition and fresh idea
     "dreams of opening a restaurant of her own. Her plan relies on talent, persistence... and " +
     "the money she's been skimming from Boddy Black, which he's known about all along. She has " +
     "two choices: thanklessly run Black's drab hotel restaurant, or face charges.";
-
+window.charTokenColors = ["#3db350", "#F9B416", "#3863f1", "#b95cc5", "#e2140c", "#f5f5f5"];
 function CharacterSelect() {
     const navigate = useNavigate();
     function handleGameLaunchClick(event) {
@@ -115,6 +115,7 @@ function CharacterSelect() {
                 document.getElementById("murder-intro").innerHTML = whiteBio;
                 break;
             default:
+
                 char.currentTarget.style.border = "3px solid rgba(0, 0, 0, 0)"; 
         }
     }
@@ -133,36 +134,41 @@ function CharacterSelect() {
         checks.forEach(check => {
             check.style.visibility = "hidden";
           });
-        console.log(checks);
         switch (e.currentTarget.id) {
             case "green":
                 window.playerCharacter = "1";
+                window.charColor = "#3db350";
                 document.getElementById("check-1").style.visibility = "visible";
+                // TODO: send db/backend char id?
                 break;
             case "mustard":
                 window.playerCharacter = "2";
+                window.charColor = "#F9B416";
                 document.getElementById("check-2").style.visibility = "visible";
                 break;
             case "peacock":
                 window.playerCharacter = "3";
+                window.charColor = "#3863f1";
                 document.getElementById("check-3").style.visibility = "visible";
                 break;
             case "plum":
                 window.playerCharacter = "4";
+                window.charColor = "#b95cc5";
                 document.getElementById("check-4").style.visibility = "visible";
                 break;
             case "scarlett":
                 window.playerCharacter = "5";
+                window.charColor = "#e2140c";
                 document.getElementById("check-5").style.visibility = "visible";
                 break;
             case "white":
                 window.playerCharacter = "6";
+                window.charColor = "#f5f5f5";
                 document.getElementById("check-6").style.visibility = "visible";
                 break;
         }
         document.getElementById("launch-game").style.visibility = "visible";
-
-
+        window.charTokenColors.splice(Number(window.playerCharacter)-1, 1);
     }
     return (
 

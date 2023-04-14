@@ -64,7 +64,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background-image: url("../../assets/img/theme/backdrop.jpg");
+    
     /* background-color: #380503; */
     overflow-x: hidden;
 }
@@ -74,13 +74,21 @@
     height: 100%;
     filter: brightness(10%);
 }
+#player-idx {
+    width: 3vh;
+    height: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    border-radius: 50%;
+    /* background: radial-gradient(circle at 1vh 1vh, grey, #000000); */
+
+}
 #pc-headshot {
     position: absolute;
-    top: 8vh;
-    left: 1vw;
     height: 12vh;
-    width: 18vh;
-    /* border: 1px solid white; */
+    top: 5vh;
 }
 #pc {
     height: 100%;
@@ -88,23 +96,29 @@
 }
 
 .player-card-div {
+    background-color: #542D59;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: var(--region-height);
     width: 10vw;
-    cursor: pointer;
 }
 
 .card-container {
+    height: 30%;
+    width: 30%;
+    border: 1px solid rgba(255, 255, 255, 0.274);
     display: flex;
+    justify-content: center;
     object-fit: contain;
     position: absolute;
 }
 
 .player-card {
-    max-height: 21vh;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
     /* max-height: 25vh; */
     /* position: absolute; */
     /* visibility: hidden; */
@@ -115,6 +129,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+    height: var(--region-height);
     /* top: -3vh; */
 }
 .player-sugg-acc {
@@ -149,7 +164,14 @@
     box-shadow: 0px 0px 100px #17411b;
     z-index: 9999;
 }
-
+#drop-preventer {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #00000054;
+    z-index: 1000;
+    display: none;
+}
 .hallway {
     background-color: #9E7A5A;
     display: flex;
@@ -466,9 +488,13 @@
     width: 25vw;
 }
 #card-reveal {
-    height: 25%;
-    width: 35%;
+    height: 33%;
+    width: 40%;
     border: 1px solid white;
+    object-fit: cover;
+    background-image: url("../../assets/img/theme/pwr-card-back.png");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 #opposing-chars {
     height: 100%;
@@ -508,12 +534,7 @@
     .player-interact-div {
         width: 65vw;
     }
-    .player-card {
-        max-height: 19vh;
-        /* max-height: 25vh; */
-        /* position: absolute; */
-        /* visibility: hidden; */
-    }
+
     /* .player-card {
         height: 10vh;
         width: auto;

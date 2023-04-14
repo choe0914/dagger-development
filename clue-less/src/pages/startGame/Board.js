@@ -52,9 +52,12 @@ const cards = [card1, card2, card3, card4, card5, card6, card7,
 const charHeadshots = [green, mustard, peacock, plum, scarlett, white];
 var loadedChars = ["1","2","3","4","5","6"];
 
-window.onload = (event) => {
-  
-};
+
+
+// window.onload = (event) => {
+//   window.charTokenColors.splice(Number(window.playerCharacter)-1, 1);
+//   console.log(window.charTokenColors);
+// };
 function Board() {
   function buttonHoverA(e) {
     e.currentTarget.style.filter = "brightness(80%)";
@@ -92,11 +95,26 @@ function Board() {
       e.target.style.filter = "brightness(80%)";
       e.preventDefault();
     }
-    
   }
+
+  function allowCardDrop(e) {
+    if (e.target.className === "card-container" || e.target.id === "card-reveal") {
+      e.preventDefault();
+    }
+  }
+  function dropCardReveal(e) {
+    e.preventDefault();
+    var data = e.dataTransfer.getData("text");
+    e.target.appendChild(document.getElementById(data));
+    document.getElementById("drop-preventer").style.display = "none";
+  }
+
   function allowRoomDrop(e) {
     brighten();
     e.preventDefault();
+  }
+  function dragCard(e) {
+    e.dataTransfer.setData("text", e.target.id);
   }
   function drag(e) {
     e.dataTransfer.setData("text", e.target.id);
@@ -286,14 +304,27 @@ function Board() {
       document.getElementById("room-3").appendChild(char);
     } 
   }
+  function fixColors(e) {
+    window.charTokenColors.splice(Number(window.playerCharacter)-1, 1);
+    document.getElementById("nb-token-b").style.backgroundColor = window.charTokenColors[0];
+  }
 
+  function dropPrevent(e) {
+    document.getElementById("drop-preventer").style.display = "unset";
+  }
+  function dropEnable(e) {
+    document.getElementById("drop-preventer").style.display = "none";
+  }
   return (
     <main className="wrapper">
       <section className="left-panel">
         <img id="bck" src={backgrnd} alt="Player Panel Background"></img>
-        <div id="pc-headshot"><img id="pc" src={charHeadshots[Number(window.playerCharacter)-1]} alt="Detective Notebook"></img></div>
-        <div className="player-card-div">
         
+        <div className="player-card-div">
+          <div id="pc-headshot">
+            <div id="player-idx" style={{backgroundColor: window.charColor}}>{window.playerCharacter}</div>
+            <img id="pc" src={charHeadshots[Number(window.playerCharacter)-1]} alt="You"></img>
+          </div>
           {/* <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 3 + "vh" }}>
             <img className="player-card" id="card-1" src={cards[Math.floor(Math.random() * cards.length)]} alt="Detective Notebook"></img>
           </div> */}
@@ -303,28 +334,28 @@ function Board() {
           {/* <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 27 + "vh" }}>
             <img className="player-card" id="card-3" src={cards[Math.floor(Math.random() * cards.length)]} alt="Detective Notebook"></img>
           </div> */}
-          <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 27 + "vh" }}>
-            <img className="player-card" id="card-4" src={cards[Math.floor(Math.random() * cards.length)]} alt="Detective Notebook"></img>
+          <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 27 + "vh" }} onDragOver={allowCardDrop} onDrop={dropCardReveal}>
+            <img className="player-card" id="card-1" src={cards[Math.floor(Math.random() * cards.length)]} onMouseDown={dropPrevent} onMouseUp={dropEnable} draggable="true" onDragStart={dragCard} onDragOver={noAllowDrop} alt="Card 1"></img>
           </div>
-          <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 39 + "vh" }}>
-            <img className="player-card" id="card-5" src={cards[Math.floor(Math.random() * cards.length)]} alt="Detective Notebook"></img>
+          <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 39 + "vh" }} onDragOver={allowCardDrop} onDrop={dropCardReveal}>
+            <img className="player-card" id="card-2" src={cards[Math.floor(Math.random() * cards.length)]} onMouseDown={dropPrevent} onMouseUp={dropEnable} draggable="true" onDragStart={dragCard} onDragOver={noAllowDrop} alt="Card 2"></img>
           </div>
-          <div className="card-container" style={{ top: 51 + "vh" }}>
-            <img className="player-card" id="card-6" src={cards[Math.floor(Math.random() * cards.length)]} alt="Detective Notebook"></img>
+          <div className="card-container" style={{ top: 51 + "vh" }} onDragOver={allowCardDrop} onDrop={dropCardReveal}>
+            <img className="player-card" id="card-3" src={cards[Math.floor(Math.random() * cards.length)]} onMouseDown={dropPrevent} onMouseUp={dropEnable} draggable="true" onDragStart={dragCard} onDragOver={noAllowDrop} alt="Card 3"></img>
           </div>
         </div>
 
 
 
         <div className="player-interact-div">
-          <button className="player-sugg-acc" id="suggestion-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Suggest</button>
+          {/* <button className="player-sugg-acc" id="suggestion-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Suggest</button> */}
           <Notebook />
-          <button className="player-sugg-acc" id="accusation-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Accuse</button>
+          {/* <button className="player-sugg-acc" id="accusation-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Accuse</button> */}
         </div>
       </section>
       <section className="board-div">
         <div className="game-board">
-
+          <div id="drop-preventer"></div>
           <div className="room-div" id="room-1" onDrop={dropKitchen} onDragOver={allowRoomDrop}>
             <button className="secret-passage" id="secret-pass-1" onClick={secretPassageKitchen}>To Study</button>
           </div>
@@ -412,7 +443,7 @@ function Board() {
         </div>
       </section>
       <section className="right-panel">
-        <div id="card-reveal"></div>
+        <div id="card-reveal" onDragOver={allowCardDrop} onDrop={dropCardReveal}></div>
         <div id="opposing-chars">
 
         </div>
