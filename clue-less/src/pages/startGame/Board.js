@@ -1,4 +1,5 @@
 // import React, { Component } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Board.css';
 import Notebook from '../../components/notebook/Notebook';
 // import kitchen from "../assets/img/room-img/kitchen.jpg";
@@ -13,6 +14,7 @@ import Notebook from '../../components/notebook/Notebook';
 // import center from "../assets/img/room-img/center.jpg";
 
 import backgrnd from "../../assets/img/theme/backdrop.jpg";
+import card0 from "../../assets/img/theme/pwr-card-back.png";
 
 import green from "../../assets/img/char-img/green.png";
 import mustard from "../../assets/img/char-img/mustard.png";
@@ -45,10 +47,14 @@ import card19 from "../../assets/img/room-cards/library.png";
 import card20 from "../../assets/img/room-cards/lounge.png";
 import card21 from "../../assets/img/room-cards/study.png";
 
+window.testSolve = [1, 7, 13];
+window.playerSolve = [-1,-1,-1];
+window.playerSolveString = ['','',''];
 const cards = [card1, card2, card3, card4, card5, card6, card7,
   card8, card9, card10, card11, card12, card13,
   card14, card15, card16, card17, card18, card19,
   card20, card21];
+
 const charHeadshots = [green, mustard, peacock, plum, scarlett, white];
 var loadedChars = ["1","2","3","4","5","6"];
 
@@ -59,11 +65,9 @@ var loadedChars = ["1","2","3","4","5","6"];
 //   console.log(window.charTokenColors);
 // };
 function Board() {
-  function buttonHoverA(e) {
-    e.currentTarget.style.filter = "brightness(80%)";
-  }
-  function buttonHoverB(e) {
-    e.currentTarget.style.filter = "brightness(100%)";
+  const navigate = useNavigate();
+  function exitGame(e) {
+    navigate('/welcome');
   }
   function cardClick(e) {
     e.currentTarget.style.zIndex = "101";
@@ -431,6 +435,11 @@ function Board() {
           </div>
 
           <div className="room-div" id="room-0">
+            <div id="solve-deck">
+              <img className="card-0" src={card0} alt="Solve Envelope"></img>
+              <img className="card-0" src={card0} alt="Solve Envelope"></img>
+              <img className="card-0" src={card0} alt="Solve Envelope"></img>
+            </div>
           </div>
 
           <div className="hallway" id="hall-10A" onDrop={dropHall10A} onDragOver={allowHallwayDrop}><span className="hall-num">10A</span></div>
@@ -443,11 +452,22 @@ function Board() {
         </div>
       </section>
       <section className="right-panel">
+        <img id="bck" src={backgrnd} alt="Player Panel Background"></img>
         <div id="card-reveal" onDragOver={allowCardDrop} onDrop={dropCardReveal}></div>
         <div id="opposing-chars">
 
         </div>
       </section>
+      <div id="victory">
+        <span id="victory-header">PLAYER {window.userName} WINS!</span>
+        <div id="victory-reveal">
+          {/* TODO: index cards to strings for alt tags */}
+        <img className="victory-cards" src={cards[window.testSolve[0]]} alt="CARD1"></img>
+        <img className="victory-cards" src={cards[window.testSolve[1]]} alt="CARD2"></img>
+        <img className="victory-cards" src={cards[window.testSolve[2]]} alt="CARD3"></img>
+        </div>
+        <button id="close-victory" onClick={exitGame}>Exit Game</button>
+      </div>
     </main>
   );
 }

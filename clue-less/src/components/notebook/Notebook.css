@@ -2,11 +2,14 @@ td {
 }
 table {
     /* margin-top: 4vh; */
-    height: 10vh;
+    /* height: 10vh; */
     /* background-color: blanchedalmond; */
-    position: absolute;
+    /* position: absolute; */
     border-collapse: collapse;
     font-size: 0.8em;
+    max-width: 70%;
+    max-height: 70%;
+    padding-bottom: 2%;
 }
 input[type=checkbox] {
     padding: 0;
@@ -20,10 +23,16 @@ input[type=checkbox] {
 .notebook-div {
     /* margin-top: 3vh; */
     /* padding-top: 2vh; */
+    background-image: url("../../assets/img/theme/notebook-raw.png");
+    background-size: 105% 105%;
+    background-position: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 100%;
+    background-color: aqua;
+    width: 20vw;
+    height: var(--region-height);
 }
 #notebook {
     max-height: 70vh;
@@ -34,8 +43,36 @@ input[type=checkbox] {
     width: 2vh;
     border: 1px solid black;
 }
-
-
+#table-header-row {
+    
+}
+#refresh-nb-rads {
+    padding: 0;
+    margin: 0.5vh;
+    height: 2.5vh;
+    width: 2.5vh;
+    /* background-color: aqua; */
+    background-image: url("../../assets/img/icons/refresh.png");
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+}
+.player-sugg-acc {
+    height: 5%;
+    width: 60%;
+    cursor: pointer;
+    border: none;
+    border-radius: 16px;
+    background-image: linear-gradient(to right, #790905, #ca120c);
+    box-shadow: 0px 4px 6px #7909058c;
+    color: white;
+    font-size: large;
+    margin: 2%;
+    visibility: hidden;
+}
+#accuse-warn {
+    visibility: hidden;
+}
 
 
 
@@ -54,7 +91,7 @@ input[type=checkbox] {
         width: auto;
     }
     table {
-        margin-top: 4vh;
+        margin-top: 1vh;
         font-size: 0.7em;
         
     }
