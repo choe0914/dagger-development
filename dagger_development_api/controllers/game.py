@@ -83,7 +83,10 @@ def start_game(gameId):
     room_list = list(ROOMS.values())
     random.shuffle(room_list)
     room_index = 0
-    for weapon_token in db.session.query(GameCard).join(CardInfo).where(CardInfo.cardType == CARD_TYPES.TOKEN).all():
+    token_list = db.session.query(GameCard).where(GameCard.gameId == game.gameId)\
+            .join(CardInfo, CardInfo.cardInfoId == GameCard.cardInfoId)\
+            .where(CardInfo.cardType == CARD_TYPES.TOKEN).all()
+    for weapon_token in token_list:
         weapon_token.currentRoom = room_list[room_index]
         room_index += 1
 
