@@ -57,7 +57,7 @@ function makeSuggestion(e) {
 
 //TODO: make this work with a set of test cards from backend
 function makeAccusation(e) {
-    fetch("http://localhost:5000/game/accusation/",
+    fetch("http://localhost:5000/game/accusation",
         {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin

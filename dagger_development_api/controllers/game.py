@@ -148,16 +148,18 @@ def check_win():
     # Query the database to update player position, where a weapon token is, and where a character is.
     player = db.session.query(PlayerState).where(
         PlayerState.characterId == accusation["characterId"]).first()
-    card = db.session.query(GameCard).where(
-        GameCard.gameCardId == accusation["weaponId"]).first()
+    card = db.session.query(GameCard).where(GameCard.gameId == accusation["gameId"])\
+        .join(CardInfo, CardInfo.cardInfoId == GameCard.cardInfoId)\
+        .where(CardInfo.name == accusation["weaponId"]).first()
+
     game = db.session.query(Game).where(
         Game.gameId == accusation["gameId"]).first()
     player.current_position = accusation["roomId"]
-    card.currentRoom = room_list[accusation["roomId"]]
+    card.currentRoom = accusation["roomId"]
     db.session.commit()
 
     # Remove the first entry for easier hand checking
-    accusation.pop(0)
+    # accusation.pop(0)
 
     # Update other players via websockets the playersates and where the weapon token is
     socketio.emit("update_players",
@@ -165,11 +167,10 @@ def check_win():
                   ), game.players)), "currentRoom": card.currentRoom},
                   room=game.gameId)
 
-    # Check if the character, weapon, and room ar correct
-    if accusation == game.winningHand:
-        # If it was a success,
-        socketio.emit("win_status", {"status": "Success"}, room=game.gameId)
-        return {"result": success}
-    else:
-        socketio.emit("win_status", {"status": "Fail"}, room=game.gameId)
-        return {"result": fail}
+    for card in list(game.winningHand):
+        if (card.cardInfo.name != accusation["weaponId"] and card.cardInfo.name != accusation["roomId"] and card.cardInfo.name != accusation["characterId"]):
+            socketio.emit("win_status", {"status": "Fail"}, room=game.gameId)
+            return {"result": fail}
+
+    socketio.emit("win_status", {"status": "Success"}, room=game.gameId)
+    return {"result": success}
