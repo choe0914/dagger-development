@@ -117,8 +117,14 @@ def check_win(accusation):
         send(fail, to=game.gameId)
         #return {"result": fail}
 
+@socketio.on('join_game')
+def join_game_room(data):
+    room = data['room']
+    join_room(room)
+    return
+
 @socketio.on('suggestion')
-def check_sugg(suggestion):
+def check_suggestion(suggestion):
     #suggestion in format of gameId, person, weapon, room
     #Get the room list so we can update the tokens
     room_list = list(ROOMS.values())
@@ -136,7 +142,7 @@ def check_sugg(suggestion):
     send("Response", (game, card.currentRoom, suggestion["characterId"], suggestion["weaponId"], suggestion["roomId"]), to=game.gameId)
 
     #Set the global variable for users to respond to a player who made a suggestion
-    suggestionId = request.sid
+    suggestionId = request.json["sid"]
     #return {"result": "success"}
 
 @socketio.on('suggestion-response')

@@ -14,7 +14,7 @@ def add_user():
     user = User(request.json["userName"])
     db.session.add(user)
     db.session.commit()
-    response = flask.jsonify({"User": user.as_dict()})
+    response = jsonify({"User": user.as_dict()})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 

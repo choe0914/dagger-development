@@ -1,6 +1,7 @@
 import './CharacterSelect.css';
 // import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { join_game } from '../../socket';
 // import React, { useRef } from 'react';
 import invite from "../../assets/img/theme/clue-less-invite.jpg";
 import backdrop from "../../assets/img/theme/backdrop.jpg";
@@ -76,6 +77,7 @@ function CharacterSelect() {
                 positionId: "Hallway" + window.playerCharacter
             }), // body data type must match "Content-Type" header
           }).then((response) => { return response.json(); }).then((data) => {
+                join_game(data.gameId)
                 window.playerId = data.yourPlayer.playerStateId;
                 var launchButton = document.getElementById("launch-game");
                 launchButton.style.transform = "translateY(2px)";

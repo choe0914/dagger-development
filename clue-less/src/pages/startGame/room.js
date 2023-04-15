@@ -3,29 +3,6 @@ import React from "react";
 export default class Room extends React.Component {
     constructor(){
         super();
-        
-        this.state={
-            weapon_tokens: [],
-            player_tokens: []
-        }
-
-    }
-
-    componentDidMount = () => {
-        fetch("http://localhost:5000/game/get_room_contents", {
-            method: "POST", // *GET, POST, PUT, DELETE, etc.
-            mode: "cors", // no-cors, *cors, s ame-origin
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ 
-                gameId: window.gameId,  // TODO get this from somewhere
-                roomId: this.props.roomId
-            }), // body data type must match "Content-Type" header
-          }).then((response) => { return response.json(); }).then((data) => {
-            this.setState({weapon_tokens: data.weapon_tokens, player_tokens: data.player_tokens});
-          })
     }
  
     handleDrop = (e) => { 
@@ -131,9 +108,9 @@ export default class Room extends React.Component {
     }
 
     getPlayerTokens = () => {
-        if (this.state.player_tokens.length > 0) {
+        if (this.props.player_tokens.length > 0) {
             return (
-                <div className="char-token" id={this.getPlayerStyleId(this.state.player_tokens[0])}
+                <div className="char-token" id={this.getPlayerStyleId(this.props.player_tokens[0])}
                     onMouseDown={this.checkPC} 
                     draggable="false" onDragStart={this.drag}>
                 </div>
@@ -151,7 +128,7 @@ export default class Room extends React.Component {
 
     render() {
       return (
-        <div className={this.props.classId} roomId={this.props.roomId} 
+        <div className={this.props.classId}
             id={this.props.styleId} onDrop={this.handleDrop}
             onDragOver={this.props.handleDragOver}>
             {this.getHallwaySpan()}
