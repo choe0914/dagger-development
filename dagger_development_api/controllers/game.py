@@ -111,7 +111,7 @@ def start_game(gameId):
     db.session.commit()
 
     #Update all the players in the room
-    send(game, json=True, to=game.gameId)
+    socketio.emit("update_game", {"game": game.as_dict()}, room=game.gameId)
 
     # Return game info
     return {"gameInfo": game.as_dict()}
@@ -137,13 +137,15 @@ def check_win(accusation):
     accusation.pop(0)
 
     # Update other players via websockets the playersates and where the weapon token is
-    send({"players": game.players, "currentRoom": card.currentRoom}, json=True, to=game.gameId)
+    socketio.emit("update_players", \
+        {"players": list(map(lambda player: player.as_dict(), game.players)), "currentRoom": card.currentRoom}, \
+        room=game.gameId)
 
     #Check if the character, weapon, and room ar correct
     if accusation == game.winningHand:
         #If it was a success, 
-        send("Success", to=game.gameId)
+        socketio.emit("win_status", {"status": "Success"}, room=game.gameId)
         return {"result": success}
     else:
-        send("Fail", to=game.gameId)
+        socketio.emit("win_status", {"status": "Fail"}, room=game.gameId)
         return {"result": fail}
