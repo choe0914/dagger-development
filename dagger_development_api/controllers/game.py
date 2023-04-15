@@ -176,8 +176,12 @@ def check_win():
     return {"result": success}
 
 
-@game_blueprint.route('/game/suggestion')
-def check_suggestion(accusation):
+@game_blueprint.route('/game/accusation', methods=["POST"])
+def make_suggestion():
+    # accusation in format of gameId, person, weapon, room
+    accusation = request.json
+    success = "Win"
+    fail = "Lose"
 
     #Get the room list so we can update the tokens
     room_list = list(ROOMS.values())
