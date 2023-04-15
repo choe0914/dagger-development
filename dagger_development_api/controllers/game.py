@@ -174,3 +174,41 @@ def check_win():
 
     socketio.emit("win_status", {"status": "Success"}, room=game.gameId)
     return {"result": success}
+
+
+@game_blueprint.route('/game/suggestion')
+def check_suggestion(accusation):
+
+    #Get the room list so we can update the tokens
+    room_list = list(ROOMS.values())
+
+    #Query the database to update player position, where a weapon token is, and where a character is.
+    player = db.session.query(PlayerState).where(PlayerState.characterId == accusation["characterId"]).first()
+    card = db.session.query(GameCard).where(GameCard.gameId == accusation["gameId"])\
+        .join(CardInfo, CardInfo.cardInfoId == GameCard.cardInfoId)\
+        .where(CardInfo.name == accusation["weaponId"]).first()
+    game = db.session.query(Game).where(Game.gameId == accusation["gameId"]).first()
+    player.current_position = accusation["roomId"]
+    card.currentRoom = accusation["roomId"]
+    db.session.commit() 
+
+    allPlayers = db.session.query(PlayerState).where(PlayerState.gameId == accusation["gameId"]).all()
+    # Update other players via websockets the playersates and where the weapon token is
+    socketio.emit("update_players", \
+        {"players": list(map(lambda player: player.as_dict(), game.players)), "currentRoom": card.currentRoom}, \
+        room=game.gameId)
+
+    # Check if the character, weapon, and room ar correct
+    for card in list(game.winningHand):
+        if (card.cardInfo.name != accusation["weaponId"] and card.cardInfo.name != accusation["roomId"] and card.cardInfo.name != accusation["characterId"]):
+            socketio.emit("win_status", {"status": "Success"}, room=game.gameId)
+            return {"result": "Success"}
+
+    for player in list(players):
+        for card in list(players.hand):
+            if card.cardInfo.name == accusation["weaponId"]:
+                return {"result": "Fail", "matchingCard": card.as_dict()}
+            if card.cardInfo.name == accusation["roomId"]:
+                return {"result": "Fail", "matchingCard": card.as_dict()}
+            if card.cardInfo.name == accusation["characterId"]:
+                return {"result": "Fail", "matchingCard": card.as_dict()}
