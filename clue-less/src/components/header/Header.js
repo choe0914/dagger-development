@@ -7,7 +7,10 @@ function Header() {
     const navi = document.getElementById('navi');
     function handleMenuClick(event) {
         console.log("here");
-        navi.style.visibility = "hidden";
+        if (navi) {
+            navi.style.visibility = "hidden";
+
+        }
 
         // return (<Board />)
     }
