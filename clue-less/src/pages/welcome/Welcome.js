@@ -50,7 +50,16 @@ function UserName() {
     const userAction = async () => {
         // const response = await fetch('http://127.0.0.1:5000/user/' + username);
         // const myJson = await response.json(); //extract JSON from the http response
-        navigate('/joinGame');
+        fetch("http://localhost:5000/user/create", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+              "Content-Type": "application/json",
+            }, 
+            body: JSON.stringify({
+                userName: window.userName
+            }) // body data type must match "Content-Type" header
+          }).then(() => { navigate('/joinGame'); })
     }
 
     function checkNameField(event) {

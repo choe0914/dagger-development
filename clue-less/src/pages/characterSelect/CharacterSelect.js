@@ -12,6 +12,8 @@ import plum from "../../assets/img/char-img/plum.png";
 import scarlett from "../../assets/img/char-img/scarlett.png";
 import white from "../../assets/img/char-img/white.png";
 
+const characterNumbersToIds = ["Mr. Green", "Colonel Mustard", "Mrs. Peacock", "Professor Plum", "Miss Scarlet", "Mrs. White"]
+
 const murderHeading = "The Night of the Murder";
 
 const murderIntro = "Six carefully chosen guests arrive at Boden “Boddy” Black's family home, Tudor Mansion, " +
@@ -60,12 +62,29 @@ window.opponentIds = ["1", "2", "3", "4", "5", "6"];
 function CharacterSelect() {
     const navigate = useNavigate();
     function handleGameLaunchClick(event) {
-        var launchButton = document.getElementById("launch-game");
-        launchButton.style.transform = "translateY(2px)";
-        setTimeout(() => {
-            launchButton.style.transform = "translateY(-1px)";
-        }, 100);
-        navigate('/gameStart');
+        fetch("http://localhost:5000/game/join", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userName: window.userName,
+                gameId: window.gameId,
+                characterId: characterNumbersToIds[window.playerCharacter - 1],
+                positionId: "Hallway" + window.playerCharacter
+            }), // body data type must match "Content-Type" header
+          }).then((response) => { return response.json(); }).then((data) => {
+                window.playerId = data.yourPlayer.playerStateId;
+                var launchButton = document.getElementById("launch-game");
+                launchButton.style.transform = "translateY(2px)";
+                setTimeout(() => {
+                    launchButton.style.transform = "translateY(-1px)";
+                }, 100);
+                navigate('/gameStart');
+          })
+        
     }
     function buttonHoverA(event) {
         var launchButton = document.getElementById("launch-game");
