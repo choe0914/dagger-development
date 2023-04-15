@@ -132,7 +132,7 @@ def start_game(gameId):
     return {"gameInfo": game.as_dict()}
 
 
-@game_blueprint.route('/game/accusation', methods=['POST'])
+@game_blueprint.route('/game/accusation/<gameId>/<roomId>/<weaponId>/<characterId>', )
 def check_win(accusation):
     # accusation in format of gameId, person, weapon, room
     success = "Win"
