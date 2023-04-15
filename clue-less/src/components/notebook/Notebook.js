@@ -25,7 +25,6 @@ const charTokenColors = ["#3db350", "#F9B416", "#3863f1", "#b95cc5", "#e2140c", 
 // };
 window.playerSolve = [-1, -1, -1];
 window.playerSolveString = ['', '', ''];
-
 const equalsCheck = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
 }
@@ -49,14 +48,35 @@ function makeSuggestion(e) {
             gameId: window.gameId,
             roomId: notebookNumbersToId[window.playerSolve[2] - 1]
         }), // body data type must match "Content-Type" header
-    });
+    }).then((response) => { return response.json() }).then((data) => { console.log(data) });
     // TODO: add turn logic 
     if (window.turnBool) {
 
     }
 }
+
 //TODO: make this work with a set of test cards from backend
 function makeAccusation(e) {
+    fetch("http://localhost:5000/game/accusation",
+        {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+                characterId: characterNumbersToIds[window.playerCharacter - 1],
+                weaponId: notebookNumbersToId[window.playerSolve[1] - 1],
+                gameId: window.gameId,
+                roomId: notebookNumbersToId[window.playerSolve[2] - 1]
+            }),
+        }).then((response) => {
+            return response.json()
+        }).then((data) => {
+            console.log(data);
+        });
 
     if (equalsCheck(window.playerSolve, window.testSolve)) {
         document.getElementById("victory").style.display = "unset";
@@ -66,21 +86,6 @@ function makeAccusation(e) {
         document.getElementById("defeat").style.display = "flex";
     }
 
-    fetch("http://localhost:5000/game/accusation", {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            characterId: characterNumbersToIds[window.playerCharacter - 1],
-            weaponId: notebookNumbersToId[window.playerSolve[1] - 1],
-            gameId: window.gameId,
-            roomId: notebookNumbersToId[window.playerSolve[2] - 1]
-
-        }), // body data type must match "Content-Type" header
-    });
 }
 function clearRadios(e) {
     var radios = document.querySelectorAll('.notebook-radio');
