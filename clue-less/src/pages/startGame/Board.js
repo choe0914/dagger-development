@@ -1,8 +1,8 @@
 // import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Board.css';
-import { useState, useEffect } from 'react';
-import {register_callback} from "../../socket"
+import { useState, useEffect, useContext } from 'react';
+import { register_callback } from "../../socket";
 import Room from './room'
 import Notebook from '../../components/notebook/Notebook';
 // import kitchen from "../assets/img/room-img/kitchen.jpg";
@@ -45,15 +45,13 @@ import card19 from "../../assets/img/room-cards/library.png";
 import card20 from "../../assets/img/room-cards/lounge.png";
 import card21 from "../../assets/img/room-cards/study.png";
 
+import { CurrentHandContext } from "../../context/cardContext";
 window.testSolve = [1, 7, 13];
 
 const cards = [card1, card2, card3, card4, card5, card6, card7,
   card8, card9, card10, card11, card12, card13,
   card14, card15, card16, card17, card18, card19,
   card20, card21];
-
-
-
 
 
 // TODO: figure out how to put the turn indicator in place
@@ -66,16 +64,17 @@ const cards = [card1, card2, card3, card4, card5, card6, card7,
 //   }
 // };
 function Board() {
+  const [currentHand, setCurrentHand] = useContext(CurrentHandContext);
 
-  const [playerTokens, setPlayerTokens] = useState([])
-  const [weaponTokens, setWeaponTokens] = useState([])
-  
+  const [playerTokens, setPlayerTokens] = useState([]);
+  const [weaponTokens, setWeaponTokens] = useState([]);
+
   function updateRoom(message) {
     setPlayerTokens(message.players)
   }
   useEffect(() => {
     // Update the document title using the browser API
-    
+
     fetch("http://localhost:5000/game/get_all_board_pieces", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, s ame-origin
@@ -83,13 +82,12 @@ function Board() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ 
-          gameId: window.gameId,  // TODO get this from somewhere
+      body: JSON.stringify({
+        gameId: window.gameId,  // TODO get this from somewhere
       }), // body data type must match "Content-Type" header
     }).then((response) => { return response.json(); }).then((data) => {
       setPlayerTokens(data.player_tokens)
       setWeaponTokens(data.weaponTokens)
-      
       register_callback('update_players', updateRoom)
     })
   }, []);
@@ -328,25 +326,25 @@ function Board() {
     var char = document.getElementById(`char-${window.playerCharacter}`);
     if (e.currentTarget.parentElement === char.parentElement) {
       document.getElementById("room-6").appendChild(char);
-    }  
+    }
   }
   function secretPassageConservatory(e) {
     var char = document.getElementById(`char-${window.playerCharacter}`);
     if (e.currentTarget.parentElement === char.parentElement) {
       document.getElementById("room-8").appendChild(char);
-    } 
+    }
   }
   function secretPassageStudy(e) {
     var char = document.getElementById(`char-${window.playerCharacter}`);
     if (e.currentTarget.parentElement === char.parentElement) {
       document.getElementById("room-1").appendChild(char);
-    } 
+    }
   }
   function secretPassageLounge(e) {
     var char = document.getElementById(`char-${window.playerCharacter}`);
     if (e.currentTarget.parentElement === char.parentElement) {
       document.getElementById("room-3").appendChild(char);
-    } 
+    }
   }
 
   function dropPrevent(e) {
@@ -372,15 +370,15 @@ function Board() {
     <main className="wrapper">
       <section className="left-panel">
         <img id="bck" src={backgrnd} alt="Player Panel Background"></img>
-        
+
         <div className="player-card-div">
           <div id="pc-headshot">
-            <div className="char-idx" id="player-idx" style={{backgroundColor: window.charColor}}>{window.playerCharacter}</div>
-            <img id="pc" src={window.charHeadshots[Number(window.playerCharacter)-1]} alt="You"></img>
+            <div className="char-idx" id="player-idx" style={{ backgroundColor: window.charColor }}>{window.playerCharacter}</div>
+            <img id="pc" src={window.charHeadshots[Number(window.playerCharacter) - 1]} alt="You"></img>
             <button className="turn-pass" id={"turn-pass" + window.playerCharacter} onClick={turnPass}></button>
             <img className="turn-ind" id="turn-indicator" src={star} alt="Turn Icon"></img>
           </div>
-          
+
           {/* <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 3 + "vh" }}>
             <img className="player-card" id="card-1" src={cards[Math.floor(Math.random() * cards.length)]} alt="Detective Notebook"></img>
           </div> */}
@@ -400,7 +398,7 @@ function Board() {
             <img className="player-card" id="card-3" src={cards[Math.floor(Math.random() * cards.length)]} onMouseDown={dropPrevent} onMouseUp={dropEnable} draggable="true" onDragStart={dragCard} onDragOver={noAllowDrop} alt="Card 3"></img>
           </div>
         </div>
- 
+
 
 
         <div className="player-interact-div">
@@ -412,71 +410,71 @@ function Board() {
       <section className="board-div">
         <div className="game-board">
           <div id="drop-preventer"></div>
-          <Room key="1" player_tokens={playerTokens.filter(player => player.currentPosition == "Kitchen")} 
-            classId="room-div" styleId="room-1" 
+          <Room key="1" player_tokens={playerTokens.filter(player => player.currentPosition == "Kitchen")}
+            classId="room-div" styleId="room-1"
             roomId="Kitchen" handleDragOver={allowRoomDrop}
-            secretPassage={{styleId:"secret-pass-1", text:"To Study", toId:"Study"}} />
+            secretPassage={{ styleId: "secret-pass-1", text: "To Study", toId: "Study" }} />
 
           <Room key="2" player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway1")}
             classId="hallway" hallwayId="1" styleId="hall-1" roomId="Hallway1" handleDragOver={allowHallwayDrop}
-            startingLocation={{classId: "loc-1", handleDragOver:noAllowDrop}}/>
-          
+            startingLocation={{ classId: "loc-1", handleDragOver: noAllowDrop }} />
+
           <Room key="3" player_tokens={playerTokens.filter(player => player.currentPosition == "Ballroom")}
-           classId="room-div" styleId="room-2" roomId="Ballroom" handleDragOver={allowRoomDrop}/>
+            classId="room-div" styleId="room-2" roomId="Ballroom" handleDragOver={allowRoomDrop} />
 
           <Room key="4" player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway2")}
             classId="hallway" hallwayId="2" styleId="hall-2" roomId="Hallway2" handleDragOver={allowHallwayDrop}
-            startingLocation={{classId: "loc-2", handleDragOver:noAllowDrop}}/>
+            startingLocation={{ classId: "loc-2", handleDragOver: noAllowDrop }} />
 
           <Room key="5" player_tokens={playerTokens.filter(player => player.currentPosition == "Conservatory")}
-           classId="room-div" styleId="room-3" roomId="Conservatory" handleDragOver={allowRoomDrop}/>
+            classId="room-div" styleId="room-3" roomId="Conservatory" handleDragOver={allowRoomDrop} />
 
           <Room key="6" player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway3")}
             classId="hallway" hallwayId="3" styleId="hall-3" roomId="Hallway3" handleDragOver={allowHallwayDrop}
-            startingLocation={{classId: "loc-3", handleDragOver:noAllowDrop}}/>
+            startingLocation={{ classId: "loc-3", handleDragOver: noAllowDrop }} />
 
           <Room key="7" player_tokens={playerTokens.filter(player => player.currentPosition == "Billiards")}
-           classId="room-div" styleId="room-4" roomId="Billiards" handleDragOver={allowRoomDrop}/>
+            classId="room-div" styleId="room-4" roomId="Billiards" handleDragOver={allowRoomDrop} />
 
           <Room key="8" player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway4")}
             classId="hallway" hallwayId="4" styleId="hall-4" roomId="Hallway4" handleDragOver={allowHallwayDrop}
-            startingLocation={{classId: "loc-4", handleDragOver:noAllowDrop}}/>
+            startingLocation={{ classId: "loc-4", handleDragOver: noAllowDrop }} />
 
           <Room key="9" player_tokens={playerTokens.filter(player => player.currentPosition == "Library")}
-            classId="room-div" styleId="room-5" roomId="Library" handleDragOver={allowRoomDrop}/>
+            classId="room-div" styleId="room-5" roomId="Library" handleDragOver={allowRoomDrop} />
 
           <Room key="10" player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway5")}
             classId="hallway" hallwayId="5" styleId="hall-5" roomId="Hallway5" handleDragOver={allowHallwayDrop}
-            startingLocation={{classId: "loc-5", handleDragOver:noAllowDrop}}/>
+            startingLocation={{ classId: "loc-5", handleDragOver: noAllowDrop }} />
 
           <Room key="11" player_tokens={playerTokens.filter(player => player.currentPosition == "Study")}
             classId="room-div" styleId="room-6" roomId="Study" handleDragOver={allowRoomDrop}
-            secretPassage={{styleId:"secret-pass-6", text:"To Kitchen", toId:"Kitchen"}} />
+            secretPassage={{ styleId: "secret-pass-6", text: "To Kitchen", toId: "Kitchen" }} />
 
           <Room key="12" player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway6")}
             classId="hallway" hallwayId="6" styleId="hall-6" roomId="Hallway6" handleDragOver={allowHallwayDrop}
-            startingLocation={{classId: "loc-6", handleDragOver:noAllowDrop}}/>
+            startingLocation={{ classId: "loc-6", handleDragOver: noAllowDrop }} />
 
           <Room key="13" player_tokens={playerTokens.filter(player => player.currentPosition == "Hall")}
-           classId="room-div" styleId="room-7" roomId="Hall" handleDragOver={allowRoomDrop}/>
+            classId="room-div" styleId="room-7" roomId="Hall" handleDragOver={allowRoomDrop} />
 
           <Room key="14" player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway7")}
-           classId="hallway" hallwayId="7" styleId="hall-7" roomId="Hallway7" handleDragOver={allowHallwayDrop}
-            startingLocation={{classId: "loc-7", handleDragOver:noAllowDrop}}/>
+            classId="hallway" hallwayId="7" styleId="hall-7" roomId="Hallway7" handleDragOver={allowHallwayDrop}
+            startingLocation={{ classId: "loc-7", handleDragOver: noAllowDrop }} />
 
           <Room key="15" player_tokens={playerTokens.filter(player => player.currentPosition == "Lounge")}
-           classId="room-div" styleId="room-8" roomId="Lounge" handleDragOver={allowRoomDrop}/>
+            classId="room-div" styleId="room-8" roomId="Lounge" handleDragOver={allowRoomDrop} />
 
           <Room key="16" player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway8")}
-           classId="hallway" hallwayId="8" styleId="hall-8" roomId="Hallway8" handleDragOver={allowHallwayDrop}
-            startingLocation={{classId: "loc-8", handleDragOver:noAllowDrop}}/>
+            classId="hallway" hallwayId="8" styleId="hall-8" roomId="Hallway8" handleDragOver={allowHallwayDrop}
+            startingLocation={{ classId: "loc-8", handleDragOver: noAllowDrop }} />
 
           <Room key="17" player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway9")}
-           classId="hallway" hallwayId="9" styleId="hall-9" roomId="Hallway9" handleDragOver={allowHallwayDrop}
-            startingLocation={{classId: "loc-9", handleDragOver:noAllowDrop}}/>
+            classId="hallway" hallwayId="9" styleId="hall-9" roomId="Hallway9" handleDragOver={allowHallwayDrop}
+            startingLocation={{ classId: "loc-9", handleDragOver: noAllowDrop }} />
 
           <Room key="18" player_tokens={playerTokens.filter(player => player.currentPosition == "Dining Room")}
-           classId="room-div" styleId="room-9" roomId="Dining Room" handleDragOver={allowRoomDrop}/>
+            classId="room-div" styleId="room-9" roomId="Dining Room" handleDragOver={allowRoomDrop} />
 
 
           <div className="room-div" id="room-0">
@@ -488,19 +486,19 @@ function Board() {
           </div>
 
           <Room player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway10A")}
-            classId="hallway" hallwayId="10A" styleId="hall-10A" roomId="Hallway10A" handleDragOver={allowHallwayDrop}/>
+            classId="hallway" hallwayId="10A" styleId="hall-10A" roomId="Hallway10A" handleDragOver={allowHallwayDrop} />
           <Room player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway10B")}
-            classId="hallway" hallwayId="10B" styleId="hall-10B" roomId="Hallway10B" handleDragOver={allowHallwayDrop}/>
+            classId="hallway" hallwayId="10B" styleId="hall-10B" roomId="Hallway10B" handleDragOver={allowHallwayDrop} />
           <Room player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway11")}
-            classId="hallway" hallwayId="11" styleId="hall-11" roomId="Hallway11" handleDragOver={allowHallwayDrop}/>
+            classId="hallway" hallwayId="11" styleId="hall-11" roomId="Hallway11" handleDragOver={allowHallwayDrop} />
           <Room player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway12A")}
-            classId="hallway" hallwayId="12A" styleId="hall-12A" roomId="Hallway12A" handleDragOver={allowHallwayDrop}/>
+            classId="hallway" hallwayId="12A" styleId="hall-12A" roomId="Hallway12A" handleDragOver={allowHallwayDrop} />
           <Room player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway12B")}
-            classId="hallway" hallwayId="12B" styleId="hall-12B" roomId="Hallway12B" handleDragOver={allowHallwayDrop}/>
+            classId="hallway" hallwayId="12B" styleId="hall-12B" roomId="Hallway12B" handleDragOver={allowHallwayDrop} />
           <Room player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway12C")}
-            classId="hallway" hallwayId="12C" styleId="hall-12C" roomId="Hallway12C" handleDragOver={allowHallwayDrop}/>
+            classId="hallway" hallwayId="12C" styleId="hall-12C" roomId="Hallway12C" handleDragOver={allowHallwayDrop} />
           <Room player_tokens={playerTokens.filter(player => player.currentPosition == "Hallway13")}
-            classId="hallway" hallwayId="13" styleId="hall-13" roomId="Hallway13" handleDragOver={allowHallwayDrop}/>
+            classId="hallway" hallwayId="13" styleId="hall-13" roomId="Hallway13" handleDragOver={allowHallwayDrop} />
         </div>
       </section>
       <section className="right-panel">
@@ -510,23 +508,23 @@ function Board() {
         </div>
         <div id="opposing-chars">
           <div className="turn-div" id={"opp-div-" + window.opponentIds[0]}>
-            <div className="char-idx" id="player-idx-1" style={{backgroundColor: window.charTokenColors[0]}}>{window.opponentIds[0]}</div>
+            <div className="char-idx" id="player-idx-1" style={{ backgroundColor: window.charTokenColors[0] }}>{window.opponentIds[0]}</div>
             <img className="opp" src={window.activePlayers[0]} alt="CARD1"></img>
           </div>
           <div className="turn-div" id={"opp-div-" + window.opponentIds[1]}>
-            <div className="char-idx" id="player-idx-2" style={{backgroundColor: window.charTokenColors[1]}}>{window.opponentIds[1]}</div>
+            <div className="char-idx" id="player-idx-2" style={{ backgroundColor: window.charTokenColors[1] }}>{window.opponentIds[1]}</div>
             <img className="opp" src={window.activePlayers[1]} alt="CARD1"></img>
           </div>
           <div className="turn-div" id={"opp-div-" + window.opponentIds[2]}>
-            <div className="char-idx" id="player-idx-3" style={{backgroundColor: window.charTokenColors[2]}}>{window.opponentIds[2]}</div>
+            <div className="char-idx" id="player-idx-3" style={{ backgroundColor: window.charTokenColors[2] }}>{window.opponentIds[2]}</div>
             <img className="opp" src={window.activePlayers[2]} alt="CARD1"></img>
           </div>
           <div className="turn-div" id={"opp-div-" + window.opponentIds[3]}>
-            <div className="char-idx" id="player-idx-4" style={{backgroundColor: window.charTokenColors[3]}}>{window.opponentIds[3]}</div>
+            <div className="char-idx" id="player-idx-4" style={{ backgroundColor: window.charTokenColors[3] }}>{window.opponentIds[3]}</div>
             <img className="opp" src={window.activePlayers[3]} alt="CARD1"></img>
           </div>
           <div className="turn-div" id={"opp-div-" + window.opponentIds[4]}>
-            <div className="char-idx" id="player-idx-5" style={{backgroundColor: window.charTokenColors[4]}}>{window.opponentIds[4]}</div>
+            <div className="char-idx" id="player-idx-5" style={{ backgroundColor: window.charTokenColors[4] }}>{window.opponentIds[4]}</div>
             <img className="opp" src={window.activePlayers[4]} alt="CARD1"></img>
           </div>
         </div>

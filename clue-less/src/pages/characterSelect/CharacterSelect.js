@@ -12,38 +12,40 @@ import peacock from "../../assets/img/char-img/peacock.png";
 import plum from "../../assets/img/char-img/plum.png";
 import scarlett from "../../assets/img/char-img/scarlett.png";
 import white from "../../assets/img/char-img/white.png";
+import { characterNumbersToIds } from "../../constant/character";
+import { useState, useContext } from 'react';
+import { CurrentHandContext } from '../../context/cardContext';
 
-const characterNumbersToIds = ["Mr. Green", "Colonel Mustard", "Mrs. Peacock", "Professor Plum", "Miss Scarlet", "Mrs. White"]
 
 const murderHeading = "The Night of the Murder";
 
 const murderIntro = "Six carefully chosen guests arrive at Boden “Boddy” Black's family home, Tudor Mansion, " +
-"after receiving a mysterious invitation. Over dinner, Black announces his plans to build an extravagantly over-the-top, " + 
-"luxury hotel right over a beloved public park. Everyone objects, but then Black reveals that he has the perfect blackmail " + 
-"to force each one of them into helping him. If they don't, their secrets will be revealed. Shortly after, Black excuses " + 
-"himself and the guests disperse to digest the news. A scream rings out and the guests discover Black, murdered.";
+    "after receiving a mysterious invitation. Over dinner, Black announces his plans to build an extravagantly over-the-top, " +
+    "luxury hotel right over a beloved public park. Everyone objects, but then Black reveals that he has the perfect blackmail " +
+    "to force each one of them into helping him. If they don't, their secrets will be revealed. Shortly after, Black excuses " +
+    "himself and the guests disperse to digest the news. A scream rings out and the guests discover Black, murdered.";
 
-const greenBio = "The loveable Mayor of Hue County who always has a " + 
-    "kind word to spare. He's up for re-election and not worried in the " + 
-    "slightest-even his opponents struggle to dislike him. His squeaky-clean " + 
-    "record has only one tarnish: a campaign-saving donation from a major crime " + 
-    "family. Black has assured him that nobody needs to find out... as long as he " + 
+const greenBio = "The loveable Mayor of Hue County who always has a " +
+    "kind word to spare. He's up for re-election and not worried in the " +
+    "slightest-even his opponents struggle to dislike him. His squeaky-clean " +
+    "record has only one tarnish: a campaign-saving donation from a major crime " +
+    "family. Black has assured him that nobody needs to find out... as long as he " +
     "helps re-zone the park where Black plans to build his hotel.";
 
-const mustardBio = "A decorated war hero, full of stories of past battles and narrow escapes. " + 
-    "He's a man of action, with the experience to back it up. His credibility as a respected military " + 
-    "member means he could easily sway public opinion in Black's favor-especially if it means no one " + 
+const mustardBio = "A decorated war hero, full of stories of past battles and narrow escapes. " +
+    "He's a man of action, with the experience to back it up. His credibility as a respected military " +
+    "member means he could easily sway public opinion in Black's favor-especially if it means no one " +
     "ever finds out he wasn't actually in the battle for which he was awarded his most prestigious medal.";
 
-const peacockBio = "A tenacious attorney who knows exactly how to command a room, court or otherwise. Her " + 
-    "success has provided her significant status and she's not shy about flaunting it. Black knows nothing " + 
-    "is off-limits when it comes to getting her verdict, even tampering with witnesses, a fact he is happy " + 
+const peacockBio = "A tenacious attorney who knows exactly how to command a room, court or otherwise. Her " +
+    "success has provided her significant status and she's not shy about flaunting it. Black knows nothing " +
+    "is off-limits when it comes to getting her verdict, even tampering with witnesses, a fact he is happy " +
     "to reveal if she refuses to represent him in his hotel dealings.";
 
-const plumBio = "A professor of antiquities with an uncannily perceptive eye. His incredible attention to " + 
-    "detail aids him in identifying counterfeits, and occasionally creating them. Only Black knows about" + 
-    "his most convincing forgery: Plum's PhD, which hangs proudly above his desk. With the right incentive, " + 
-    "the professor could likely fabricate anything, even a land deed proving Black has claim to the park " + 
+const plumBio = "A professor of antiquities with an uncannily perceptive eye. His incredible attention to " +
+    "detail aids him in identifying counterfeits, and occasionally creating them. Only Black knows about" +
+    "his most convincing forgery: Plum's PhD, which hangs proudly above his desk. With the right incentive, " +
+    "the professor could likely fabricate anything, even a land deed proving Black has claim to the park " +
     "he plans to build his hotel on.";
 
 const scarlettBio = "A socialite, at first glance. A sharply intelligent investigative journalist, in " +
@@ -62,13 +64,35 @@ window.activePlayers = [green, mustard, peacock, plum, scarlett, white];
 window.opponentIds = ["1", "2", "3", "4", "5", "6"];
 function CharacterSelect() {
     const navigate = useNavigate();
+    const [currentHand, setCurrentHand] = useContext(CurrentHandContext);
+    const [winningHand, setWinningHand] = useState([]);
+
+
     function handleGameLaunchClick(event) {
+        // TODO : what's the difference between /game/join and /game/start
+
+        fetch("http://localhost:5000/game/start/" + window.gameId, {
+            method: "GET", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+                "Content-Type": "application/json",
+            },// body data type must match "Content-Type" header
+        }).then((response) => { return response.json(); }).then((data) => {
+            // Filter Current Hand 
+            let charInfo = data.gameInfo.players.filter(charId => charId.characterId === characterNumbersToIds[window.playerCharacter - 1])[0];
+            // TODO : why I can't save card info?
+            setCurrentHand(state => ({ ...state, hand: charInfo }));
+            // Filter Winning Hand 
+            setWinningHand(data.gameInfo.winningHand);
+        })
+
         fetch("http://localhost:5000/game/join", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
             headers: {
-              "Content-Type": "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 userName: window.userName,
@@ -76,17 +100,17 @@ function CharacterSelect() {
                 characterId: characterNumbersToIds[window.playerCharacter - 1],
                 positionId: "Hallway" + window.playerCharacter
             }), // body data type must match "Content-Type" header
-          }).then((response) => { return response.json(); }).then((data) => {
-                join_game(data.gameId)
-                window.playerId = data.yourPlayer.playerStateId;
-                var launchButton = document.getElementById("launch-game");
-                launchButton.style.transform = "translateY(2px)";
-                setTimeout(() => {
-                    launchButton.style.transform = "translateY(-1px)";
-                }, 100);
-                navigate('/gameStart');
-          })
-        
+        }).then((response) => { return response.json(); }).then((data) => {
+            join_game(data.gameId)
+            window.playerId = data.yourPlayer.playerStateId;
+            var launchButton = document.getElementById("launch-game");
+            launchButton.style.transform = "translateY(2px)";
+            setTimeout(() => {
+                launchButton.style.transform = "translateY(-1px)";
+            }, 100);
+            navigate('/gameStart');
+        })
+
     }
     function buttonHoverA(event) {
         var launchButton = document.getElementById("launch-game");
@@ -140,7 +164,7 @@ function CharacterSelect() {
                 break;
             default:
 
-                char.currentTarget.style.border = "3px solid rgba(0, 0, 0, 0)"; 
+                char.currentTarget.style.border = "3px solid rgba(0, 0, 0, 0)";
         }
     }
     function charHoverB(char) {
@@ -157,7 +181,7 @@ function CharacterSelect() {
         var checks = document.querySelectorAll(".check-mark");
         checks.forEach(check => {
             check.style.visibility = "hidden";
-          });
+        });
         switch (e.currentTarget.id) {
             case "green":
                 window.playerCharacter = "1";
@@ -193,10 +217,10 @@ function CharacterSelect() {
                 break;
         }
         document.getElementById("launch-game").style.visibility = "visible";
-        window.charTokenColors.splice(Number(window.playerCharacter)-1, 1);
-        window.activePlayers.splice(Number(window.playerCharacter)-1, 1);
+        window.charTokenColors.splice(Number(window.playerCharacter) - 1, 1);
+        window.activePlayers.splice(Number(window.playerCharacter) - 1, 1);
         const index = window.opponentIds.indexOf(window.playerCharacter);
-        if (index > -1) { 
+        if (index > -1) {
             window.opponentIds.splice(index, 1);
         }
     }

@@ -10,8 +10,8 @@ function GameType() {
     const navigate = useNavigate();
     // var launchButton = useRef();
 
-    const [newGame, setNewGame] = useState(0)
-  
+    const [newGame, setNewGame] = useState(0);
+
     // const gameChoice = useRef();
     function handleGameChoiceClick(event) {
         if (newGame) {
@@ -20,12 +20,12 @@ function GameType() {
                 mode: "cors", // no-cors, *cors, same-origin
                 cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
                 headers: {
-                  "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },// body data type must match "Content-Type" header
-              }).then((response) => { return response.json(); }).then((data) => {
+            }).then((response) => { return response.json(); }).then((data) => {
                 window.gameId = data.gameId
                 handleProceeding()
-              })
+            })
         } else {
             window.gameId = document.getElementById("game-id-field").value
             handleProceeding()
@@ -49,7 +49,7 @@ function GameType() {
         launchButton.style.filter = "brightness(100%)";
     }
     function handleGameChoiceA(event) {
-        setNewGame(0)
+        setNewGame(0);
         var launchButton = document.getElementById("launch-char-select");
         launchButton.style.visibility = "hidden";
         var fieldText = document.getElementById("game-id-field");
