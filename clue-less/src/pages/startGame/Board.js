@@ -92,6 +92,7 @@ function Board() {
     })
   }, []);
 
+
   const navigate = useNavigate();
   function exitGame(e) {
     navigate('/welcome');
@@ -158,159 +159,6 @@ function Board() {
   function dragCard(e) {
     e.dataTransfer.setData("text", e.target.id);
   }
-  function drag(e) {
-    e.dataTransfer.setData("text", e.target.id);
-  }
-  function dropKitchen(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall1(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropBall(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall2(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropConservatory(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall3(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropBilliards(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall4(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropLibrary(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall5(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropStudy(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall6(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall7(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropLounge(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall8(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropDining(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall9(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall10A(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall10B(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall11(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall12A(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall12B(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall12C(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
-  function dropHall13(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-    brighten();
-  }
 
   // checks current player character, allows movement of token by them only
   function checkPC(e) {
@@ -322,31 +170,6 @@ function Board() {
     // e.currentTarget.setAttribute("draggable", "true");
     // e.currentTarget.style.cursor = "pointer";
   }
-  function secretPassageKitchen(e) {
-    var char = document.getElementById(`char-${window.playerCharacter}`);
-    if (e.currentTarget.parentElement === char.parentElement) {
-      document.getElementById("room-6").appendChild(char);
-    }
-  }
-  function secretPassageConservatory(e) {
-    var char = document.getElementById(`char-${window.playerCharacter}`);
-    if (e.currentTarget.parentElement === char.parentElement) {
-      document.getElementById("room-8").appendChild(char);
-    }
-  }
-  function secretPassageStudy(e) {
-    var char = document.getElementById(`char-${window.playerCharacter}`);
-    if (e.currentTarget.parentElement === char.parentElement) {
-      document.getElementById("room-1").appendChild(char);
-    }
-  }
-  function secretPassageLounge(e) {
-    var char = document.getElementById(`char-${window.playerCharacter}`);
-    if (e.currentTarget.parentElement === char.parentElement) {
-      document.getElementById("room-3").appendChild(char);
-    }
-  }
-
   function dropPrevent(e) {
     document.getElementById("drop-preventer").style.display = "unset";
   }
@@ -552,6 +375,7 @@ function Board() {
         <button id="close-defeat" onClick={defeatReturn}>Return</button>
       </div>
     </main>
+  
   );
 }
 
