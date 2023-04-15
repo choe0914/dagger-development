@@ -54,6 +54,9 @@ const whiteBio = "An up-and-coming chef full of youthful ambition and fresh idea
     "the money she's been skimming from Boddy Black, which he's known about all along. She has " +
     "two choices: thanklessly run Black's drab hotel restaurant, or face charges.";
 window.charTokenColors = ["#3db350", "#F9B416", "#3863f1", "#b95cc5", "#e2140c", "#f5f5f5"];
+window.charHeadshots = [green, mustard, peacock, plum, scarlett, white];
+window.activePlayers = [green, mustard, peacock, plum, scarlett, white];
+window.opponentIds = ["1", "2", "3", "4", "5", "6"];
 function CharacterSelect() {
     const navigate = useNavigate();
     function handleGameLaunchClick(event) {
@@ -160,6 +163,7 @@ function CharacterSelect() {
                 window.playerCharacter = "5";
                 window.charColor = "#e2140c";
                 document.getElementById("check-5").style.visibility = "visible";
+                window.turnBool = true;
                 break;
             case "white":
                 window.playerCharacter = "6";
@@ -169,6 +173,11 @@ function CharacterSelect() {
         }
         document.getElementById("launch-game").style.visibility = "visible";
         window.charTokenColors.splice(Number(window.playerCharacter)-1, 1);
+        window.activePlayers.splice(Number(window.playerCharacter)-1, 1);
+        const index = window.opponentIds.indexOf(window.playerCharacter);
+        if (index > -1) { 
+            window.opponentIds.splice(index, 1);
+        }
     }
     return (
 

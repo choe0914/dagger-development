@@ -15,13 +15,8 @@ import Notebook from '../../components/notebook/Notebook';
 
 import backgrnd from "../../assets/img/theme/backdrop.jpg";
 import card0 from "../../assets/img/theme/pwr-card-back.png";
+import star from "../../assets/img/icons/star.png";
 
-import green from "../../assets/img/char-img/green.png";
-import mustard from "../../assets/img/char-img/mustard.png";
-import peacock from "../../assets/img/char-img/peacock.png";
-import plum from "../../assets/img/char-img/plum.png";
-import scarlett from "../../assets/img/char-img/scarlett.png";
-import white from "../../assets/img/char-img/white.png";
 
 import card1 from "../../assets/img/char-cards/green.png";
 import card2 from "../../assets/img/char-cards/mustard.png";
@@ -48,26 +43,40 @@ import card20 from "../../assets/img/room-cards/lounge.png";
 import card21 from "../../assets/img/room-cards/study.png";
 
 window.testSolve = [1, 7, 13];
-window.playerSolve = [-1,-1,-1];
-window.playerSolveString = ['','',''];
+
 const cards = [card1, card2, card3, card4, card5, card6, card7,
   card8, card9, card10, card11, card12, card13,
   card14, card15, card16, card17, card18, card19,
   card20, card21];
 
-const charHeadshots = [green, mustard, peacock, plum, scarlett, white];
-var loadedChars = ["1","2","3","4","5","6"];
 
 
 
-// window.onload = (event) => {
-//   window.charTokenColors.splice(Number(window.playerCharacter)-1, 1);
-//   console.log(window.charTokenColors);
+
+// TODO: figure out how to put the turn indicator in place
+// document.onload = (event) => {
+//   console.log("here");
+//   if (window.playerCharacter == "5") {
+//     document.getElementById("pc-headshot").appendChild('<img className="turn-ind" id="turn-indicator" src={star} alt="Turn Icon"></img>');
+//   } else {
+//     document.getElementById("opp-div-5").appendChild('<img className="turn-ind" id="turn-indicator" src={star} alt="Turn Icon"></img>');
+//   }
 // };
 function Board() {
   const navigate = useNavigate();
   function exitGame(e) {
     navigate('/welcome');
+  }
+  function defeatReturn(e) {
+    document.getElementById("defeat").style.display = "none";
+    var nbInputs = document.querySelectorAll('input[type="radio"]');
+    nbInputs.forEach(nbRad => {
+      nbRad.disabled = true;
+    });
+    document.getElementById("suggest-button").style.visibility = "hidden";
+    document.getElementById("accuse-button").style.visibility = "hidden";
+    document.getElementById("accuse-warn").style.visibility = "hidden";
+    console.log(window.playerSolve);
   }
   function cardClick(e) {
     e.currentTarget.style.zIndex = "101";
@@ -308,16 +317,25 @@ function Board() {
       document.getElementById("room-3").appendChild(char);
     } 
   }
-  function fixColors(e) {
-    window.charTokenColors.splice(Number(window.playerCharacter)-1, 1);
-    document.getElementById("nb-token-b").style.backgroundColor = window.charTokenColors[0];
-  }
 
   function dropPrevent(e) {
     document.getElementById("drop-preventer").style.display = "unset";
   }
   function dropEnable(e) {
     document.getElementById("drop-preventer").style.display = "none";
+  }
+
+  function turnPass(e) {
+    if (window.playerCharacter === "6") {
+      var nextPlayer = document.getElementById("opp-div-1");
+    } else {
+      var nextPlayer = document.getElementById("opp-div-" + (Number(window.playerCharacter) + 1));
+    }
+    nextPlayer.appendChild(document.getElementById("turn-indicator"));
+    document.getElementById("suggest-button").style.visibility = "hidden";
+    document.getElementById("accuse-button").style.visibility = "hidden";
+    document.getElementById("accuse-warn").style.visibility = "hidden";
+    window.turnBool = false;
   }
   return (
     <main className="wrapper">
@@ -326,9 +344,12 @@ function Board() {
         
         <div className="player-card-div">
           <div id="pc-headshot">
-            <div id="player-idx" style={{backgroundColor: window.charColor}}>{window.playerCharacter}</div>
-            <img id="pc" src={charHeadshots[Number(window.playerCharacter)-1]} alt="You"></img>
+            <div className="char-idx" id="player-idx" style={{backgroundColor: window.charColor}}>{window.playerCharacter}</div>
+            <img id="pc" src={window.charHeadshots[Number(window.playerCharacter)-1]} alt="You"></img>
+            <button className="turn-pass" id={"turn-pass" + window.playerCharacter} onClick={turnPass}></button>
+            <img className="turn-ind" id="turn-indicator" src={star} alt="Turn Icon"></img>
           </div>
+          
           {/* <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 3 + "vh" }}>
             <img className="player-card" id="card-1" src={cards[Math.floor(Math.random() * cards.length)]} alt="Detective Notebook"></img>
           </div> */}
@@ -452,21 +473,54 @@ function Board() {
         </div>
       </section>
       <section className="right-panel">
-        <img id="bck" src={backgrnd} alt="Player Panel Background"></img>
-        <div id="card-reveal" onDragOver={allowCardDrop} onDrop={dropCardReveal}></div>
+        <img id="bck-right" src={backgrnd} alt="Player Panel Background"></img>
+        <div id="game-state">
+          <div id="card-reveal" onDragOver={allowCardDrop} onDrop={dropCardReveal}></div>
+        </div>
         <div id="opposing-chars">
-
+          <div className="turn-div" id={"opp-div-" + window.opponentIds[0]}>
+            <div className="char-idx" id="player-idx-1" style={{backgroundColor: window.charTokenColors[0]}}>{window.opponentIds[0]}</div>
+            <img className="opp" src={window.activePlayers[0]} alt="CARD1"></img>
+          </div>
+          <div className="turn-div" id={"opp-div-" + window.opponentIds[1]}>
+            <div className="char-idx" id="player-idx-2" style={{backgroundColor: window.charTokenColors[1]}}>{window.opponentIds[1]}</div>
+            <img className="opp" src={window.activePlayers[1]} alt="CARD1"></img>
+          </div>
+          <div className="turn-div" id={"opp-div-" + window.opponentIds[2]}>
+            <div className="char-idx" id="player-idx-3" style={{backgroundColor: window.charTokenColors[2]}}>{window.opponentIds[2]}</div>
+            <img className="opp" src={window.activePlayers[2]} alt="CARD1"></img>
+          </div>
+          <div className="turn-div" id={"opp-div-" + window.opponentIds[3]}>
+            <div className="char-idx" id="player-idx-4" style={{backgroundColor: window.charTokenColors[3]}}>{window.opponentIds[3]}</div>
+            <img className="opp" src={window.activePlayers[3]} alt="CARD1"></img>
+          </div>
+          <div className="turn-div" id={"opp-div-" + window.opponentIds[4]}>
+            <div className="char-idx" id="player-idx-5" style={{backgroundColor: window.charTokenColors[4]}}>{window.opponentIds[4]}</div>
+            <img className="opp" src={window.activePlayers[4]} alt="CARD1"></img>
+          </div>
         </div>
       </section>
       <div id="victory">
         <span id="victory-header">PLAYER {window.userName} WINS!</span>
         <div id="victory-reveal">
           {/* TODO: index cards to strings for alt tags */}
-        <img className="victory-cards" src={cards[window.testSolve[0]]} alt="CARD1"></img>
-        <img className="victory-cards" src={cards[window.testSolve[1]]} alt="CARD2"></img>
-        <img className="victory-cards" src={cards[window.testSolve[2]]} alt="CARD3"></img>
+          <img className="victory-cards" src={cards[window.testSolve[0]]} alt="CARD1"></img>
+          <img className="victory-cards" src={cards[window.testSolve[1]]} alt="CARD2"></img>
+          <img className="victory-cards" src={cards[window.testSolve[2]]} alt="CARD3"></img>
         </div>
         <button id="close-victory" onClick={exitGame}>Exit Game</button>
+      </div>
+      <div id="defeat">
+        <span id="defeat-header">SORRY {window.userName}, YOU HAVE MADE A FALSE ACCUSATION.</span>
+        <span id="defeat-instructions">PLEASE RETURN TO THE GAME SO YOU MAY CONTINUE TO REVEAL CLUES</span>
+        <span id="defeat-summary">ACCUSATION SUMMARY</span>
+        {/* <div id="defeat-wait">
+
+          <img className="defeat-cards" src={cards[window.playerSolve[0]]} alt="CARD1"></img>
+          <img className="defeat-cards" src={cards[window.playerSolve[1]]} alt="CARD2"></img>
+          <img className="defeat-cards" src={cards[window.playerSolve[2]]} alt="CARD3"></img>
+        </div> */}
+        <button id="close-defeat" onClick={defeatReturn}>Return</button>
       </div>
     </main>
   );

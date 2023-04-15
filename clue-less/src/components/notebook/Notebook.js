@@ -21,6 +21,8 @@ const charTokenColors = ["#3db350", "#F9B416", "#3863f1", "#b95cc5", "#e2140c", 
 //   charTokenColors.splice(Number(window.playerCharacter), 1);
 //   console.log("here");
 // };
+window.playerSolve = [-1,-1,-1];
+window.playerSolveString = ['','',''];
 const equalsCheck = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
 }
@@ -31,15 +33,19 @@ function buttonHoverB(e) {
     e.currentTarget.style.filter = "brightness(100%)";
 }
 function makeSuggestion(e) {
+    if (window.turnBool) {
 
+    }
 }
 //TODO: make this work with a set of test cards from backend
 function makeAccusation(e) {
     
     if (equalsCheck(window.playerSolve, window.testSolve)) {
-        console.log("here");
         document.getElementById("victory").style.display = "unset";
         document.getElementById("victory").style.display = "flex";
+    } else {
+        document.getElementById("defeat").style.display = "unset";
+        document.getElementById("defeat").style.display = "flex";
     }
 }
 function clearRadios(e) {
@@ -71,9 +77,12 @@ function checkRadios(e) {
     if (!window.playerSolve.includes(-1)) {
         console.log(window.playerSolve);
         console.log(window.testSolve);
-        document.getElementById("suggest-button").style.visibility = "visible";
-        document.getElementById("accuse-button").style.visibility = "visible";
-        document.getElementById("accuse-warn").style.visibility = "visible";
+        if (window.turnBool) {
+            document.getElementById("suggest-button").style.visibility = "visible";
+            document.getElementById("accuse-button").style.visibility = "visible";
+            document.getElementById("accuse-warn").style.visibility = "visible";
+        }
+        
     }
 }
 class Notebook extends Component {
@@ -585,7 +594,7 @@ class Notebook extends Component {
                 </table>
                 <button className="player-sugg-acc" id="suggest-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB} onClick={makeSuggestion}>Suggest</button>
                 <button className="player-sugg-acc" id="accuse-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB} onClick={makeAccusation}>Accuse !</button>
-                <span id="accuse-warn">Beware: A false accusation is bad</span>
+                <span id="accuse-warn">Beware of false accusations...</span>
             </div>
         );
     }
