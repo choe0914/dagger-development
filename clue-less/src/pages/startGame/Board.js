@@ -71,10 +71,20 @@ function Board() {
   const [weaponTokens, setWeaponTokens] = useState([]);
   const [canStartGame, setCanStartGame] = useState(false);
 
+  function updateGame(data) {
+    let charInfo = data.gameInfo.players.filter(charId => charId.characterId === characterNumbersToIds[window.playerCharacter - 1])[0];
+    // Save the current hand
+    setCurrentHand(charInfo.hand);
+    // Save the winning hand 
+    setWinningHand(data.gameInfo.winningHand);
+    setCanStartGame(true);
+  }
+
   function updateRoom(message) {
     setPlayerTokens(message.players)
   }
   useEffect(() => {
+
     // Update the document title using the browser API
 
     fetch("http://localhost:5000/game/get_all_board_pieces", {
@@ -91,9 +101,9 @@ function Board() {
       setPlayerTokens(data.player_tokens)
       setWeaponTokens(data.weaponTokens)
       register_callback('update_players', updateRoom)
+      register_callback('update_game', updateGame)
     })
   }, []);
-
 
   const navigate = useNavigate();
   function exitGame(e) {
