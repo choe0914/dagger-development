@@ -173,7 +173,7 @@ def check_win():
             return {"result": fail}
 
     socketio.emit("win_status", {"status": "Success"}, room=game.gameId)
-    return {"result": success}
+    return {"result": "Win"}
 
 
 @game_blueprint.route('/game/suggestion', methods=["POST"])
@@ -183,24 +183,28 @@ def make_suggestion():
     success = "Win"
     fail = "Lose"
 
-    #Get the room list so we can update the tokens
+    # Get the room list so we can update the tokens
     room_list = list(ROOMS.values())
 
-    #Query the database to update player position, where a weapon token is, and where a character is.
-    player = db.session.query(PlayerState).where(PlayerState.characterId == accusation["characterId"]).first()
+    # Query the database to update player position, where a weapon token is, and where a character is.
+    player = db.session.query(PlayerState).where(
+        PlayerState.characterId == accusation["characterId"]).first()
     card = db.session.query(GameCard).where(GameCard.gameId == accusation["gameId"])\
         .join(CardInfo, CardInfo.cardInfoId == GameCard.cardInfoId)\
         .where(CardInfo.name == accusation["weaponId"]).first()
-    game = db.session.query(Game).where(Game.gameId == accusation["gameId"]).first()
+    game = db.session.query(Game).where(
+        Game.gameId == accusation["gameId"]).first()
     player.current_position = accusation["roomId"]
     card.currentRoom = accusation["roomId"]
-    db.session.commit() 
+    db.session.commit()
 
-    allPlayers = db.session.query(PlayerState).where(PlayerState.gameId == accusation["gameId"]).all()
+    allPlayers = db.session.query(PlayerState).where(
+        PlayerState.gameId == accusation["gameId"]).all()
     # Update other players via websockets the playersates and where the weapon token is
-    socketio.emit("update_players", \
-        {"players": list(map(lambda player: player.as_dict(), game.players)), "currentRoom": card.currentRoom}, \
-        room=game.gameId)
+    socketio.emit("update_players",
+                  {"players": list(map(lambda player: player.as_dict(
+                  ), game.players)), "currentRoom": card.currentRoom},
+                  room=game.gameId)
 
     for player in list(allPlayers):
         for card in list(player.hand):
