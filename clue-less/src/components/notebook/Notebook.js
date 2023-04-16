@@ -80,8 +80,8 @@ function makeAccusation(e) {
                 gameId: window.gameId,
                 roomId: notebookNumbersToId[window.playerSolve[2] - 1]
             }),
-        }).then((response) => { return response.json(); }).then((data) => {
-            if (data.result !== "Lose") {
+        }).then((response) => { return response.json() }).then((data) => {
+            if (data.result == "Win") {
                 document.getElementById("victory").style.display = "unset";
                 document.getElementById("victory").style.display = "flex";
             } else {
