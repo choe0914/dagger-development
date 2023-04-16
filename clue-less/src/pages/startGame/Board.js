@@ -1,4 +1,4 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Board.css';
 import { useState, useEffect, useContext } from 'react';
@@ -45,14 +45,13 @@ import card19 from "../../assets/img/room-cards/library.png";
 import card20 from "../../assets/img/room-cards/lounge.png";
 import card21 from "../../assets/img/room-cards/study.png";
 
-import { CurrentHandContext } from "../../context/cardContext";
-window.testSolve = [1, 7, 13];
+import { characterNumbersToIds } from "../../constant/character";
+window.testSolve = [1, 7, 13]; 
 
 const cards = [card1, card2, card3, card4, card5, card6, card7,
   card8, card9, card10, card11, card12, card13,
   card14, card15, card16, card17, card18, card19,
   card20, card21];
-
 
 // TODO: figure out how to put the turn indicator in place
 // document.onload = (event) => {
@@ -63,11 +62,14 @@ const cards = [card1, card2, card3, card4, card5, card6, card7,
 //     document.getElementById("opp-div-5").appendChild('<img className="turn-ind" id="turn-indicator" src={star} alt="Turn Icon"></img>');
 //   }
 // };
-function Board() {
-  const [currentHand, setCurrentHand] = useContext(CurrentHandContext);
 
+
+function Board() {
+  const [currentHand, setCurrentHand] = useState([]);
+  const [winningHand, setWinningHand] = useState([]);
   const [playerTokens, setPlayerTokens] = useState([]);
   const [weaponTokens, setWeaponTokens] = useState([]);
+  const [canStartGame, setCanStartGame] = useState(false);
 
   function updateRoom(message) {
     setPlayerTokens(message.players)
@@ -198,12 +200,50 @@ function Board() {
     document.getElementById("accuse-warn").style.visibility = "hidden";
     window.turnBool = false;
   }
+
+  function startGame() {
+    fetch("http://localhost:5000/game/start/" + window.gameId, {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+      },// body data type must match "Content-Type" header
+    }).then((response) => { return response.json(); }).then((data) => {
+      // Filter Current Hand 
+      let charInfo = data.gameInfo.players.filter(charId => charId.characterId === characterNumbersToIds[window.playerCharacter - 1])[0];
+      // Save the current hand
+      setCurrentHand(charInfo.hand);
+      // Save the winning hand 
+      setWinningHand(data.gameInfo.winningHand);
+      setCanStartGame(true);
+    })
+  }
+
+  function displayCurrentHand() {
+    let currentPlayerHand = [];
+    currentHand.filter(hand => {
+      currentPlayerHand.push(hand.cardInfo);
+    });
+    const hand = [];
+    // Construct current hands 
+    for (let x = 0; x < currentPlayerHand.length; x++) {
+      hand.push(currentPlayerHand &&
+        <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={handStyle[x]} onDragOver={allowCardDrop} onDrop={dropCardReveal}>
+          <img alt={'card-' + (x + 1)} className="player-card" id={'card-' + (x + 1)} src={CardConfig[currentPlayerHand[x].name].img} onMouseDown={dropPrevent} onMouseUp={dropEnable} draggable="true"  onDragStart={dragCard} onDragOver={noAllowDrop}></img>
+        </div>);
+    }
+    return (<React.Fragment>{hand}</React.Fragment>);
+  }
+
   return (
     <main className="wrapper">
       <section className="left-panel">
-        <img id="bck" src={backgrnd} alt="Player Panel Background"></img>
 
+        <img id="bck" src={backgrnd} alt="Player Panel Background"></img>
+        {canStartGame && <React.Fragment>
         <div className="player-card-div">
+
           <div id="pc-headshot">
             <div className="char-idx" id="player-idx" style={{ backgroundColor: window.charColor }}>{window.playerCharacter}</div>
             <img id="pc" src={window.charHeadshots[Number(window.playerCharacter) - 1]} alt="You"></img>
@@ -211,31 +251,14 @@ function Board() {
             <img className="turn-ind" id="turn-indicator" src={star} alt="Turn Icon"></img>
           </div>
 
-          {/* <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 3 + "vh" }}>
-            <img className="player-card" id="card-1" src={cards[Math.floor(Math.random() * cards.length)]} alt="Detective Notebook"></img>
-          </div> */}
-          {/* <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 15 + "vh" }}>
-            <img className="player-card" id="card-2" src={cards[Math.floor(Math.random() * cards.length)]} alt="Detective Notebook"></img>
-          </div> */}
-          {/* <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 27 + "vh" }}>
-            <img className="player-card" id="card-3" src={cards[Math.floor(Math.random() * cards.length)]} alt="Detective Notebook"></img>
-          </div> */}
-          <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 27 + "vh" }} onDragOver={allowCardDrop} onDrop={dropCardReveal}>
-            <img className="player-card" id="card-1" src={cards[Math.floor(Math.random() * cards.length)]} onMouseDown={dropPrevent} onMouseUp={dropEnable} draggable="true" onDragStart={dragCard} onDragOver={noAllowDrop} alt="Card 1"></img>
-          </div>
-          <div className="card-container" onClick={cardClick} onMouseEnter={cardEnter} onMouseLeave={cardExit} style={{ top: 39 + "vh" }} onDragOver={allowCardDrop} onDrop={dropCardReveal}>
-            <img className="player-card" id="card-2" src={cards[Math.floor(Math.random() * cards.length)]} onMouseDown={dropPrevent} onMouseUp={dropEnable} draggable="true" onDragStart={dragCard} onDragOver={noAllowDrop} alt="Card 2"></img>
-          </div>
-          <div className="card-container" style={{ top: 51 + "vh" }} onDragOver={allowCardDrop} onDrop={dropCardReveal}>
-            <img className="player-card" id="card-3" src={cards[Math.floor(Math.random() * cards.length)]} onMouseDown={dropPrevent} onMouseUp={dropEnable} draggable="true" onDragStart={dragCard} onDragOver={noAllowDrop} alt="Card 3"></img>
-          </div>
+           {displayCurrentHand()}
+
         </div>
-
-
-
+        </React.Fragment>}
         <div className="player-interact-div">
+          {!canStartGame && <button className="start-game" onClick={startGame}>START GAME</button>}
           {/* <button className="player-sugg-acc" id="suggestion-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Suggest</button> */}
-          <Notebook />
+          {canStartGame && <Notebook />}
           {/* <button className="player-sugg-acc" i d="accusation-button" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB}>Accuse</button> */}
         </div>
       </section>
@@ -409,8 +432,88 @@ function Board() {
         <button id="close-defeat" onClick={right_suggestion_return}>Return</button>
       </div>
     </main>
-  
+
   );
+}
+
+export const handStyle = {
+  0: {
+    top: 27 + "vh"
+  },
+  1: {
+    top: 39 + "vh"
+  },
+  2: {
+    top: 51 + "vh"
+  }
+}
+
+
+export const CardConfig = {
+  "Mr. Green": {
+    img: card1
+  },
+  "Colonel Mustard": {
+    img: card2
+  },
+  "Mrs. Peacock": {
+    img: card3
+  },
+  "Professor Plum": {
+    img: card4
+  },
+  "Miss Scarlet": {
+    img: card5
+  },
+  "Mrs. White": {
+    img: card6
+  },
+  "Candlestick": {
+    img: card7
+  },
+  "Dagger": {
+    img: card8
+  },
+  "Lead Pipe": {
+    img: card9
+  },
+  "Revolver": {
+    img: card10
+  },
+  "Rope": {
+    img: card11
+  },
+  "Wrench": {
+    img: card12
+  },
+  "Ballroom": {
+    img: card13
+  },
+  "Billiard Room": {
+    img: card14
+  },
+  "Conservatory": {
+    img: card15
+  },
+  "Dining Room": {
+    img: card16
+  },
+  "Hall": {
+    img: card17
+  },
+  "Kitchen": {
+    img: card18
+  },
+  "Library": {
+    img: card19
+  },
+  "Lounge": {
+    img: card20
+  },
+  "Study": {
+    img: card21
+  },
+
 }
 
 export default Board;

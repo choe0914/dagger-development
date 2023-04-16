@@ -22,15 +22,16 @@ input[type=checkbox] {
 }
 .notebook-div {
     /* margin-top: 3vh; */
-    /* padding-top: 2vh; */
+    padding-top: 6vh;
+    padding-right: 45px;
     background-image: url("../../assets/img/theme/notebook-raw.png");
-    background-size: 105% 105%;
+    background-size: 111% 105%;
     background-position: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 20vw;
+    width: 22vw;
     height: var(--region-height);
 }
 #notebook {
@@ -87,7 +88,7 @@ input[type=checkbox] {
     }
     #notebook {
         max-height: 75vh;
-        width: auto;
+        width: 40vw;
     }
     table {
         margin-top: 1vh;

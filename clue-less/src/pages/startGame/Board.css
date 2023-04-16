@@ -149,6 +149,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+    padding-left: 10px;
     height: var(--region-height);
     /* top: -3vh; */
 }
@@ -611,7 +612,7 @@
         width: 35vw;
     }
     .player-interact-div {
-        width: 65vw;
+        width: 70vw;
     }
 
     /* .player-card {
@@ -629,4 +630,20 @@
     .game-board {
         transform: scale(75%);
     }
+}
+
+.start-game {
+    height: 8%;
+    width: 110%;
+    cursor: pointer;
+    border: none;
+    border-radius: 16px;
+    background-image: linear-gradient(to right, #790905, #ca120c);
+    box-shadow: 0px 4px 6px #7909058c;
+    color: white;
+    font-size: large;
+    margin: 2%;
+}
+.start-game-container {
+    padding-top: 45px;
 }

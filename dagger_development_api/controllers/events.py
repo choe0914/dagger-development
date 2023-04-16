@@ -4,31 +4,37 @@ from dagger_development_api.extensions import db
 from flask import request
 import random
 from dagger_development_api.model.game import Game
-from dagger_development_api.model.user import User 
+from dagger_development_api.model.user import User
 from dagger_development_api.model.player_state import PlayerState
 from dagger_development_api.model.card_info import CardInfo
 from dagger_development_api.model.game_card import GameCard
 from dagger_development_api.utils.constants import CARD_TYPES, ROOMS
 
-#Global variable for responding to a suggestion
+# Global variable for responding to a suggestion
 suggestionId = None
 
-#Socket representation of the join api route
-#Stored in dictionary of userId, gameId, characterId, and positionId
+# Socket representation of the join api route
+# Stored in dictionary of userId, gameId, characterId, and positionId
+
+
 @socketio.on("joined")
 def joined(gameRoom):
-    user = db.session.query(User).where(User.userId == gameRoom["userId"]).first()
-    game = db.session.query(Game).where(Game.gameId == gameRoom["gameId"]).first()
+    user = db.session.query(User).where(
+        User.userId == gameRoom["userId"]).first()
+    game = db.session.query(Game).where(
+        Game.gameId == gameRoom["gameId"]).first()
     # Create new playerState and add it to db
-    db.session.add(PlayerState(gameRoom["userId"], gameRoom["gameId"], gameRoom["characterId"], \
-        gameRoom["positionId"]))
+    db.session.add(PlayerState(gameRoom["userId"], gameRoom["gameId"], gameRoom["characterId"],
+                               gameRoom["positionId"]))
     db.session.commit()
     # Return the gameId and the current list of players
-    #return {"gameId": game.gameId, "players": list(map(lambda player: player.as_dict(), game.players))}
+    # return {"gameId": game.gameId, "players": list(map(lambda player: player.as_dict(), game.players))}
     join_room(gameRoom)
     send("Response", game, to=game.gameId)
 
-#Socket representation of the start game api route
+# Socket representation of the start game api route
+
+
 @socketio.on("start")
 def start_game(gameId):
     game = db.session.query(Game).where(Game.gameId == gameId).first()
@@ -46,9 +52,12 @@ def start_game(gameId):
         room_index += 1
 
     # Get cards of each type
-    weapon_cards = db.session.query(GameCard).join(CardInfo).where(CardInfo.cardType == CARD_TYPES.WEAPON).all()
-    suspect_cards = db.session.query(GameCard).join(CardInfo).where(CardInfo.cardType == CARD_TYPES.SUSPECT).all()
-    room_cards = db.session.query(GameCard).join(CardInfo).where(CardInfo.cardType == CARD_TYPES.ROOM).all()
+    weapon_cards = db.session.query(GameCard).join(CardInfo).where(
+        CardInfo.cardType == CARD_TYPES.WEAPON).all()
+    suspect_cards = db.session.query(GameCard).join(CardInfo).where(
+        CardInfo.cardType == CARD_TYPES.SUSPECT).all()
+    room_cards = db.session.query(GameCard).join(CardInfo).where(
+        CardInfo.cardType == CARD_TYPES.ROOM).all()
 
     # Shuffle the cards
     random.shuffle(weapon_cards)
@@ -68,54 +77,63 @@ def start_game(gameId):
 
     db.session.commit()
 
-    #Update all the players in the room
+    # Update all the players in the room
     send("Response", game, to=game.gameId)
 
     # Return game info
-    #return {"gameInfo": game.as_dict()}
+    # return {"gameInfo": game.as_dict()}
 
-#Socket representation of the move api route
+# Socket representation of the move api route
+
+
 @socketio.on('move')
 def move_player(moveRequest):
-    player = db.session.query(User).where(User.userId == moveRequest["userId"]).first()
-    game = db.session.query(Game).where(Game.gameId == moveRequest["gameId"]).first()
+    player = db.session.query(User).where(
+        User.userId == moveRequest["userId"]).first()
+    game = db.session.query(Game).where(
+        Game.gameId == moveRequest["gameId"]).first()
     player.current_position = moveRequest["positionId"]
     db.session.commit()
     # Update other players via websockets?
     send("Response", game, to=game.gameId)
-    #return {"playerId": player.playerStateId, "position": player.currentPosition}
+    # return {"playerId": player.playerStateId, "position": player.currentPosition}
+
 
 @socketio.on('accusation')
 def check_win(accusation):
-    #accusation in format of gameId, person, weapon, room
+    # accusation in format of gameId, person, weapon, room
     success = "Win"
     fail = "Lose"
 
-    #Get the room list so we can update the tokens
+    # Get the room list so we can update the tokens
     room_list = list(ROOMS.values())
 
-    #Query the database to update player position, where a weapon token is, and where a character is.
-    player = db.session.query(PlayerState).where(PlayerState.characterId == accusation["characterId"]).first()
-    card = db.session.query(GameCard).where(GameCard.gameCardId == accusation["weaponId"]).first()
-    game = db.session.query(Game).where(Game.gameId == accusation["characterId"]).first()
+    # Query the database to update player position, where a weapon token is, and where a character is.
+    player = db.session.query(PlayerState).where(
+        PlayerState.characterId == accusation["characterId"]).first()
+    card = db.session.query(GameCard).where(
+        GameCard.gameCardId == accusation["weaponId"]).first()
+    game = db.session.query(Game).where(
+        Game.gameId == accusation["gameId"]).first()
     player.current_position = accusation["roomId"]
     card.currentRoom = room_list[accusation["roomId"]]
     db.session.commit()
 
-    #Remove the first entry for easier hand checking
+    # Remove the first entry for easier hand checking
     accusation.pop(0)
 
     # Update other players via websockets the playersates and where the weapon token is
     send("Response", (game, card.currentRoom), to=game.gameId)
 
-    #Check if the character, weapon, and room ar correct
+    # Check if the character, weapon, and room ar correct
     if accusation == game.winningHand:
-        #If it was a success, 
+        # If it was a success,
         send(success, to=game.gameId)
-        #return {"result": success}
+        # return {"result": success}
     else:
         send(fail, to=game.gameId)
-        #return {"result": fail}
+        # return {"result": fail}
+
 
 @socketio.on('join_game')
 def join_game_room(data):
@@ -123,31 +141,37 @@ def join_game_room(data):
     join_room(room)
     return
 
+
 @socketio.on('suggestion')
 def check_suggestion(suggestion):
-    #suggestion in format of gameId, person, weapon, room
-    #Get the room list so we can update the tokens
+    # suggestion in format of gameId, person, weapon, room
+    # Get the room list so we can update the tokens
     room_list = list(ROOMS.values())
 
-    #Query the database to update player position, where a weapon token is, and where a character is.
-    player = db.session.query(PlayerState).where(PlayerState.characterId == suggestion["characterId"]).first()
-    card = db.session.query(GameCard).where(GameCard.gameCardId == suggestion["weaponId"]).first()
-    game = db.session.query(Game).where(Game.gameId == suggestion["gameId"]).first()
+    # Query the database to update player position, where a weapon token is, and where a character is.
+    player = db.session.query(PlayerState).where(
+        PlayerState.characterId == suggestion["characterId"]).first()
+    card = db.session.query(GameCard).where(
+        GameCard.gameCardId == suggestion["weaponId"]).first()
+    game = db.session.query(Game).where(
+        Game.gameId == suggestion["gameId"]).first()
     player.current_position = suggestion["roomId"]
     card.currentRoom = room_list[suggestion["roomId"]]
     db.session.commit()
 
     # Update other players via websockets the playersates and where the weapon token is
-    #Additionally, send them all the guess items
-    send("Response", (game, card.currentRoom, suggestion["characterId"], suggestion["weaponId"], suggestion["roomId"]), to=game.gameId)
+    # Additionally, send them all the guess items
+    send("Response", (game, card.currentRoom,
+         suggestion["characterId"], suggestion["weaponId"], suggestion["roomId"]), to=game.gameId)
 
-    #Set the global variable for users to respond to a player who made a suggestion
+    # Set the global variable for users to respond to a player who made a suggestion
     suggestionId = request.json["sid"]
-    #return {"result": "success"}
+    # return {"result": "success"}
+
 
 @socketio.on('suggestion-response')
 def check_sugg(usrResponse):
-    #Send responses to the suggestion creator for the various cards.
+    # Send responses to the suggestion creator for the various cards.
     if usrResponse["weaponId"] is not None:
         send("Response", usrResponse["weaponId"], to=suggestionId)
     elif usrResponse["characterId"] is not None:
