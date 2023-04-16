@@ -48,7 +48,19 @@ function makeSuggestion(e) {
             gameId: window.gameId,
             roomId: notebookNumbersToId[window.playerSolve[2] - 1]
         }), // body data type must match "Content-Type" header
-    }).then((response) => { return response.json() }).then((data) => { console.log(data) });
+    }).then((response) => { return response.json() }).then((data) => { 
+        if (data.result == 'Fail') {
+            document.getElementById("wrong_suggestion").style.display = "unset";
+            document.getElementById("wrong_suggestion").style.display = "flex";
+            document.getElementById("wrong-accusation-summary").innerHTML = data.matchingCard.cardInfo.name
+        } else {
+            document.getElementById("right_suggestion").style.display = "unset";
+            document.getElementById("right_suggestion").style.display = "flex";
+        }
+        
+        
+        console.log(data) 
+    });
     // TODO: add turn logic 
     if (window.turnBool) {
 

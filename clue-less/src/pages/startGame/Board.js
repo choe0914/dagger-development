@@ -97,6 +97,15 @@ function Board() {
   function exitGame(e) {
     navigate('/welcome');
   }
+
+  function right_suggestion_return(e) {
+    document.getElementById("right_suggestion").style.display = "none";
+  }
+
+  function wrong_suggestion_return(e) {
+    document.getElementById("wrong_suggestion").style.display = "none";
+  }
+
   function defeatReturn(e) {
     document.getElementById("defeat").style.display = "none";
     var nbInputs = document.querySelectorAll('input[type="radio"]');
@@ -373,6 +382,31 @@ function Board() {
           <img className="defeat-cards" src={cards[window.playerSolve[2]]} alt="CARD3"></img>
         </div> */}
         <button id="close-defeat" onClick={defeatReturn}>Return</button>
+      </div>
+      
+      <div id="wrong_suggestion">
+        <span id="defeat-header">{window.userName}, YOUR SUGGESTION WAS DISPROVED.</span>
+        <span id="wrong-accusation-instructions">ANOTHER PLAYER HAD THIS CARD: </span>
+        <span id="wrong-accusation-summary"></span>
+        {/* <div id="defeat-wait">
+
+          <img className="defeat-cards" src={cards[window.playerSolve[0]]} alt="CARD1"></img>
+          <img className="defeat-cards" src={cards[window.playerSolve[1]]} alt="CARD2"></img>
+          <img className="defeat-cards" src={cards[window.playerSolve[2]]} alt="CARD3"></img>
+        </div> */}
+        <button id="close-defeat" onClick={wrong_suggestion_return}>Return</button>
+      </div>
+      
+      <div id="right_suggestion">
+        <span id="defeat-header">{window.userName}, NO OTHER PLAYER COULD DISPROVE YOUR SUGGESTION.</span>
+        <span id="defeat-instructions">PLEASE RETURN TO THE GAME</span>
+        {/* <div id="defeat-wait">
+
+          <img className="defeat-cards" src={cards[window.playerSolve[0]]} alt="CARD1"></img>
+          <img className="defeat-cards" src={cards[window.playerSolve[1]]} alt="CARD2"></img>
+          <img className="defeat-cards" src={cards[window.playerSolve[2]]} alt="CARD3"></img>
+        </div> */}
+        <button id="close-defeat" onClick={right_suggestion_return}>Return</button>
       </div>
     </main>
   

@@ -109,12 +109,14 @@ export default class Room extends React.Component {
 
     getPlayerTokens = () => {
         if (this.props.player_tokens.length > 0) {
-            return (
-                <div className="char-token" id={this.getPlayerStyleId(this.props.player_tokens[0])}
-                    onMouseDown={this.checkPC} 
-                    draggable="false" onDragStart={this.drag}>
-                </div>
-            );
+            return this.props.player_tokens.map((token) => {
+                return (
+                    <div className="char-token" id={this.getPlayerStyleId(token)}
+                        onMouseDown={this.checkPC} 
+                        draggable="false" onDragStart={this.drag}>
+                    </div>
+                );
+            })
         }
     }
  

@@ -176,7 +176,7 @@ def check_win():
     return {"result": success}
 
 
-@game_blueprint.route('/game/accusation', methods=["POST"])
+@game_blueprint.route('/game/suggestion', methods=["POST"])
 def make_suggestion():
     # accusation in format of gameId, person, weapon, room
     accusation = request.json
@@ -202,17 +202,12 @@ def make_suggestion():
         {"players": list(map(lambda player: player.as_dict(), game.players)), "currentRoom": card.currentRoom}, \
         room=game.gameId)
 
-    # Check if the character, weapon, and room ar correct
-    for card in list(game.winningHand):
-        if (card.cardInfo.name != accusation["weaponId"] and card.cardInfo.name != accusation["roomId"] and card.cardInfo.name != accusation["characterId"]):
-            socketio.emit("win_status", {"status": "Success"}, room=game.gameId)
-            return {"result": "Success"}
-
-    for player in list(players):
-        for card in list(players.hand):
+    for player in list(allPlayers):
+        for card in list(player.hand):
             if card.cardInfo.name == accusation["weaponId"]:
                 return {"result": "Fail", "matchingCard": card.as_dict()}
             if card.cardInfo.name == accusation["roomId"]:
                 return {"result": "Fail", "matchingCard": card.as_dict()}
             if card.cardInfo.name == accusation["characterId"]:
                 return {"result": "Fail", "matchingCard": card.as_dict()}
+    return {"result": "Success"}
