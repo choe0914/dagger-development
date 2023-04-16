@@ -23,7 +23,6 @@ SUSPECTS = AttrDict({
 WEAPONS = AttrDict({
     "ROPE": "Rope",
     "LEAD_PIPE": "Lead Pipe",
-    "KNIFE": "Knife",
     "WRENCH": "Wrench",
     "CANDLESTICK": "Candlestick",
     "REVOLVER": "Revolver",

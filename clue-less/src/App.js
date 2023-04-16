@@ -6,12 +6,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import JoinGame from './components/JoinGame';
 import Board from './pages/startGame/Board';
 import CharacterSelect from './pages/characterSelect/CharacterSelect';
-import { CurrentHandProvider } from './context/cardContext';
 
 function App() {
   init_socket();
   return (
-    <CurrentHandProvider>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SharedLayout />}>
@@ -22,7 +20,6 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </CurrentHandProvider>
   );
 
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './Notebook.css';
 import notebook from "../../assets/img/theme/notebook-raw.png";
 import { characterNumbersToIds, notebookNumbersToId } from "../../constant/character";
@@ -25,6 +25,8 @@ const charTokenColors = ["#3db350", "#F9B416", "#3863f1", "#b95cc5", "#e2140c", 
 // };
 window.playerSolve = [-1, -1, -1];
 window.playerSolveString = ['', '', ''];
+
+
 const equalsCheck = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
 }
@@ -34,59 +36,7 @@ function buttonHoverA(e) {
 function buttonHoverB(e) {
     e.currentTarget.style.filter = "brightness(100%)";
 }
-function makeSuggestion(e) {
-    fetch("http://localhost:5000/game/suggestion", {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            characterId: characterNumbersToIds[window.playerCharacter - 1],
-            weaponId: notebookNumbersToId[window.playerSolve[1] - 1],
-            gameId: window.gameId,
-            roomId: notebookNumbersToId[window.playerSolve[2] - 1]
-        }), // body data type must match "Content-Type" header
-    }).then((response) => { return response.json() }).then((data) => { console.log(data) });
-    // TODO: add turn logic 
-    if (window.turnBool) {
 
-    }
-}
-
-//TODO: make this work with a set of test cards from backend
-function makeAccusation(e) {
-    fetch("http://localhost:5000/game/accusation",
-        {
-            method: "POST", // *GET, POST, PUT, DELETE, etc.
-            mode: "cors", // no-cors, *cors, same-origin
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            headers: {
-                "Content-Type": "application/json",
-            },
-
-            body: JSON.stringify({
-                characterId: characterNumbersToIds[window.playerCharacter - 1],
-                weaponId: notebookNumbersToId[window.playerSolve[1] - 1],
-                gameId: window.gameId,
-                roomId: notebookNumbersToId[window.playerSolve[2] - 1]
-            }),
-        }).then((response) => {
-            return response.json()
-        }).then((data) => {
-            console.log(data);
-        });
-
-    if (equalsCheck(window.playerSolve, window.testSolve)) {
-        document.getElementById("victory").style.display = "unset";
-        document.getElementById("victory").style.display = "flex";
-    } else {
-        document.getElementById("defeat").style.display = "unset";
-        document.getElementById("defeat").style.display = "flex";
-    }
-
-}
 function clearRadios(e) {
     var radios = document.querySelectorAll('.notebook-radio');
     radios.forEach(radio => {
@@ -124,12 +74,69 @@ function checkRadios(e) {
     }
 }
 function Notebook() {
+    const [accusationResult, setAccusationResult] = useState("");
+    const [suggestionResult, setSuggestionResult] = useState("");
+
+    function makeSuggestion(e) {
+        fetch("http://localhost:5000/game/suggestion", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                characterId: characterNumbersToIds[window.playerCharacter - 1],
+                weaponId: notebookNumbersToId[window.playerSolve[1] - 1],
+                gameId: window.gameId,
+                roomId: notebookNumbersToId[window.playerSolve[2] - 1]
+            }), // body data type must match "Content-Type" header
+        }).then((response) => { return response.json() })
+        .then((data) => { console.log(data) });
+        // TODO: add turn logic 
+        if (window.turnBool) {
+
+        }
+    }
+
+    //TODO: make this work with a set of test cards from backend
+    function makeAccusation(e) {
+        fetch("http://localhost:5000/game/accusation",
+            {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    characterId: characterNumbersToIds[window.playerCharacter - 1],
+                    weaponId: notebookNumbersToId[window.playerSolve[1] - 1],
+                    gameId: window.gameId,
+                    roomId: notebookNumbersToId[window.playerSolve[2] - 1]
+                }),
+            }).then((response) => { return response.json(); }).then((data) => {
+                setSuggestionResult(data.result);
+              })
+            console.log(suggestionResult);
+ 
+
+
+
+
+        if (equalsCheck(window.playerSolve, window.testSolve)) {
+            document.getElementById("victory").style.display = "unset";
+            document.getElementById("victory").style.display = "flex";
+        } else {
+            document.getElementById("defeat").style.display = "unset";
+            document.getElementById("defeat").style.display = "flex";
+        }
+
+    }
 
     return (
         <div className="notebook-div">
             {/* <img className="notebook-img" id="notebook" src={notebook} alt="Detective Notebook"></img> */}
-
-
             <table className="notebook-table" id="nb-table">
                 <tbody>
                     <tr className="table-section" id="table-header-row"><td>WHO?</td>

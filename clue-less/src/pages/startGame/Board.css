@@ -627,8 +627,8 @@
 }
 
 .start-game {
-    height: 5%;
-    width: 50%;
+    height: 8%;
+    width: 110%;
     cursor: pointer;
     border: none;
     border-radius: 16px;
@@ -637,4 +637,7 @@
     color: white;
     font-size: large;
     margin: 2%;
+}
+.start-game-container {
+    padding-top: 45px;
 }
