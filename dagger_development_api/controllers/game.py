@@ -129,7 +129,8 @@ def start_game(gameId):
     db.session.commit()
 
     # Update all the players in the room
-    socketio.emit("update_game", {"game": game.as_dict()}, room=game.gameId)
+    socketio.emit("update_game", {
+                  "gameInfo": game.as_dict()}, room=game.gameId)
 
     # Return game info
     return {"gameInfo": game.as_dict()}
@@ -154,7 +155,8 @@ def check_win():
 
     game = db.session.query(Game).where(
         Game.gameId == accusation["gameId"]).first()
-    player.current_position = accusation["roomId"]
+    if player:
+        player.currentPosition = accusation["roomId"]
     card.currentRoom = accusation["roomId"]
     db.session.commit()
 
@@ -187,14 +189,15 @@ def make_suggestion():
     room_list = list(ROOMS.values())
 
     # Query the database to update player position, where a weapon token is, and where a character is.
-    player = db.session.query(PlayerState).where(
+    accusedPlayer = db.session.query(PlayerState).where(
         PlayerState.characterId == accusation["characterId"]).first()
     card = db.session.query(GameCard).where(GameCard.gameId == accusation["gameId"])\
         .join(CardInfo, CardInfo.cardInfoId == GameCard.cardInfoId)\
         .where(CardInfo.name == accusation["weaponId"]).first()
     game = db.session.query(Game).where(
         Game.gameId == accusation["gameId"]).first()
-    player.current_position = accusation["roomId"]
+    if accusedPlayer:
+        accusedPlayer.currentPosition = accusation["roomId"]
     card.currentRoom = accusation["roomId"]
     db.session.commit()
 
