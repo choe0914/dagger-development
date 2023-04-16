@@ -531,7 +531,7 @@
     bottom: 0;
     /* display: none; */
 }
-#victory, #defeat {
+#victory, #defeat, #wrong_suggestion, #right_suggestion {
     position: absolute;
     display: flex;
     align-items: center;
@@ -552,6 +552,12 @@
     margin-bottom: 5vh;
 }
 #defeat-instructions, #defeat-summary {
+    font-size: 2em;
+    font-family: "inglesa-caps-variable", sans-serif;
+    font-variation-settings: "wght" 600;
+    color: white;
+}
+#wrong-accusation-instructions, #wrong-accusation-summary {
     font-size: 2em;
     font-family: "inglesa-caps-variable", sans-serif;
     font-variation-settings: "wght" 600;
