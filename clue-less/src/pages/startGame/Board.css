@@ -532,7 +532,7 @@
     bottom: 0;
     /* display: none; */
 }
-#victory, #defeat, #wrong_suggestion, #right_suggestion {
+#victory, #defeat, #wrong_suggestion, #right_suggestion, #other-player-wins {
     position: absolute;
     display: flex;
     align-items: center;
@@ -545,7 +545,7 @@
     z-index: 19999;
     display: none;
 }
-#victory-header, #defeat-header {
+#victory-header, #defeat-header, #other-player-wins-header {
     font-size: 3em;
     font-family: "inglesa-caps-variable", sans-serif;
     font-variation-settings: "wght" 600;
@@ -575,7 +575,7 @@
     height: 100%;
     width: auto;
 }
-#close-victory, #close-defeat {
+#close-victory, #close-defeat, #close-other-player-wins {
     margin-top: 5vh;
     font-size: 1.5em;
     cursor: pointer;

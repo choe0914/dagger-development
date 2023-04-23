@@ -71,6 +71,17 @@ function Board() {
   const [weaponTokens, setWeaponTokens] = useState([]);
   const [canStartGame, setCanStartGame] = useState(false);
 
+  function showWin(data) {
+    console.log(data.winningPlayer)
+    if (data.status == 'Success') {
+      if (window.winningPlayer !== window.userName) {
+        document.getElementById("other-player-wins").style.display = "unset";
+        document.getElementById("other-player-wins").style.display = "flex";
+        document.getElementById("other-player-wins-header").innerHTML = "Player " + data.winningPlayer + " has won!"
+      }
+    }  
+  }
+
   function updateGame(data) {
     let charInfo = data.gameInfo.players.filter(charId => charId.characterId === characterNumbersToIds[window.playerCharacter - 1])[0];
     // Save the current hand
@@ -102,6 +113,7 @@ function Board() {
       setWeaponTokens(data.weaponTokens)
       register_callback('update_players', updateRoom)
       register_callback('update_game', updateGame)
+      register_callback('win_status', showWin)
     })
   }, []);
 
@@ -416,6 +428,11 @@ function Board() {
         </div> */}
         <button id="close-defeat" onClick={defeatReturn}>Return</button>
       </div>
+
+      <div id="other-player-wins">
+        <span id="other-player-wins-header">Player {window.winningPlayer} HAS WON!</span>
+        <button id="close-other-player-wins" onClick={exitGame}>Exit Game</button>
+      </div>
       
       <div id="wrong_suggestion">
         <span id="defeat-header">{window.userName}, YOUR SUGGESTION WAS DISPROVED.</span>
@@ -482,6 +499,9 @@ export const CardConfig = {
     img: card7
   },
   "Dagger": {
+    img: card8
+  },
+  "Knife": {
     img: card8
   },
   "Lead Pipe": {
