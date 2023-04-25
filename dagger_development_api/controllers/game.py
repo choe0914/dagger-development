@@ -104,11 +104,11 @@ def start_game(gameId):
 
     # Get cards of each type
     weapon_cards = db.session.query(GameCard).join(CardInfo).where(
-        CardInfo.cardType == CARD_TYPES.WEAPON).all()
+        CardInfo.cardType == CARD_TYPES.WEAPON).where(GameCard.gameId == gameId).all()
     suspect_cards = db.session.query(GameCard).join(CardInfo).where(
-        CardInfo.cardType == CARD_TYPES.SUSPECT).all()
+        CardInfo.cardType == CARD_TYPES.SUSPECT).where(GameCard.gameId == gameId).all()
     room_cards = db.session.query(GameCard).join(CardInfo).where(
-        CardInfo.cardType == CARD_TYPES.ROOM).all()
+        CardInfo.cardType == CARD_TYPES.ROOM).where(GameCard.gameId == gameId).all()
 
     # Shuffle the cards
     random.shuffle(weapon_cards)
@@ -173,7 +173,7 @@ def check_win():
             socketio.emit("win_status", {"status": "Fail"}, room=game.gameId)
             return {"result": fail}
 
-    socketio.emit("win_status", {"status": "Success"}, room=game.gameId)
+    socketio.emit("win_status", {"status": "Success", "winningPlayer": accusation["userName"]}, room=game.gameId)
     return {"result": success}
 
 

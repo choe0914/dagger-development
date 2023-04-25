@@ -45,7 +45,7 @@ function makeSuggestion(e) {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            characterId: characterNumbersToIds[window.playerCharacter - 1],
+            characterId:notebookNumbersToId[window.playerSolve[0] - 1],
             weaponId: notebookNumbersToId[window.playerSolve[1] - 1],
             gameId: window.gameId,
             roomId: notebookNumbersToId[window.playerSolve[2] - 1]
@@ -75,10 +75,11 @@ function makeAccusation(e) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                characterId: characterNumbersToIds[window.playerCharacter - 1],
+                characterId: notebookNumbersToId[window.playerSolve[0] - 1],
                 weaponId: notebookNumbersToId[window.playerSolve[1] - 1],
                 gameId: window.gameId,
-                roomId: notebookNumbersToId[window.playerSolve[2] - 1]
+                roomId: notebookNumbersToId[window.playerSolve[2] - 1],
+                userName: window.userName
             }),
         }).then((response) => { return response.json() }).then((data) => {
             if (data.result == "Win") {
