@@ -191,7 +191,6 @@ function CharacterSelect() {
                 window.playerCharacter = "5";
                 window.charColor = "#e2140c";
                 document.getElementById("check-5").style.visibility = "visible";
-                window.turnBool = true;
                 break;
             case "white":
                 window.playerCharacter = "6";
@@ -199,6 +198,7 @@ function CharacterSelect() {
                 document.getElementById("check-6").style.visibility = "visible";
                 break;
         }
+        window.turnBool = true;
         document.getElementById("launch-game").style.visibility = "visible";
         window.charTokenColors.splice(Number(window.playerCharacter) - 1, 1);
         window.activePlayers.splice(Number(window.playerCharacter) - 1, 1);
