@@ -11,6 +11,9 @@ function GameType() {
     // var launchButton = useRef();
 
     const [newGame, setNewGame] = useState(0);
+    const [showGameID, setShowGameID] = useState(false);
+    const [listGames, setListGames] = useState(false);
+    const [games, setGames] = useState([]);
 
     // const gameChoice = useRef();
     function handleGameChoiceClick(event) {
@@ -24,12 +27,30 @@ function GameType() {
                 },// body data type must match "Content-Type" header
             }).then((response) => { return response.json(); }).then((data) => {
                 window.gameId = data.gameId
-                handleProceeding()
+                setShowGameID(true)
             })
         } else {
             window.gameId = document.getElementById("game-id-field").value
-            handleProceeding()
+            setShowGameID(true)
         }
+    }
+
+    function displayList(){
+        fetch("http://localhost:5000/game/get_all", {
+                method: "GET", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                headers: {
+                    "Content-Type": "application/json",
+                },// body data type must match "Content-Type" header
+            }).then((response) => { return response.json(); }).then((data) => {
+                let listOfGames = [];
+                for(let i = 0; i < data.length(); i ++){
+                    listOfGames.append(data[i].gameId);
+                }
+                setGames(listOfGames)
+                setListGames(true)
+            })
     }
 
     function handleProceeding() {
@@ -113,7 +134,8 @@ function GameType() {
                         <span className="game-option-txt" id="game-launch-join">Join Game<input id="join-game" className="game-choice" type="radio" name="choice" onClick={handleGameChoiceA}></input></span>
                         <div id="game-search-wrapper">
                             <input type="text" id="game-id-field" maxLength={6} onKeyUp={checkField} name="game-id-field" placeholder='Game ID'></input>
-                            <button id="search">List</button>
+                            <button id="search" onClick={displayList}>List</button>
+                            {listGames ? window.confirm("Game IDs:" + games.map(k => {return '\n' + k})) ? setListGames(false) : setListGames(false) : null}
                         </div>
                         <span className="game-option-txt" id="game-launch-new">Host New Game<input id="start-game" className="game-choice" type="radio" name="choice" onClick={handleGameChoiceB}></input></span>
                         <div id="game-vis-wrapper">
@@ -121,6 +143,7 @@ function GameType() {
                             <span className="game-vis-txt" id="game-vis-private" onClick={handleGameVisChoiceB}>Private<input id="game-private" className="game-vis" type="radio" name="vis-choice"></input></span>
                         </div>
                         <button id="launch-char-select" onMouseEnter={buttonHoverA} onMouseLeave={buttonHoverB} onClick={handleGameChoiceClick}>Continue</button>
+                        {showGameID ? window.confirm("Your Game ID is: " + window.gameId) ? handleProceeding() : handleProceeding() : null}
                         <span id="next-info">Next - Character Selection</span>
                     </section>
                 </section>
