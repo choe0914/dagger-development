@@ -167,7 +167,7 @@ function Board() {
     e.stopPropagation();
   }
   function allowHallwayDrop(e) {
-    if ((e.target.lastElementChild.className === "starting-loc") || (e.target.lastElementChild.className === "hall-num")) {
+    if ((e.target.lastElementChild && e.target.lastElementChild.className === "starting-loc") || (e.target.lastElementChild.className === "hall-num")) {
       e.target.style.filter = "brightness(80%)";
       e.preventDefault();
     }

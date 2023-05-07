@@ -3,8 +3,9 @@ import io from 'socket.io-client';
 var socket
 
 export function init_socket()  {
-    socket = io(`http://${window.location.hostname}:5000`);
-    //socket.close()
+    socket = io(`http://${window.location.hostname}:5000`, {});
+    socket.onAny((event) => {console.log(event)})
+    //socket.close() 
 }
 
 export function get_socket() {

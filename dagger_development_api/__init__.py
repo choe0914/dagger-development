@@ -17,16 +17,16 @@ def create_app(config_class=Config):
     from extensions import db
     db.init_app(app)
     with app.app_context():
-        if not os.path.isfile(dir_path + "..\..\instance\clue_database.db"):
-            model.init_data()
+        # if not os.path.isfile(dir_path + "..\..\instance\clue_database.db"):
+        model.init_data()
     
-    # Register blueprints
-    from controllers import user_blueprint
-    from controllers import game_blueprint
-    from controllers import player_blueprint
+        # Register blueprints
+        from controllers import user_blueprint
+        # from controllers import game_blueprint
+        # from controllers import player_blueprint
 
-    app.register_blueprint(user_blueprint)
-    app.register_blueprint(game_blueprint)
-    app.register_blueprint(player_blueprint)
-    
+        app.register_blueprint(user_blueprint)
+        # app.register_blueprint(game_blueprint)
+        # app.register_blueprint(player_blueprint)
+        
     return app

@@ -74,9 +74,12 @@ def join_game():
     # Create new playerState and add it to db
     db.session.add(player)
     db.session.commit()
-    # Have the player join a room
+    # # Have the player join a room
+    # socketio.emit("update_players", {"players": list(
+    #     map(lambda player: player.as_dict(), game.players))}, broadcast=True, room=game.gameId)
     socketio.emit("update_players", {"players": list(
-        map(lambda player: player.as_dict(), game.players))}, room=str(game.gameId))
+        map(lambda player: player.as_dict(), game.players))})
+    socketio.send("update_players", {"players": "abc123"})
     # Return the gameId and the current list of players
     return {"gameId": game.gameId, "yourPlayer": player.as_dict(), "players": list(map(lambda player: player.as_dict(), game.players))}
 
@@ -134,7 +137,7 @@ def start_game(gameId):
     db.session.commit()
 
     # Update all the players in the room
-    socketio.emit("update_game", {"gameInfo": game.as_dict()}, room=game.gameId)
+    socketio.emit("update_game", {"gameInfo": game.as_dict()})
 
     # Return game info
     return {"gameInfo": game.as_dict()}
@@ -170,15 +173,14 @@ def check_win():
     # Update other players via websockets the playersates and where the weapon token is
     socketio.emit("update_players",
                   {"players": list(map(lambda player: player.as_dict(
-                  ), game.players)), "currentRoom": card.currentRoom},
-                  room=game.gameId)
+                  ), game.players)), "currentRoom": card.currentRoom})
 
     for card in list(game.winningHand):
         if (card.cardInfo.name != accusation["weaponId"] and card.cardInfo.name != accusation["roomId"] and card.cardInfo.name != accusation["characterId"]):
-            socketio.emit("win_status", {"status": "Fail"}, room=game.gameId)
+            socketio.emit("win_status", {"status": "Fail"})
             return {"result": fail}
 
-    socketio.emit("win_status", {"status": "Success", "winningPlayer": accusation["userName"]}, room=game.gameId)
+    socketio.emit("win_status", {"status": "Success", "winningPlayer": accusation["userName"]})
     return {"result": success}
 
 
@@ -206,8 +208,7 @@ def make_suggestion():
     allPlayers = db.session.query(PlayerState).where(PlayerState.gameId == accusation["gameId"]).all()
     # Update other players via websockets the playersates and where the weapon token is
     socketio.emit("update_players", \
-        {"players": list(map(lambda player: player.as_dict(), game.players)), "currentRoom": card.currentRoom}, \
-        room=game.gameId)
+        {"players": list(map(lambda player: player.as_dict(), game.players)), "currentRoom": card.currentRoom})
 
     for player in list(allPlayers):
         for card in list(player.hand):

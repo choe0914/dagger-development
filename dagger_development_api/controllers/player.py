@@ -1,4 +1,5 @@
 from controllers import player_blueprint
+from app import app
 from flask_cors import cross_origin
 from extensions import db
 from flask import request
@@ -22,6 +23,6 @@ def move_player():
     game = db.session.query(Game).where(Game.gameId == player.gameId).first()
     
     # Update other players via websockets?
-    socketio.emit("update_players", {"players": list(map(lambda player: player.as_dict(), game.players))}, \
-        to=game.gameId)
+    socketio.emit("update_players", {"players": list(map(lambda player: player.as_dict(), game.players))})
+    
     return {"playerId": player.playerStateId, "position": player.currentPosition}

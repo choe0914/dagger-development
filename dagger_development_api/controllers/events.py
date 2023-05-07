@@ -16,7 +16,6 @@ suggestionId = None
 # Socket representation of the join api route
 # Stored in dictionary of userId, gameId, characterId, and positionId
 
-
 @socketio.on("joined")
 def joined(gameRoom):
     user = db.session.query(User).where(
@@ -30,10 +29,12 @@ def joined(gameRoom):
     # Return the gameId and the current list of players
     # return {"gameId": game.gameId, "players": list(map(lambda player: player.as_dict(), game.players))}
     join_room(gameRoom)
-    send("Response", game, to=game.gameId)
 
 # Socket representation of the start game api route
 
+@socketio.on('broadcast')
+def on_broadcast(data):
+    socketio.emit('broadcast', data)  # bp.emit same as socketio.emit
 
 @socketio.on("start")
 def start_game(gameId):

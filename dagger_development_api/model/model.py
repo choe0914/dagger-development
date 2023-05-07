@@ -10,7 +10,9 @@ def init_data():
     from model.player_state import PlayerState
     from model.card_info import CardInfo
     from model.notepad import Notepad
+
     db.create_all()
+    
     if not db.session.query(CardInfo).first():
         for key, suspect_name in SUSPECTS.items():
             db.session.add(CardInfo(suspect_name, CARD_TYPES.SUSPECT))
