@@ -114,18 +114,23 @@ def start_game(gameId):
     random.shuffle(weapon_cards)
     random.shuffle(suspect_cards)
     random.shuffle(room_cards)
-    deckIndex = 0
+    
+    # Create winning hand
+    game.winningHand.append(weapon_cards.pop())
+    game.winningHand.append(suspect_cards.pop())
+    game.winningHand.append(room_cards.pop())
+
+    # add the rest to a deck
+    deck = weapon_cards + suspect_cards + room_cards
+    random.shuffle(deck)
 
     # Assign cards to players and to the winning hand
-    for player in game.players:
-        player.hand.append(weapon_cards[deckIndex])
-        player.hand.append(suspect_cards[deckIndex])
-        player.hand.append(room_cards[deckIndex])
-        deckIndex += 1
-    game.winningHand.append(weapon_cards[deckIndex])
-    game.winningHand.append(suspect_cards[deckIndex])
-    game.winningHand.append(room_cards[deckIndex])
-
+    playerIndex = 0
+    numPlayers = len(game.players)
+    for card in deck:
+        game.players[playerIndex % numPlayers].hand.append(card)
+        playerIndex += 1
+    
     db.session.commit()
 
     # Update all the players in the room
