@@ -1,4 +1,4 @@
-from dagger_development_api.extensions import db
+from extensions import db
 from sqlalchemy.orm import relationship
 
 # User ORM

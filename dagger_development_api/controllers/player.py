@@ -1,12 +1,12 @@
-from dagger_development_api.controllers import player_blueprint
+from controllers import player_blueprint
 from flask_cors import cross_origin
-from dagger_development_api.extensions import db
+from extensions import db
 from flask import request
-from .. import socketio
-from dagger_development_api.model.game import Game
-from dagger_development_api.model.user import User 
+from app import socketio
+from model.game import Game
+from model.user import User 
 from flask_socketio import send
-from dagger_development_api.model.player_state import PlayerState
+from model.player_state import PlayerState
 
 # All routes for game data and calculations (if needed)
 @cross_origin(supports_credentials=True)

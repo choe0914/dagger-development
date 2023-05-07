@@ -1,10 +1,10 @@
-from dagger_development_api.controllers import user_blueprint
+from controllers import user_blueprint
 from flask_cors import cross_origin
-from dagger_development_api.extensions import db
-from dagger_development_api.model.user import User
-from dagger_development_api.model.game import Game
+from extensions import db
+from model.user import User
+from model.game import Game
 from flask import request
-from dagger_development_api.model.player_state import PlayerState
+from model.player_state import PlayerState
 from flask import jsonify
 from flask import request
 

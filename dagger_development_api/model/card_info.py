@@ -1,4 +1,4 @@
-from dagger_development_api.extensions import db
+from extensions import db
 
 # CardInfo ORM
 # Stores information about a card such as type and name

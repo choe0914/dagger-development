@@ -1,14 +1,15 @@
-from dagger_development_api.extensions import db
-from dagger_development_api.model.user import User
-from dagger_development_api.model.game import Game
-from dagger_development_api.model.game_card import GameCard
-from dagger_development_api.model.player_state import PlayerState
-from dagger_development_api.model.card_info import CardInfo
-from dagger_development_api.model.notepad import Notepad
-from dagger_development_api.utils.constants import CARD_TYPES, SUSPECTS, WEAPONS, ROOMS
+
+from utils.constants import CARD_TYPES, SUSPECTS, WEAPONS, ROOMS
 
 def init_data():
     # Create all the tables
+    from extensions import db
+    from model.user import User
+    from model.game import Game
+    from model.game_card import GameCard
+    from model.player_state import PlayerState
+    from model.card_info import CardInfo
+    from model.notepad import Notepad
     db.create_all()
     if not db.session.query(CardInfo).first():
         for key, suspect_name in SUSPECTS.items():

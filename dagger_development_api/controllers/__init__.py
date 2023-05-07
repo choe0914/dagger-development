@@ -10,7 +10,7 @@ CORS(user_blueprint, origins=["*"])
 CORS(game_blueprint, origins=["*"])
 CORS(player_blueprint, origins=["*"])
 
-from dagger_development_api.controllers import user
-from dagger_development_api.controllers import game
-from dagger_development_api.controllers import player
-from dagger_development_api.controllers import events
+from controllers import user
+from controllers import game
+from controllers import player
+from controllers import events

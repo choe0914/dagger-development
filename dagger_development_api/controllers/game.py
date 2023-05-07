@@ -1,15 +1,15 @@
-from dagger_development_api.controllers import game_blueprint
+from controllers import game_blueprint
 from flask_cors import cross_origin
-from dagger_development_api.extensions import db
-from .. import socketio
+from extensions import db
+from app import socketio
 from flask import request
 import random
-from dagger_development_api.model.game import Game
-from dagger_development_api.model.user import User
-from dagger_development_api.model.player_state import PlayerState
-from dagger_development_api.model.card_info import CardInfo
-from dagger_development_api.model.game_card import GameCard
-from dagger_development_api.utils.constants import CARD_TYPES, ROOMS
+from model.game import Game
+from model.user import User
+from model.player_state import PlayerState
+from model.card_info import CardInfo
+from model.game_card import GameCard
+from utils.constants import CARD_TYPES, ROOMS
 from flask_socketio import send, join_room, leave_room
 
 
@@ -76,7 +76,7 @@ def join_game():
     db.session.commit()
     # Have the player join a room
     socketio.emit("update_players", {"players": list(
-        map(lambda player: player.as_dict(), game.players))}, room=game.gameId)
+        map(lambda player: player.as_dict(), game.players))}, room=str(game.gameId))
     # Return the gameId and the current list of players
     return {"gameId": game.gameId, "yourPlayer": player.as_dict(), "players": list(map(lambda player: player.as_dict(), game.players))}
 

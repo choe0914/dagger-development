@@ -1,14 +1,14 @@
 from flask_socketio import send, join_room, leave_room
-from .. import socketio
-from dagger_development_api.extensions import db
+from app import socketio
+from extensions import db
 from flask import request
 import random
-from dagger_development_api.model.game import Game
-from dagger_development_api.model.user import User
-from dagger_development_api.model.player_state import PlayerState
-from dagger_development_api.model.card_info import CardInfo
-from dagger_development_api.model.game_card import GameCard
-from dagger_development_api.utils.constants import CARD_TYPES, ROOMS
+from model.game import Game
+from model.user import User
+from model.player_state import PlayerState
+from model.card_info import CardInfo
+from model.game_card import GameCard
+from utils.constants import CARD_TYPES, ROOMS
 
 # Global variable for responding to a suggestion
 suggestionId = None
